@@ -5,6 +5,8 @@
       src="~assets/quasar-logo-vertical.svg"
       style="width: 200px; height: 200px"
     >
+    <br>
+    我在 pages/IndexPage.vue
   </q-page>
 </template>
 

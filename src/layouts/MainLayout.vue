@@ -1,5 +1,133 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout>
+    <q-header class="bg-primary text-white">
+      <q-toolbar>
+        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+
+        <q-toolbar-title>
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+          </q-avatar>
+          Title
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-header>
+
+    <q-drawer v-model="leftDrawerOpen" side="left" overlay>
+      drawer content
+    </q-drawer>
+
+    <q-page-container>
+      <router-view />
+    </q-page-container>
+    <!-- <q-header class="bg-primary text-secondary1">
+      <q-toolbar>
+        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+
+        <q-toolbar-title>
+          法師事務所
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-header>
+
+    <q-drawer v-model="drawerLeft" show-if-above overlay class="bg-primary text-white">
+      法師事務所
+    </q-drawer>
+
+    <q-page-container class="bg-secondary2 text-white">
+      <router-view />
+    </q-page-container> -->
+
+    <!-- <q-footer class="bg-secondary1 text-white">
+      <q-toolbar>
+        <q-toolbar-title>
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+          </q-avatar>
+          <div>我是Footer</div>
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-footer> -->
+
+  </q-layout>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup () {
+    const leftDrawerOpen = ref(false)
+
+    return {
+      leftDrawerOpen,
+      toggleLeftDrawer () {
+        leftDrawerOpen.value = !leftDrawerOpen.value
+      }
+    }
+  }
+}
+</script>
+
+<!-- 我弄得 Layout Builder -->
+<!-- <template>
+  <q-layout view="lHr lpr lFr">
+
+    <q-header class="bg-primary text-white">
+      <q-toolbar>
+        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+
+        <q-toolbar-title>
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+          </q-avatar>
+          Title
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-header>
+
+    <q-drawer v-model="leftDrawerOpen" side="left" overlay>
+      drawer content
+    </q-drawer>
+
+    <q-page-container>
+      <router-view />
+    </q-page-container>
+
+    <q-footer class="bg-grey-8 text-white">
+      <q-toolbar>
+        <q-toolbar-title>
+          <q-avatar>
+            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+          </q-avatar>
+          <div>Title</div>
+        </q-toolbar-title>
+      </q-toolbar>
+    </q-footer>
+
+  </q-layout>
+</template>
+
+<script>
+import { ref } from 'vue'
+
+export default {
+  setup () {
+    const leftDrawerOpen = ref(false)
+
+    return {
+      leftDrawerOpen,
+      toggleLeftDrawer () {
+        leftDrawerOpen.value = !leftDrawerOpen.value
+      }
+    }
+  }
+}
+</script> -->
+
+<!-- 原始檔 -->
+<!-- <template>
+  <q-layout>
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -9,13 +137,13 @@
           icon="menu"
           aria-label="Menu"
           @click="toggleLeftDrawer"
-        />
+        />漢堡
 
         <q-toolbar-title>
-          Quasar App
+          我是標題
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>Quasar v{{ $q.version }} 不需要</div>
       </q-toolbar>
     </q-header>
 
@@ -43,9 +171,9 @@
       <router-view />
     </q-page-container>
   </q-layout>
-</template>
+</template> -->
 
-<script>
+<!-- <script>
 import { defineComponent, ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 
@@ -113,4 +241,4 @@ export default defineComponent({
     }
   }
 })
-</script>
+</script> -->
