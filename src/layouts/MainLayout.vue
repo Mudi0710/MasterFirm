@@ -1,6 +1,6 @@
 <template>
   <q-layout class="bg-dark">
-    <q-header class="bg-dark text-secondary lt-xl q-px-sm">
+    <q-header class="bg-primary text-secondary lt-xl q-px-sm">
       <q-toolbar>
         <q-toolbar-title>
           法師事務所
@@ -9,12 +9,11 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer  v-model="leftDrawerOpen" side="left" :breakpoint="1213" show-if-above mini-to-overlay :width="150"
-      class="bg-dark text-secondary text-center q-py-lg q-px-md column">
-      <div class="col-2">
+    <q-drawer  v-model="leftDrawerOpen" side="left" :breakpoint="1213" show-if-above mini-to-overlay :width="150" class="bg-primary text-secondary text-center q-py-lg q-px-md column justify-center">
+      <a href="#" class="col-2">
         <div class="text-h3 master">法師</div>
-        <div class="text-h4 firm q-mb-xl">事務所</div>
-      </div>
+        <div class="text-h4">事務所</div>
+      </a>
       <q-list class="col-6">
         <!-- v-ripple 點擊時有波紋特效 -->
         <q-item clickable v-ripple>
@@ -30,8 +29,8 @@
           <q-item-section>服務項目</q-item-section>
         </q-item>
         <q-expansion-item label="專欄文章" dense>
-          <q-item clickable v-ripple dense class="bg-white justify-center">靈學知識</q-item>
-          <q-item clickable v-ripple dense class="bg-white justify-center">案例分享</q-item>
+          <q-item clickable v-ripple dense class="bg-dark justify-center">靈學知識</q-item>
+          <q-item clickable v-ripple dense class="bg-dark justify-center">案例分享</q-item>
         </q-expansion-item>
         <q-item clickable v-ripple dense>
           <q-item-section>開運小物</q-item-section>
@@ -41,7 +40,7 @@
         </q-item>
       </q-list>
 
-      <q-list class="col-4 q-gutter-md text-h5">
+      <q-list class="col-4 q-gutter-md text-h5 q-py-xl">
         <q-icon name="fa-brands fa-square-facebook" /><br>
         <q-icon name="fa-brands fa-instagram" /><br>
         <q-icon name="fa-brands fa-line" /><br>
