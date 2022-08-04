@@ -18,17 +18,45 @@
 // #ECE7D7
 // #CDAC90
 // #D09139
-$primary: #322A28;
-$secondary1 : #CAB69E;
-$secondary2 : #ECE7D7;
+$dark: #322A28;
+$deep: #000000;
+$primary: #7A421B;
+$secondary : #CAB69E;
+$info : #ECE7D7;
+$warning   : #CDAC90;
+$accent    : #D09139;
 // $primary   : #1976D2;
 // $secondary : #26A69A;
-$accent    : #9C27B0;
+// $accent    : #9C27B0;
 
-$dark      : #1D1D1D;
-$dark-page : #121212;
+// $dark      : #1D1D1D;
+// $dark-page : #121212;
 
-$positive  : #21BA45;
-$negative  : #C10015;
-$info      : #31CCEC;
-$warning   : #F2C037;
+// $positive  : #21BA45;
+// $negative  : #C10015;
+// $info      : #31CCEC;
+// $warning   : #F2C037;
+
+// bootstrap
+// $breakpoint-xs: 0px !default (~ 575px)
+// $breakpoint-sm: 576px !default (576px ~ 767px)
+// $breakpoint-md: 768px !default (768px ~ 991px)
+// $breakpoint-lg: 992px !default (992px ~ 1199px)
+// $breakpoint-xl: 1200px !default (1200px ~ 1399px)
+// $breakpoint-xxl: 1400px !default (1400px ~)
+  
+// 自定義
+$breakpoint-xs: 575px; // 575px 含以下
+$breakpoint-sm: 767px; // 576px ~ 767px
+$breakpoint-md: 991px; // 768px ~ 991px
+$breakpoint-lg: 1199px; // 992px ~ 1199px
+$breakpoint-xl: 1399px; // 1200px ~ 1399px
+
+// Quasar 預設
+// $breakpoint-xs: 599px; // 0~599px
+// $breakpoint-sm: 1023px; // 600px~1023px
+// $breakpoint-md: 1439px; // 1024px~1439px
+// $breakpoint-lg: 1919px; // 1440px~1919px
+// xl: 1920px以上
+
+$body-font-size: 16px;

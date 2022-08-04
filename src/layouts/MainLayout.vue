@@ -1,129 +1,73 @@
 <template>
-  <q-layout>
-    <q-header class="bg-primary text-white">
+  <q-layout class="bg-dark">
+    <q-header class="bg-dark text-secondary lt-xl q-px-sm">
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
-
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-          </q-avatar>
-          Title
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-header>
-
-    <q-drawer v-model="leftDrawerOpen" side="left" overlay>
-      drawer content
-    </q-drawer>
-
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-    <!-- <q-header class="bg-primary text-secondary1">
-      <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
-
         <q-toolbar-title>
           法師事務所
         </q-toolbar-title>
-      </q-toolbar>
-    </q-header>
-
-    <q-drawer v-model="drawerLeft" show-if-above overlay class="bg-primary text-white">
-      法師事務所
-    </q-drawer>
-
-    <q-page-container class="bg-secondary2 text-white">
-      <router-view />
-    </q-page-container> -->
-
-    <!-- <q-footer class="bg-secondary1 text-white">
-      <q-toolbar>
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-          </q-avatar>
-          <div>我是Footer</div>
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-footer> -->
-
-  </q-layout>
-</template>
-
-<script>
-import { ref } from 'vue'
-
-export default {
-  setup () {
-    const leftDrawerOpen = ref(false)
-
-    return {
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
-  }
-}
-</script>
-
-<!-- 我弄得 Layout Builder -->
-<!-- <template>
-  <q-layout view="lHr lpr lFr">
-
-    <q-header class="bg-primary text-white">
-      <q-toolbar>
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
-
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-          </q-avatar>
-          Title
-        </q-toolbar-title>
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" side="left" overlay>
-      drawer content
+    <q-drawer  v-model="leftDrawerOpen" side="left" :breakpoint="1213" show-if-above mini-to-overlay :width="150"
+      class="bg-dark text-secondary text-center q-py-lg q-px-md column">
+      <div class="col-2">
+        <div class="text-h3 master">法師</div>
+        <div class="text-h4 firm q-mb-xl">事務所</div>
+      </div>
+      <q-list class="col-6">
+        <!-- v-ripple 點擊時有波紋特效 -->
+        <q-item clickable v-ripple>
+          <q-item-section>預約諮詢</q-item-section>
+        </q-item>
+        <q-item clickable v-ripple dense>
+          <q-item-section>本所簡介</q-item-section>
+        </q-item>
+        <q-item clickable v-ripple dense>
+          <q-item-section>最新消息</q-item-section>
+        </q-item>
+        <q-item clickable v-ripple dense>
+          <q-item-section>服務項目</q-item-section>
+        </q-item>
+        <q-expansion-item label="專欄文章" dense>
+          <q-item clickable v-ripple dense class="bg-white justify-center">靈學知識</q-item>
+          <q-item clickable v-ripple dense class="bg-white justify-center">案例分享</q-item>
+        </q-expansion-item>
+        <q-item clickable v-ripple dense>
+          <q-item-section>開運小物</q-item-section>
+        </q-item>
+        <q-item clickable v-ripple dense>
+          <q-item-section>聯絡我們</q-item-section>
+        </q-item>
+      </q-list>
+
+      <q-list class="col-4 q-gutter-md text-h5">
+        <q-icon name="fa-brands fa-square-facebook" /><br>
+        <q-icon name="fa-brands fa-instagram" /><br>
+        <q-icon name="fa-brands fa-line" /><br>
+        <q-icon name="fa-solid fa-user" /><br>
+        <q-icon name="fa-solid fa-cart-shopping" />
+      </q-list>
+
     </q-drawer>
 
     <q-page-container>
       <router-view />
     </q-page-container>
 
-    <q-footer class="bg-grey-8 text-white">
-      <q-toolbar>
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-          </q-avatar>
-          <div>Title</div>
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-footer>
-
   </q-layout>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue'
 
-export default {
-  setup () {
-    const leftDrawerOpen = ref(false)
+const leftDrawerOpen = ref(false)
 
-    return {
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
-  }
+const toggleLeftDrawer = () => {
+  leftDrawerOpen.value = !leftDrawerOpen.value
 }
-</script> -->
+
+</script>
 
 <!-- 原始檔 -->
 <!-- <template>
@@ -174,6 +118,7 @@ export default {
 </template> -->
 
 <!-- <script>
+
 import { defineComponent, ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
 

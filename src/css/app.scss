@@ -2,3 +2,12 @@
 * {
   font-family: 'Noto Serif TC', serif;
 }
+// 設定 法師 樣式
+.master {
+  font-size: 54px;
+}
+
+// 隱藏 手風琴(q-expansion-item) 的預設箭頭
+.q-item__section--side{
+  display:none
+}
