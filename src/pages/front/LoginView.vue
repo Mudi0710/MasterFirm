@@ -6,14 +6,6 @@
       style="width: 200px; height: 200px"
     >
     <br>
-    我在 pages/IndexPage.vue
+    登入
   </q-page>
 </template>
-
-<script>
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'IndexPage'
-})
-</script>
