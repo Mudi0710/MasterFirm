@@ -5,12 +5,12 @@
 
 a {
   text-decoration: none;
-  color: $info;
+  color: $secondary;
   &:hover {
     cursor: pointer;
   }
   &:visited {
-    color: $info
+    color: $secondary
   }
 }
 

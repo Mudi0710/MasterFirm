@@ -5,20 +5,23 @@
         <q-toolbar-title>
           法師事務所
         </q-toolbar-title>
+        <!-- 漢堡 -->
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
       </q-toolbar>
     </q-header>
 
-    <q-drawer  v-model="leftDrawerOpen" side="left" :breakpoint="1213" show-if-above mini-to-overlay :width="150" class="bg-primary text-secondary text-center q-py-lg q-px-md column justify-center">
+    <q-drawer v-model="leftDrawerOpen" side="left" :breakpoint="1213" show-if-above mini-to-overlay :width="150"
+      class="bg-primary text-secondary text-center q-py-lg q-px-md column justify-center" style="overflow: visible;">
       <a href="#" class="col-2">
         <div class="text-h3 master">法師</div>
         <div class="text-h4">事務所</div>
       </a>
       <q-list class="col-6">
         <!-- v-ripple 點擊時有波紋特效 -->
-        <q-item clickable v-ripple>
+        <q-item clickable v-ripple dense>
           <q-item-section>預約諮詢</q-item-section>
         </q-item>
+        <q-separator dark />
         <q-item clickable v-ripple dense>
           <q-item-section>本所簡介</q-item-section>
         </q-item>
@@ -40,12 +43,16 @@
         </q-item>
       </q-list>
 
-      <q-list class="col-4 q-gutter-md text-h5 q-py-xl">
-        <q-icon name="fa-brands fa-square-facebook" /><br>
-        <q-icon name="fa-brands fa-instagram" /><br>
-        <q-icon name="fa-brands fa-line" /><br>
-        <q-icon name="fa-solid fa-user" /><br>
-        <q-icon name="fa-solid fa-cart-shopping" />
+      <q-list class="col-4 text-h5">
+        <q-btn round flat icon="fa-brands fa-square-facebook" /><br>
+        <q-btn round flat icon="fa-brands fa-instagram" /><br>
+        <q-btn round flat icon="fa-brands fa-line" /><br>
+        <q-fab v-model="fab2" icon="fa-solid fa-user" direction="right" flat>
+          <q-fab-action flat external-label label-position="top" @click="onClick" icon="fa-solid fa-user-plus" label="註冊" to=""
+            label-style="background-color: rgba(0,0,0,0);" label-class="text-secondary text-subtitle1" />
+          <q-fab-action flat external-label label-position="top" @click="onClick" icon="fa-solid fa-right-to-bracket" label="登入" to="" label-style="background-color: rgba(0,0,0,0);" label-class="text-secondary text-subtitle1" />
+        </q-fab><br>
+        <q-btn round dense flat icon="fa-solid fa-cart-shopping" />
       </q-list>
 
     </q-drawer>
@@ -65,7 +72,6 @@ const leftDrawerOpen = ref(false)
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
-
 </script>
 
 <!-- 原始檔 -->
