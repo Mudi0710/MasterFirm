@@ -16,7 +16,7 @@
         <div class="text-h3 master">法師</div>
         <div class="text-h4">事務所</div>
       </a>
-      <q-list class="col-6">
+      <q-list class="col-5">
         <!-- v-ripple 點擊時有波紋特效 -->
         <q-item clickable v-ripple dense>
           <q-item-section>預約諮詢</q-item-section>
@@ -43,15 +43,24 @@
         </q-item>
       </q-list>
 
-      <q-list class="col-4 text-h5">
+      <q-list class="col-5 text-h5">
         <q-btn round flat icon="fa-brands fa-square-facebook" /><br>
         <q-btn round flat icon="fa-brands fa-instagram" /><br>
         <q-btn round flat icon="fa-brands fa-line" /><br>
-        <q-fab v-model="fab2" icon="fa-solid fa-user" direction="right" flat>
-          <q-fab-action flat external-label label-position="top" @click="onClick" icon="fa-solid fa-user-plus" label="註冊" to="register"
-            label-style="background-color: rgba(0,0,0,0);" label-class="text-secondary text-subtitle1" />
+        <q-btn round flat icon="fa-solid fa-user-plus" to="register" /><br>
+        <q-btn round flat icon="fa-solid fa-right-to-bracket" to="login" /><br>
+        <q-btn round flat icon="fa-solid fa-address-card" to="#" /><br>
+        <q-btn round flat icon="fa-regular fa-calendar-days" to="#" /><br>
+        <q-btn round flat icon="fa-solid fa-receipt" to="#" /><br>
+        <q-btn round flat icon="fa-solid fa-right-from-bracket" /><br>
+        <!-- <q-fab v-model="fab2" icon="fa-solid fa-user" direction="right" flat q-gutter-lg>
+          <q-fab-action flat external-label label-position="top" @click="onClick" icon="fa-solid fa-user-plus" label="註冊" to="register" label-style="background-color: rgba(0,0,0,0);" label-class="text-secondary text-subtitle1" />
           <q-fab-action flat external-label label-position="top" @click="onClick" icon="fa-solid fa-right-to-bracket" label="登入" to="login" label-style="background-color: rgba(0,0,0,0);" label-class="text-secondary text-subtitle1" />
-        </q-fab><br>
+          <q-fab-action flat external-label label-position="top" @click="onClick" icon="fa-solid fa-address-card" label="會員資料" to="#" label-style="background-color: rgba(0,0,0,0);" label-class="text-secondary text-subtitle1" />
+          <q-fab-action flat external-label label-position="top" @click="onClick" icon="fa-regular fa-calendar-days" label="預約查詢" to="#" label-style="background-color: rgba(0,0,0,0);" label-class="text-secondary text-subtitle1" />
+          <q-fab-action flat external-label label-position="top" @click="onClick" icon="fa-solid fa-receipt" label="訂單查詢" to="#" label-style="background-color: rgba(0,0,0,0);" label-class="text-secondary text-subtitle1" />
+          <q-fab-action flat external-label label-position="top" @click="onClick" icon="fa-solid fa-right-from-bracket" label="登出" to="#" label-style="background-color: rgba(0,0,0,0);" label-class="text-secondary text-subtitle1" />
+        </q-fab><br> -->
         <q-btn round dense flat icon="fa-solid fa-cart-shopping" />
       </q-list>
 
@@ -72,6 +81,26 @@ const leftDrawerOpen = ref(false)
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
+
+// export default defineComponent({
+//   name: 'MainLayout',
+
+//   components: {
+//     EssentialLink
+//   },
+
+//   setup () {
+//     const leftDrawerOpen = ref(false)
+
+//     return {
+//       essentialLinks: linksList,
+//       leftDrawerOpen,
+//       toggleLeftDrawer () {
+//         leftDrawerOpen.value = !leftDrawerOpen.value
+//       }
+//     }
+//   }
+// })
 </script>
 
 <!-- 原始檔 -->
