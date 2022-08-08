@@ -54,3 +54,53 @@ a {
     height: 20vh;
   }
 }
+
+// 設定 會員專區按鈕 樣式
+// .q-fab__actions .q-btn:nth-child(3),
+// .q-fab__actions .q-btn:nth-child(4),
+// .q-fab__actions .q-btn:nth-child(5) {
+//   margin-right: 18px;
+//   margin-left: 18px
+// }
+
+// RegisterView.vue 設定 --------------------------------------------------
+// 設定 註冊視窗 樣式
+#register {
+  width: 300px;
+  height: 700px;
+  @media (min-width: $breakpoint-xs) {
+    width: 400px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+// 設定 input 背景樣式
+#register .q-field__control {
+  background-color: $dark;
+}
+
+// 設定 input 文字樣式
+#register .q-field__native {
+  color: $secondary
+}
+
+// 設定 radio 樣式
+#register .q-radio__inner {
+  color: $secondary
+}
+
+// 設定 login link 出現時機
+#register a {
+  @media (min-width: $breakpoint-lg) {
+    display: none;
+  }
+}
+
+#register-login {
+  width: 400px;
+  height: 700px;
+  @media (max-width: $breakpoint-lg) {
+    display: none;
+  }
+}
