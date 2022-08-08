@@ -1,8 +1,15 @@
-// app global css in SCSS form
+// 全局設定 --------------------------------------------------
 * {
   font-family: 'Noto Serif TC', serif;
 }
 
+.q-page-container {
+  @media (min-width: $breakpoint-lg) {
+    padding-right: 50px;
+  }
+}
+
+// MainLayout.vue 設定 --------------------------------------------------
 a {
   text-decoration: none;
   color: $secondary;
@@ -14,10 +21,6 @@ a {
   }
 }
 
-// a:hover {
-//   cursor: pointer;
-// }
-
 // 設定 法師 樣式
 .master {
   font-size: 54px;
@@ -28,9 +31,26 @@ a {
   display:none
 }
 
-.q-carousel {
-  height: 60vh;
+// IndexPage.vue 設定 --------------------------------------------------
+
+// 設定 首頁輪播圖 樣式
+#indexpage-img .q-carousel {
+  width: 100%;
+  height: 30vh;
   @media (min-width: $breakpoint-xs) {
+    height: 45vh;
+  }
+  @media (min-width: $breakpoint-sm) {
+    height: 50vh;
+  }
+  @media (min-width: $breakpoint-lg) {
     height: 75vh;
+  }
+}
+
+#myheader {
+  height: 0;
+  @media (min-width: $breakpoint-lg) {
+    height: 20vh;
   }
 }
