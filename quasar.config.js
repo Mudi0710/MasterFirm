@@ -10,6 +10,7 @@
 
 const { configure } = require('quasar/wrappers')
 const path = require('path')
+const { QRadio } = require('quasar')
 
 module.exports = configure(function (/* ctx */) {
   return {
@@ -106,7 +107,7 @@ module.exports = configure(function (/* ctx */) {
       // (like functional components as one of the examples),
       // you can manually specify Quasar components/directives to be available everywhere:
       //
-      // components: [],
+      components: ['QInput', 'QRadio'],
       // directives: [],
 
       // Quasar plugins
