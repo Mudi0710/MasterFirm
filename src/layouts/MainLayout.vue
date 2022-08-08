@@ -1,6 +1,6 @@
 <template>
   <q-layout class="bg-dark">
-    <q-header class="bg-primary text-secondary lt-xl q-px-sm">
+    <q-header class="bg-primary text-secondary lt-xl q-px-md">
       <q-toolbar>
         <q-toolbar-title>
           法師事務所
