@@ -9,7 +9,7 @@
   }
 }
 
-// MainLayout.vue 設定 --------------------------------------------------
+// .router-link 樣式設定
 a {
   text-decoration: none;
   color: $secondary;
@@ -17,10 +17,25 @@ a {
     cursor: pointer;
   }
   &:visited {
-    color: $secondary
+    color: $secondary;
   }
 }
 
+// 在 移動裝置 隱藏
+.mobile-none {
+  @media (max-width: $breakpoint-lg) {
+    display: none;
+  }
+}
+
+// 在 桌機模式 隱藏
+.desktop-none {
+  @media (min-width: $breakpoint-lg) {
+    display: none;
+  }
+}
+
+// MainLayout.vue 設定 --------------------------------------------------
 // 設定 法師 樣式
 .master {
   font-size: 54px;
@@ -28,11 +43,17 @@ a {
 
 // 隱藏 手風琴(q-expansion-item) 的預設箭頭
 .q-item__section--side{
-  display:none
+  display:none;
+}
+
+// .q-drawer 
+.q-tooltip {
+  background-color: rgba(0, 0, 0, 0);
+  color: $secondary;
+  font-size: 16px;
 }
 
 // IndexPage.vue 設定 --------------------------------------------------
-
 // 設定 首頁輪播圖 樣式
 #indexpage-img .q-carousel {
   width: 100%;
@@ -65,7 +86,7 @@ a {
 
 // RegisterView.vue 設定 --------------------------------------------------
 // 設定 註冊視窗 樣式
-#register {
+#register-form {
   width: 300px;
   height: 700px;
   @media (min-width: $breakpoint-xs) {
@@ -76,31 +97,22 @@ a {
 }
 
 // 設定 input 背景樣式
-#register .q-field__control {
+#register-form .q-field__control {
   background-color: $dark;
 }
 
 // 設定 input 文字樣式
-#register .q-field__native {
-  color: $secondary
+#register-form .q-field__native {
+  color: $secondary;
 }
 
 // 設定 radio 樣式
-#register .q-radio__inner {
-  color: $secondary
+#register-form .q-radio__inner {
+  color: $secondary;
 }
 
-// 設定 login link 出現時機
-#register a {
-  @media (min-width: $breakpoint-lg) {
-    display: none;
-  }
-}
-
+// 設定 登入跳轉視窗 樣式
 #register-login {
   width: 400px;
   height: 700px;
-  @media (max-width: $breakpoint-lg) {
-    display: none;
-  }
 }
