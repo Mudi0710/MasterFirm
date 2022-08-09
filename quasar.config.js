@@ -69,7 +69,7 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      // env: {},
+      env: { VITE_API: process.env.VITE_API },
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
