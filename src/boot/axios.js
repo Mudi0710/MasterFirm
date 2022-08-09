@@ -7,7 +7,18 @@ import axios from 'axios'
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: 'https://api.example.com' })
+
+// const api = axios.create({ baseURL: 'https://api.example.com' })
+// export { api }
+/*
+  由於每個與 api 溝通的地方都要寫 import.meta.env.VITE_API，重複寫實在太麻煩
+  因此換個寫法，自訂一個自己的預設 axios 設定
+  建立一個新的 axios 實體，更改預設的設定 => baseURL 使用 API網址(process.env.VITE_API)
+  2022/07/04 7:11:00
+*/
+export const api = axios.create({
+  baseURL: import.meta.env.VITE_API
+})
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
@@ -20,5 +31,3 @@ export default boot(({ app }) => {
   // ^ ^ ^ this will allow you to use this.$api (for Vue Options API form)
   //       so you can easily perform requests against your app's API
 })
-
-export { api }
