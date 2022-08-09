@@ -9,6 +9,19 @@
   }
 }
 
+.swal2-container .swal2-popup {
+  background-color: $info;
+  color: $primary;
+  border-radius:0;
+}
+
+// Sweetalert 按鈕樣式
+.swal2-container .swal2-actions .swal2-styled {
+  background-color: $primary;
+  color: $info;
+  border-radius:0;
+}
+
 // .router-link 樣式設定
 a {
   text-decoration: none;
