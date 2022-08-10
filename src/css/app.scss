@@ -9,6 +9,7 @@
   }
 }
 
+// Sweetalert 背景樣式
 .swal2-container .swal2-popup {
   background-color: $info;
   color: $primary;
@@ -28,9 +29,24 @@ a {
   color: $secondary;
   &:hover {
     cursor: pointer;
+    color: $accent !important;
   }
   &:visited {
     color: $secondary;
+  }
+}
+
+// button 樣式設定
+button {
+  &:hover {
+    color: $accent !important;
+  }
+}
+
+// 側邊欄項目 樣式設定
+.q-item {
+  &:hover {
+    color: $accent !important;
   }
 }
 
@@ -128,4 +144,43 @@ a {
 #register-login {
   width: 400px;
   height: 700px;
+}
+
+// 設定 密碼顯示/隱藏 樣式
+.q-field__marginal {
+  color: $secondary;
+}
+
+// LoginView.vue 設定 --------------------------------------------------
+// 設定 註冊視窗 樣式
+#login-form {
+  width: 300px;
+  height: 700px;
+  @media (min-width: $breakpoint-xs) {
+    width: 400px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+// 設定 input 背景樣式
+#login-form .q-field__control {
+  background-color: $dark;
+}
+
+// 設定 input 文字樣式
+#login-form .q-field__native {
+  color: $secondary;
+}
+
+// 設定 radio 樣式
+#login-form .q-radio__inner {
+  color: $secondary;
+}
+
+// 設定 註冊跳轉視窗 樣式
+#login-register {
+  width: 400px;
+  height: 700px;
+  // background: url('https://cdn.quasar.dev/img/mountains.jpg') no-repeat center center/cover !important;
 }
