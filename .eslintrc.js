@@ -79,6 +79,6 @@ module.exports = {
     'no-unused-vars': 'off',
 
     // 限制使用單引號
-    'quotes': ['error', 'single']
+    // 'quotes': ['error', 'single']
   }
 }
