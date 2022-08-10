@@ -10,7 +10,7 @@
 
 const { configure } = require('quasar/wrappers')
 const path = require('path')
-const { QRadio } = require('quasar')
+// const { QRadio } = require('quasar')
 
 module.exports = configure(function (/* ctx */) {
   return {
@@ -30,7 +30,6 @@ module.exports = configure(function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli/boot-files
     boot: [
-
       'axios'
     ],
 
@@ -107,7 +106,26 @@ module.exports = configure(function (/* ctx */) {
       // (like functional components as one of the examples),
       // you can manually specify Quasar components/directives to be available everywhere:
       //
-      components: ['QInput', 'QRadio'],
+      components: [
+        'QBtn',
+        'QDrawer',
+        'QExpansionItem',
+        'QForm',
+        'QHeader',
+        'QIcon',
+        'QInput',
+        'QItem',
+        'QItemSection',
+        'QLayout',
+        'QList',
+        'QPage',
+        'QPageContainer',
+        'QRadio',
+        'QSeparator',
+        'QToolbar',
+        'QToolbarTitle',
+        'QTooltip'
+      ],
       // directives: [],
 
       // Quasar plugins
