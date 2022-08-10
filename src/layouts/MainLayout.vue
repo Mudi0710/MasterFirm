@@ -97,9 +97,10 @@
             :offset='[-5, 0]'>
             購物車
           </q-tooltip>
+          <q-badge v-if='cart > 0' floating color="red" rounded>{{ cart }}</q-badge>
         </q-btn>
         <br v-if='isLogin'>
-        <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-wrench'>
+        <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear'>
           <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
             :offset='[-5, 0]'>
             管理後台
@@ -120,7 +121,7 @@
           </q-tooltip>
         </q-btn>
         <br v-if='isLogin'>
-        <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-right-from-bracket'>
+        <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-right-from-bracket' @click='logout'>
           <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
             :offset='[-5, 0]'>
             登出
