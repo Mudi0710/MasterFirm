@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { api } from '@/boot/axios'
+import { api, apiAuth } from '@/boot/axios'
 import Swal from 'sweetalert2'
 /*
   import { useRouter } from 'vue-router'
@@ -61,6 +61,24 @@ export const useUserStore = defineStore({
           text: (error.isAxiosError && error.response.data) ? error.response.data.message : '發生錯誤'
         })
       }
+    },
+    async logout () {
+      try {
+        // 設定新的 axios 實體，並加上 JWT
+        await apiAuth.delete('/users/logout')
+        this.router.push('/')
+        Swal.fire({
+          icon: 'success',
+          title: '登出成功',
+          text: `【${this.name}】再見，法師事務所隨時歡迎您回來！`
+        })
+      } catch (_) {
+      }
+      this.token = ''
+      this.account = ''
+      this.name = ''
+      this.role = 0
+      this.cart = 0
     }
   }
 })
