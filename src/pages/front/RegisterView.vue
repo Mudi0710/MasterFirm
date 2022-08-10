@@ -4,11 +4,18 @@
       <div class='row'>
         <div id='register-form' class='col-12 col-lg-6 column justify-center q-pa-lg bg-primary text-secondary'>
           <div class='col-auto text-h5 text-center q-mb-lg'>會員註冊</div>
-          <q-form @submit='register'>
+          <q-form @submit.prevent='register'>
             <div class='col-auto'>帳號</div>
-            <q-input name='account' type='text' v-model='form.account' :rules='rules.account' maxlength='20' outlined square dense />
+            <q-input name='account' type='text' v-model='form.account' :rules='rules.account' maxlength='20' outlined
+              square dense />
             <div class='col-auto'>密碼</div>
-            <q-input name='password' type='password' v-model='form.password' :rules='rules.password' maxlength='20' outlined square dense />
+            <q-input name='password' :type="isPwd ? 'password' : 'text'" v-model='form.password' :rules='rules.password' maxlength='20'
+              outlined square dense>
+              <template v-slot:append>
+                <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer"
+                  @click="isPwd = !isPwd" />
+              </template>
+            </q-input>
             <div class='col-auto'>姓名</div>
             <q-input name='name' type='text' v-model='form.name' :rules='rules.name' outlined square dense />
             <div class='col-auto'>性別</div>
@@ -19,8 +26,10 @@
             <div class='col-auto'>信箱</div>
             <q-input name='email' type='email' v-model='form.email' :rules='rules.email' outlined square dense />
             <div class='col-auto'>手機</div>
-            <q-input name='tel' type='tel' v-model='form.tel' :rules='rules.tel' mask='####-###-###' maxlength='12' outlined square dense />
-            <q-btn square label='註冊' type='submit' :loading='loading4' class='bg-secondary text-dark q-my-sm' style="width: 100%;"></q-btn>
+            <q-input name='tel' type='tel' v-model='form.tel' :rules='rules.tel' mask='####-###-###' maxlength='12'
+              outlined square dense />
+            <q-btn square label='註冊' type='submit' class='bg-secondary text-dark q-my-sm'
+              style="width: 100%;"></q-btn>
           </q-form>
           <router-link to='login' class='text-center q-my-sm desktop-none'>已有帳號？</router-link>
         </div>
@@ -43,6 +52,7 @@ import Swal from 'sweetalert2'
 
 const router = useRouter()
 const loading = ref(false)
+const isPwd = ref(true)
 
 const form = reactive({
   account: '',
@@ -57,7 +67,7 @@ const rules = reactive({
   account: [
     v => !!v || '會員帳號為必填',
     v => (v.length >= 4 && v.length <= 20) || '會員帳號長度為 4 到 20 個字元',
-    v => /^(?=.*[a-z])(?=.*\d)[a-z\d]{4,20}$/.test(v) || '格式錯誤，至少包含一個小寫英文及數字'
+    v => /^[a-z0-9]+$/.test(v) || '格式錯誤，只能由小寫英文及數字組成'
   ],
   password: [
     v => !!v || '會員密碼為必填',
@@ -67,7 +77,7 @@ const rules = reactive({
   name: [
     v => !!v || '會員姓名為必填',
     v => (v.length >= 2) || '會員姓名至少 2 個字以上',
-    v => /^[\u4e00-\u9fa5]{2,}$/.test(v) || '真實姓名格式錯誤，應為中文姓名'
+    v => /^[\u4e00-\u9fa5]{2,}$/.test(v) || '會員姓名格式錯誤，應為中文姓名'
   ],
   gender: [
     v => !!v || '會員性別為必填'
@@ -84,22 +94,20 @@ const rules = reactive({
 })
 
 const register = async () => {
-  loading.value = true
   try {
     await api.post('/users', form)
     await Swal.fire({
       icon: 'success',
-      title: '成功',
-      text: '註冊成功'
+      title: '註冊成功',
+      text: '您已成為法師事務所的會員！'
     })
     router.push('/')
   } catch (error) {
     Swal.fire({
       icon: 'error',
-      title: '失敗',
+      title: '註冊失敗',
       text: (error.isAxiosError && error.response.data) ? error.response.data.message : '發生錯誤'
     })
   }
-  loading.value = false
 }
 </script>
