@@ -6,28 +6,27 @@
           <div class='col-auto text-h5 text-center q-mb-lg'>會員註冊</div>
           <q-form @submit.prevent='register'>
             <div class='col-auto'>帳號</div>
-            <q-input name='account' type='text' v-model='form.account' :rules='rules.account' maxlength='20' outlined
+            <q-input name='account' type='text' v-model='form.account' :rules='rules.account' maxlength='20' placeholder='4 ~ 20 個字元' outlined
               square dense />
             <div class='col-auto'>密碼</div>
-            <q-input name='password' :type="isPwd ? 'password' : 'text'" v-model='form.password' :rules='rules.password' maxlength='20'
-              outlined square dense>
+            <q-input name='password' :type="isPwd ? 'password' : 'text'" v-model='form.password' :rules='rules.password' maxlength='20' placeholder='4 ~ 20 個字元' outlined square dense>
               <template v-slot:append>
                 <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer"
                   @click="isPwd = !isPwd" />
               </template>
             </q-input>
             <div class='col-auto'>姓名</div>
-            <q-input name='name' type='text' v-model='form.name' :rules='rules.name' outlined square dense />
+            <q-input name='name' type='text' v-model='form.name' :rules='rules.name' placeholder='至少 2 個中文字' outlined square dense />
             <div class='col-auto'>性別</div>
             <div class='row q-mt-sm q-mb-md'>
               <q-radio dense size='xs' v-model='form.gender' val='1' label='先生' class='q-mr-xl' />
               <q-radio dense size='xs' v-model='form.gender' val='2' label='小姐' class='q-ml-xl' />
             </div>
             <div class='col-auto'>信箱</div>
-            <q-input name='email' type='email' v-model='form.email' :rules='rules.email' outlined square dense />
+            <q-input name='email' type='email' v-model='form.email' :rules='rules.email' placeholder='xxx@xxx.com' outlined square dense />
             <div class='col-auto'>手機</div>
             <q-input name='tel' type='tel' v-model='form.tel' :rules='rules.tel' mask='####-###-###' maxlength='12'
-              outlined square dense />
+            placeholder='共 10 碼' outlined square dense />
             <q-btn square label='註冊' type='submit' class='bg-secondary text-dark q-my-sm'
               style="width: 100%;"></q-btn>
           </q-form>
