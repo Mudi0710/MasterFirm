@@ -3,6 +3,23 @@
   font-family: 'Noto Serif TC', serif;
 }
 
+// 頂端留白區
+#myheader {
+  height: 0;
+  padding-left: 100px;
+  @media (min-width: $breakpoint-lg) {
+    height: 20vh;
+  }
+}
+
+// 內容區
+#mycontent {
+  padding:20px 10px 0 10px;
+  @media (min-width: $breakpoint-lg) {
+    padding-left: 100px;
+  }
+}
+
 .q-page-container {
   @media (min-width: $breakpoint-lg) {
     padding-right: 50px;
@@ -70,6 +87,7 @@ button {
   font-size: 54px;
 }
 
+// sidebar 固定
 .q-drawer {
   position: fixed;
 }
@@ -98,14 +116,7 @@ button {
     height: 50vh;
   }
   @media (min-width: $breakpoint-lg) {
-    height: 75vh;
-  }
-}
-
-#myheader {
-  height: 0;
-  @media (min-width: $breakpoint-lg) {
-    height: 20vh;
+    height: 70vh;
   }
 }
 
@@ -190,9 +201,85 @@ button {
 }
 
 // AdminHomeView.vue 設定 --------------------------------------------------
-#adminHome .q-card .col-xl-4 {
-  @media (min-width: $breakpoint-lg) {
-    width: 100%;
+// 頂端留白區 RWD
+#adminHomeHeader {
+  height: 0;
+  padding-left: 100px;
+  @media (min-width: 1200px) {
+    height: 15vh;
+  }
+    @media (min-width: 1400px) {
+    height: 20vh;
+  }
+}
+
+// 內容區(card) RWD
+#adminHome .q-card {
+  width: 44vw;
+  height: 44vw;
+  @media (min-width: 1200px) {
+    width: 40vh;
     height: 40vh;
+  }
+  @media (min-width: 1200px) {
+    width: 38vh;
+    height: 38vh;
+  }
+}
+
+// card內文字 RWD
+.adminHomeLayout .title {
+  @media (min-width: $breakpoint-xs) {
+    font-size: 6rem;
+    font-weight: 300;
+    line-height: 6rem;
+    letter-spacing: -0.01562em;
+  }
+  @media (min-width: $breakpoint-sm) {
+    font-size: 8rem;
+    font-weight: 300;
+    line-height: 8rem;
+  }
+  @media (min-width: $breakpoint-md) {
+    font-size: 10rem;
+    font-weight: 300;
+    line-height: 10rem;
+  }
+  @media (min-width: $breakpoint-lg) {
+    font-size: 3.75rem;
+    font-weight: 300;
+    line-height: 3.75rem;
+    letter-spacing: -0.00833em;
+  }
+}
+
+// card內文字斷行 RWD
+.adminHomeLayout .br {
+  @media (min-width: $breakpoint-lg) {
+    display: none;
+  }
+}
+
+// card順序 RWD
+.adminHomeLayout .q-card {
+  @media (min-width: $breakpoint-lg) {
+    &:nth-child(1) {
+      order: 1;
+  }
+    &:nth-child(2) {
+      order: 4;
+  }
+    &:nth-child(3) {
+      order: 2;
+  }
+    &:nth-child(4) {
+      order: 5;
+  }
+    &:nth-child(5) {
+      order: 3;
+  }
+    &:nth-child(6) {
+      order: 6;
+  }
   }
 }
