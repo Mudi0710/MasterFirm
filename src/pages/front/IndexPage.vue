@@ -32,25 +32,3 @@ const slide = ref(1)
 const autoplay = ref(true)
 
 </script>
-
-<!-- 原始碼 -->
-<!-- <template>
-  <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    >
-    <br>
-    我在 pages/IndexPage.vue
-  </q-page>
-</template> -->
-
-<!-- defineComponent 是 Vue2 的，可以直接刪光光 -->
-<!-- <script>
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-  name: 'IndexPage'
-})
-</script> -->
