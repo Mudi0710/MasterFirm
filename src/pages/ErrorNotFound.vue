@@ -1,23 +1,18 @@
 <template>
-  <div class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center">
+  <div class='fullscreen bg-dark text-secondary text-center q-py-lg flex flex-center'>
     <div>
-      <div style="font-size: 30vh">
+      <div style='font-size: 50vw; z-index: -100; opacity:.1;' class='fixed-center'>
         404
       </div>
-
-      <div class="text-h2" style="opacity:.4">
-        Oops. Nothing here...
+      <div style='font-size: 10vw;' class="flex flex-center">
+        Oops<br>&nbsp;你迷路了嗎？
       </div>
 
-      <q-btn
-        class="q-mt-xl"
-        color="white"
-        text-color="blue"
-        unelevated
-        to="/"
-        label="Go Home"
-        no-caps
-      />
+      <div style='font-size: 3.5vw; opacity:.65' class='text-h3'>
+        別擔心，讓我們帶你找回人生的方向
+      </div>
+
+      <q-btn style='border-radius: 0;' class='q-mt-xl bg-secondary text-dark' to='/' label='回到&nbsp;&nbsp;&nbsp;&nbsp;法師事務所' ripple flat unelevated />
     </div>
   </div>
 </template>
