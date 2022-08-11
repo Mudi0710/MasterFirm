@@ -12,7 +12,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model='leftDrawerOpen' side='left' :breakpoint='1213' show-if-above :width='150'
+    <q-drawer v-model='leftDrawerOpen' side='left' :breakpoint='1199' show-if-above :width='150'
       class='bg-primary text-secondary text-center q-py-md q-px-md column justify-center' style='overflow: visible;'>
 
       <router-link to='/admin' class='col-2'>
