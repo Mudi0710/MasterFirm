@@ -49,6 +49,36 @@ const routes = [
         }
       },
       {
+        path: 'member',
+        name: 'member',
+        component: () => import('@/pages/front/MemberView.vue'),
+        meta: {
+          title: '法師事務所 | 會員資料',
+          login: true,
+          admin: false
+        }
+      },
+      {
+        path: 'booking',
+        name: 'booking',
+        component: () => import('@/pages/front/BookingView.vue'),
+        meta: {
+          title: '法師事務所 | 預約查詢',
+          login: true,
+          admin: false
+        }
+      },
+      {
+        path: 'order',
+        name: 'order',
+        component: () => import('@/pages/front/OrderView.vue'),
+        meta: {
+          title: '法師事務所 | 訂單查詢',
+          login: true,
+          admin: false
+        }
+      },
+      {
         path: 'cart',
         name: 'cart',
         component: () => import('@/layouts/CartLayout.vue'),
@@ -91,6 +121,16 @@ const routes = [
         component: () => import('@/pages/admin/AdminCaseView.vue'),
         meta: {
           title: '法師事務所 | 預約管理',
+          login: true,
+          admin: true
+        }
+      },
+      {
+        path: 'adminProduct',
+        name: 'admin-product',
+        component: () => import('@/pages/admin/AdminProductView.vue'),
+        meta: {
+          title: '法師事務所 | 商品管理',
           login: true,
           admin: true
         }
@@ -148,23 +188,3 @@ const routes = [
 ]
 
 export default routes
-
-// 原始碼
-// const routes = [
-//   {
-//     path: '/',
-//     component: () => import('layouts/MainLayout.vue'),
-//     children: [
-//       { path: '', component: () => import('pages/IndexPage.vue') }
-//     ]
-//   },
-
-//   // Always leave this as last one,
-//   // but you can also remove it
-//   {
-//     path: '/:catchAll(.*)*',
-//     component: () => import('pages/ErrorNotFound.vue')
-//   }
-// ]
-
-// export default routes
