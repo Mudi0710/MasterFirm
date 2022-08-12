@@ -22,28 +22,28 @@
 
       <q-list class='col-4 q-mb-xl'>
         <!-- v-ripple 點擊時有波紋特效 -->
-        <q-item clickable v-ripple dense>
+        <q-item clickable v-ripple dense to=''>
           <q-item-section>預約諮詢</q-item-section>
         </q-item>
         <q-separator />
-        <q-item clickable v-ripple dense>
+        <q-item clickable v-ripple dense to=''>
           <q-item-section>本所簡介</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense>
+        <q-item clickable v-ripple dense to=''>
           <q-item-section>最新消息</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense>
+        <q-item clickable v-ripple dense to=''>
           <q-item-section>服務項目</q-item-section>
         </q-item>
-        <q-expansion-item label='專欄文章' dense>
-          <q-item clickable v-ripple dense class='bg-dark justify-center'>靈學知識</q-item>
-          <q-item clickable v-ripple dense class='bg-dark justify-center'>案例分享</q-item>
+        <q-expansion-item label='專欄文章' dense to=''>
+          <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>靈學知識</q-item>
+          <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>案例分享</q-item>
         </q-expansion-item>
         <q-item clickable v-ripple dense>
-          <q-item-section>開運小物</q-item-section>
+          <q-item-section to=''>開運小物</q-item-section>
         </q-item>
         <q-item clickable v-ripple dense>
-          <q-item-section>聯絡我們</q-item-section>
+          <q-item-section to=''>聯絡我們</q-item-section>
         </q-item>
       </q-list>
 
@@ -57,28 +57,28 @@
         </q-list>
 
         <q-list class='col-6 text-h5'>
-          <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-address-card' to='#'>
+          <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-address-card' to='member'>
             <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
               :offset='[-5, 0]'>
               會員資料
             </q-tooltip>
           </q-btn>
           <br v-if='isLogin'>
-          <q-btn v-if='isLogin' round dense flat icon='fa-regular fa-calendar-days' to='#'>
+          <q-btn v-if='isLogin' round dense flat icon='fa-regular fa-calendar-days' to='booking'>
             <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
               :offset='[-5, 0]'>
               預約查詢
             </q-tooltip>
           </q-btn>
           <br v-if='isLogin'>
-          <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-receipt' to='#'>
+          <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-receipt' to='order'>
             <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
               :offset='[-5, 0]'>
               訂單查詢
             </q-tooltip>
           </q-btn>
           <br v-if='isLogin'>
-          <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-cart-shopping'>
+          <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-cart-shopping' to='cart'>
             <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
               :offset='[-5, 0]'>
               購物車
@@ -93,14 +93,14 @@
             </q-tooltip>
           </q-btn>
           <br v-if='isLogin && isAdmin'>
-          <q-btn v-if='!isLogin' round dense flat icon='fa-solid fa-user-plus' to='/register'>
+          <q-btn v-if='!isLogin' round dense flat icon='fa-solid fa-user-plus' to='register'>
             <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
               :offset='[-5, 0]'>
               註冊
             </q-tooltip>
           </q-btn>
           <br v-if='!isLogin'>
-          <q-btn v-if='!isLogin' round dense flat icon='fa-solid fa-right-to-bracket' to='/login'>
+          <q-btn v-if='!isLogin' round dense flat icon='fa-solid fa-right-to-bracket' to='login'>
             <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
               :offset='[-5, 0]'>
               登入
