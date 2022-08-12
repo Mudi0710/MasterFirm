@@ -35,7 +35,7 @@
         <q-item clickable v-ripple dense to=''>
           <q-item-section>服務項目</q-item-section>
         </q-item>
-        <q-expansion-item label='專欄文章' dense to=''>
+        <q-expansion-item label='專欄文章' dense v-model="expanded" @mouseleave='hide' @mouseover='show' to=''>
           <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>靈學知識</q-item>
           <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>案例分享</q-item>
         </q-expansion-item>
@@ -83,7 +83,7 @@
               :offset='[-5, 0]'>
               購物車
             </q-tooltip>
-            <q-badge v-if='cart > 0' floating color="red" rounded>{{ cart }}</q-badge>
+            <q-badge v-if='cart > 0' floating color='red' rounded>{{ cart }}</q-badge>
           </q-btn>
           <br v-if='isLogin'>
           <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear' to='/admin'>
@@ -134,15 +134,39 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, createApp } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 
 const leftDrawerOpen = ref(false)
+const expand = ref(false)
 
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
+
+// const show = () => {
+//   expand.value = true
+// }
+
+const QExpansionItem = createApp({
+  el: '.q-expansion-item',
+  data: function () {
+    return {
+      expanded: true
+    }
+  },
+  methods: {
+    show: function () {
+      this.expanded = true
+    },
+    hide: function () {
+      this.expanded = false
+    }
+  }
+})
+// https://www.itxst.com/ant-design-vue/ajf3uamq.html
+// http://www.quasarchs.com/vue-components/expansion-item/
 
 const user = useUserStore()
 const { logout } = user
