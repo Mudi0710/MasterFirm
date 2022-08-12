@@ -50,7 +50,6 @@ import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
 
 const router = useRouter()
-const loading = ref(false)
 const isPwd = ref(true)
 
 const form = reactive({
