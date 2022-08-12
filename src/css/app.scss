@@ -104,6 +104,20 @@ button {
   font-size: 16px;
 }
 
+// :deep .q-expansion-item__content > .q-item {
+//   &:hover {
+//     display: block;
+//   }
+// }
+
+// .q-expansion-item--expanded::v-deep .q-expansion-item__content {
+//   &:hover {
+//     display: block !important;
+//     // overflow-y: visible !important;
+//     // height: 64px !important;
+//   }
+// }
+
 // IndexPage.vue 設定 --------------------------------------------------
 // 設定 首頁輪播圖 樣式
 #indexpage-img .q-carousel {
