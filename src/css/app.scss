@@ -203,7 +203,7 @@ button {
 // AdminHomeView.vue 設定 --------------------------------------------------
 // 頂端留白區 RWD
 #adminHomeHeader {
-  height: 0;
+  height: 10vh;
   padding-left: 100px;
   @media (min-width: 1200px) {
     height: 15vh;
@@ -221,8 +221,8 @@ button {
     width: 40vh;
     height: 40vh;
   }
-  @media (min-width: 1200px) {
-    width: 38vh;
+  @media (min-width: 1400px) {
+    width: 50vh;
     height: 38vh;
   }
 }
@@ -236,14 +236,14 @@ button {
     letter-spacing: -0.01562em;
   }
   @media (min-width: $breakpoint-sm) {
-    font-size: 8rem;
+    font-size: 6rem;
     font-weight: 300;
-    line-height: 8rem;
+    line-height: 6rem;
   }
   @media (min-width: $breakpoint-md) {
-    font-size: 10rem;
+    font-size: 7rem;
     font-weight: 300;
-    line-height: 10rem;
+    line-height: 7rem;
   }
   @media (min-width: $breakpoint-lg) {
     font-size: 3.75rem;
@@ -261,7 +261,7 @@ button {
 }
 
 // card順序 RWD
-.adminHomeLayout .q-card {
+.adminHomeLayout a {
   @media (min-width: $breakpoint-lg) {
     &:nth-child(1) {
       order: 1;
