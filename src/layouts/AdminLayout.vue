@@ -24,19 +24,22 @@
         <!-- v-ripple 點擊時有波紋特效 -->
         <p class='text-h5'>管理後台</p>
         <q-separator class='q-mb-lg' />
-        <q-item clickable v-ripple dense>
+        <q-item clickable v-ripple dense to='admin-member'>
           <q-item-section>會員管理</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense>
+        <q-item clickable v-ripple dense to='admin-case'>
           <q-item-section>預約管理</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense>
+        <q-item clickable v-ripple dense to='admin-product'>
+          <q-item-section>商品管理</q-item-section>
+        </q-item>
+        <q-item clickable v-ripple dense to='admin-order'>
           <q-item-section>訂單管理</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense>
+        <q-item clickable v-ripple dense to='admin-article'>
           <q-item-section>文章管理</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense>
+        <q-item clickable v-ripple dense to='admin-promote'>
           <q-item-section>推播管理</q-item-section>
         </q-item>
       </q-list>
