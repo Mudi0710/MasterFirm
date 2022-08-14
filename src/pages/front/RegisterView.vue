@@ -1,7 +1,7 @@
 <template>
   <q-page-container>
     <q-page class='row justify-center items-center'>
-      <div class='row'>
+      <div class='row shadow'>
         <div id='register-form' class='col-12 col-lg-6 column justify-center q-pa-lg bg-primary text-secondary'>
           <div class='col-auto text-h5 text-center q-mb-lg'>會員註冊</div>
           <q-form @submit.prevent='register'>
@@ -27,7 +27,7 @@
             <div class='col-auto'>手機</div>
             <q-input name='tel' type='tel' v-model='form.tel' :rules='rules.tel' mask='####-###-###' maxlength='12'
             placeholder='共 10 碼' outlined square dense />
-            <q-btn square label='註冊' type='submit' class='bg-secondary text-dark q-my-sm'
+            <q-btn square flat label='註冊' type='submit' class='bg-secondary text-dark q-my-sm'
               style="width: 100%;"></q-btn>
           </q-form>
           <router-link to='login' class='text-center q-my-sm desktop-none'>已有帳號？</router-link>
