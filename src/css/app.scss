@@ -20,6 +20,12 @@
   }
 }
 
+// 背景漸層色
+.q-layout {
+  background: radial-gradient(circle at center, #322A28 40%, black 100%);
+}
+
+// container 右側 padding
 .q-page-container {
   @media (min-width: $breakpoint-lg) {
     padding-right: 50px;
@@ -65,6 +71,13 @@ button {
   &:hover {
     color: $accent !important;
   }
+  &:visited {
+    color: $secondary;
+  }
+}
+
+.shadow {
+  box-shadow: 0px 0px 60px rgba(30, 25, 24, 1);
 }
 
 // 在 移動裝置 隱藏
