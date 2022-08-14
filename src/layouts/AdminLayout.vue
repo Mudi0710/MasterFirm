@@ -22,30 +22,32 @@
 
       <q-list class='col-4 q-mb-xl'>
         <!-- v-ripple 點擊時有波紋特效 -->
-        <p class='text-h5'>管理後台</p>
+        <router-link to='/admin'>
+          <p class='text-h5'>管理後台</p>
+        </router-link>
         <q-separator class='q-mb-lg' />
-        <q-item clickable v-ripple dense to='admin-member'>
+        <q-item clickable v-ripple dense to='/admin/adminMember'>
           <q-item-section>會員管理</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='admin-case'>
+        <q-item clickable v-ripple dense to='/admin/adminCase'>
           <q-item-section>預約管理</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='admin-product'>
+        <q-item clickable v-ripple dense to='/admin/adminProduct'>
           <q-item-section>商品管理</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='admin-order'>
+        <q-item clickable v-ripple dense to='/admin/adminOrder'>
           <q-item-section>訂單管理</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='admin-article'>
+        <q-item clickable v-ripple dense to='/admin/adminArticle'>
           <q-item-section>文章管理</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='admin-promote'>
+        <q-item clickable v-ripple dense to='/admin/adminPromote'>
           <q-item-section>推播管理</q-item-section>
         </q-item>
       </q-list>
 
       <q-list class='col-3 text-h5'>
-        <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-house'  to='/'>
+        <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-house' to='/'>
           <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
             :offset='[-5, 0]'>
             回前台
