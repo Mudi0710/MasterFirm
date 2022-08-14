@@ -1,9 +1,9 @@
 <template>
   <q-page class="row">
-    <div id="myheader"></div>
+    <div id="myheader" class="col-12"></div>
     <div id="mycontent" class="row content-start">
       <div class="col-12 col-xl-5 q-pa-md column">
-        <div class="col col-xl-2 text-h3 text-secondary q-my-sm">法師事務所</div>
+        <div class="col col-xl-2 text-h3 text-secondary q-my-sm" style="letter-spacing: 0.2em;">法師事務所</div>
         <div class="col col-xl-6 text-h6 text-secondary text-justify items-center q-my-xl">
           你有生成跟着，就好瀏覽一座，到來每年計算機適當臺灣因為內地對此你還不對，總算發現，一句話協會關於筆者營銷高雄成果原則和諧後果動漫，科學好像優點之家熱線安排配套簽名影響減少立即因而職業一位，報名集團顯示形勢看法公里體會郵箱天氣消除嚴重導致，一位我又，高級體。
         </div>
