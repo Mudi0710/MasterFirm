@@ -1,7 +1,7 @@
 <template>
   <q-page-container>
     <q-page class='row justify-center items-center'>
-      <div class='row'>
+      <div class='row shadow'>
         <div id='login-register' class='col-lg-6 column justify-center q-pa-lg bg-primary text-secondary mobile-none'>
           <div class='col-auto text-h5 text-center q-mb-xl'>不是會員？</div>
           <router-link to='register' class='text-center q-my-xl'>點此註冊</router-link>
@@ -21,7 +21,7 @@
                   @click="isPwd = !isPwd" />
               </template>
             </q-input>
-            <q-btn square label='登入' type='submit' class='bg-secondary text-dark q-my-sm' style="width: 100%;"></q-btn>
+            <q-btn square flat label='登入' type='submit' class='bg-secondary text-dark q-my-sm' style="width: 100%;"></q-btn>
           </q-form>
           <router-link to='register' class='text-center q-my-sm desktop-none'>沒有帳號？</router-link>
         </div>
