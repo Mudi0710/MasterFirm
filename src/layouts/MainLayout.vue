@@ -1,5 +1,5 @@
 <template>
-  <q-layout class='bg-dark'>
+  <q-layout>
     <q-header class='bg-primary text-secondary lt-xl q-px-md'>
       <q-toolbar>
         <q-toolbar-title>
@@ -35,10 +35,14 @@
         <q-item clickable v-ripple dense to=''>
           <q-item-section>服務項目</q-item-section>
         </q-item>
-        <q-expansion-item label='專欄文章' dense v-model="expanded" @mouseleave='hide' @mouseover='show' to=''>
+        <q-expansion-item label='專欄文章' dense to=''>
           <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>靈學知識</q-item>
           <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>案例分享</q-item>
         </q-expansion-item>
+        <!-- <q-expansion-item label='專欄文章' dense v-model="expanded" @mouseleave='hide' @mouseover='show' to=''>
+          <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>靈學知識</q-item>
+          <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>案例分享</q-item>
+        </q-expansion-item> -->
         <q-item clickable v-ripple dense>
           <q-item-section to=''>開運小物</q-item-section>
         </q-item>
@@ -139,32 +143,28 @@ import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 
 const leftDrawerOpen = ref(false)
-const expand = ref(false)
+// const expanded = ref(false)
 
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
 
-// const show = () => {
-//   expand.value = true
-// }
-
-const QExpansionItem = createApp({
-  el: '.q-expansion-item',
-  data: function () {
-    return {
-      expanded: true
-    }
-  },
-  methods: {
-    show: function () {
-      this.expanded = true
-    },
-    hide: function () {
-      this.expanded = false
-    }
-  }
-})
+// const QExpansionItem = createApp({
+//   el: '.q-expansion-item',
+//   data: function () {
+//     return {
+//       expanded: false
+//     }
+//   },
+//   methods: {
+//     show: function () {
+//       this.expanded = false
+//     },
+//     hide: function () {
+//       this.expanded = false
+//     }
+//   }
+// })
 // https://www.itxst.com/ant-design-vue/ajf3uamq.html
 // http://www.quasarchs.com/vue-components/expansion-item/
 
