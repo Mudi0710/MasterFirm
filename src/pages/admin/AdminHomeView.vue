@@ -1,7 +1,7 @@
 <template>
   <q-page>
-    <div id="adminHome" class="text-secondary">
-      <div id="adminHomeHeader"></div>
+    <div id="adminHome" class="row justify-center text-secondary">
+      <div id="adminHomeHeader">請選擇管理項目</div>
       <div class="adminHomeLayout q-pa-md row justify-center">
         <!-- <q-card square flat class="my-card col-6 col-sm-6 col-xl-4 bg-dark text-center row">
           <div class="col-12 self-center text-h3 title">管理<br class="br">後台</div>
