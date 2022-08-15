@@ -1,6 +1,7 @@
 // 全局設定 --------------------------------------------------
 * {
   font-family: 'Noto Serif TC', serif;
+  letter-spacing: 0.06em;
 }
 
 // 頂端留白區
@@ -76,8 +77,31 @@ button {
   }
 }
 
+
+// 設定 input 背景樣式
+.q-field__control {
+  background-color: $dark;
+}
+
+// 設定 input 文字樣式
+.q-field__native {
+  color: $secondary;
+}
+
 .shadow {
   box-shadow: 0px 0px 60px rgba(30, 25, 24, 1);
+}
+
+.spacing-h3 {
+  letter-spacing: 0.2em
+}
+
+.spacing-h4 {
+  letter-spacing: 0.2em
+}
+
+.spacing-h6 {
+  letter-spacing: 0.1em
 }
 
 // 在 移動裝置 隱藏
@@ -97,7 +121,14 @@ button {
 // MainLayout.vue 設定 --------------------------------------------------
 // 設定 法師 樣式
 .master {
-  font-size: 54px;
+  font-size: 48px;
+  letter-spacing: 0.05em;
+}
+
+// 設定 事務所 樣式
+.firm {
+  font-size: 30px;
+  letter-spacing: 0.05em;
 }
 
 // sidebar 固定
@@ -117,21 +148,38 @@ button {
   font-size: 16px;
 }
 
-// :deep .q-expansion-item__content > .q-item {
-//   &:hover {
-//     display: block;
-//   }
-// }
-
-// .q-expansion-item--expanded::v-deep .q-expansion-item__content {
-//   &:hover {
-//     display: block !important;
-//     // overflow-y: visible !important;
-//     // height: 64px !important;
-//   }
-// }
-
 // IndexPage.vue 設定 --------------------------------------------------
+#indexPage #myheader {
+  @media (min-width: $breakpoint-lg) {
+    height: 10vh;
+  }
+}
+
+#indexPage #mycontent {
+  @media (min-width: $breakpoint-lg) {
+    height: 90vh;
+    padding-left: 100px;
+  }
+}
+
+.indexTitle {
+  @media (min-width: $breakpoint-lg) {
+    display: flex;
+    align-items: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 3.75rem;
+  }}
+
+.indexContent {
+  @media (min-width: $breakpoint-lg) {
+    display: flex;
+    align-items: flex-end;
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+}
+
 // 設定 首頁輪播圖 樣式
 #indexpage-img .q-carousel {
   width: 100%;
@@ -143,7 +191,7 @@ button {
     height: 50vh;
   }
   @media (min-width: $breakpoint-lg) {
-    height: 70vh;
+    height: 84vh;
   }
 }
 
@@ -165,16 +213,6 @@ button {
     padding-left: 50px;
     padding-right: 50px;
   }
-}
-
-// 設定 input 背景樣式
-#register-form .q-field__control {
-  background-color: $dark;
-}
-
-// 設定 input 文字樣式
-#register-form .q-field__native {
-  color: $secondary;
 }
 
 // 設定 radio 樣式
@@ -231,12 +269,25 @@ button {
 // 頂端留白區 RWD
 #adminHomeHeader {
   height: 10vh;
-  padding-left: 100px;
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 3.125rem;
+  letter-spacing: 0.2em;
+  padding-top: 30px;
+  // padding-left: 100px;
   @media (min-width: 1200px) {
     height: 15vh;
+    font-size: 3.75rem;
+    font-weight: 300;
+    line-height: 3.75rem;
+    padding-top: 50px;
   }
     @media (min-width: 1400px) {
     height: 20vh;
+    font-size: 5rem;
+    font-weight: 300;
+    line-height: 5rem;
+    padding-top: 60px;
   }
 }
 
@@ -244,11 +295,23 @@ button {
 #adminHome .q-card {
   width: 44vw;
   height: 44vw;
-  @media (min-width: 1200px) {
-    width: 40vh;
+  @media (min-width: 1183px) {
+    width: 35vh;
+    height: 40vh;
+  }
+  @media (min-width: 1300px) {
+    width: 39vh;
     height: 40vh;
   }
   @media (min-width: 1400px) {
+    width: 40vh;
+    height: 38vh;
+  }
+  @media (min-width: 1500px) {
+    width: 45vh;
+    height: 38vh;
+  }
+  @media (min-width: 1600px) {
     width: 50vh;
     height: 38vh;
   }
@@ -272,7 +335,7 @@ button {
     font-weight: 300;
     line-height: 7rem;
   }
-  @media (min-width: $breakpoint-lg) {
+  @media (min-width: 1183px) {
     font-size: 3.75rem;
     font-weight: 300;
     line-height: 3.75rem;
