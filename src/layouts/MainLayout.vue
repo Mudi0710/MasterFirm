@@ -17,7 +17,7 @@
 
       <router-link to='/' class='col-2'>
         <span class='text-h3 master'>法師</span>
-        <span class='text-h4'>事務所</span>
+        <span class='text-h4 firm'>事務所</span>
       </router-link>
 
       <q-list class='col-4 q-mb-xl'>
@@ -39,7 +39,7 @@
           <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>靈學知識</q-item>
           <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>案例分享</q-item>
         </q-expansion-item>
-        <!-- <q-expansion-item label='專欄文章' dense v-model="expanded" @mouseleave='hide' @mouseover='show' to=''>
+        <!-- <q-expansion-item label='專欄文章' dense v-model='expanded' @mouseleave='hide' @mouseover='show' to=''>
           <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>靈學知識</q-item>
           <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>案例分享</q-item>
         </q-expansion-item> -->
