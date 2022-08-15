@@ -40,6 +40,7 @@ apiAuth.interceptors.request.use(config => {
   return config
 })
 
+// 2022/07/11 7:25:35、8:21:30 路徑說明
 // axios 攔截回應，加上JWT
 apiAuth.interceptors.response.use(res => {
   return res
@@ -48,20 +49,23 @@ apiAuth.interceptors.response.use(res => {
   if (error.response) {
     // 如果是 401，可能是 JWT 過期
     if (error.response.status === 401) {
-      // 確認原始請求的網址不是延長登入，才重新登入
+      // 確認原始請求(error.config)的網址不是延長、也不是登出，才重新登入
+      // 如果沒有加上這條判斷式，請求就會一直循環 401 出不來
       if (error.config.url !== '/users/extend' && error.config.url !== '/users/logout') {
         const user = useUserStore()
         // 傳送延長請求
+        // post 後面一定要帶參數，這裡給他一個空物件，反正他不會去讀
         return apiAuth.post('/users/extend', {}).then(({ data }) => {
-          // 更新 JWT
+          // 更新 使用者的JWT
           user.token = data.result
-          // 使用新的 JWT 再次嘗試原始請求
+          // 使用新的 JWT 再次嘗試原始請求(error.config)
           error.config.headers.authorization = `Bearer ${user.token}`
+          // 用 axios 重新送一次請求
           return axios(error.config)
         }).catch(_ => {
           // 重新登入失敗，強制登出
           user.logout()
-          // 回傳延長登入請求的錯誤訊息到呼叫的地方
+          // 回傳 延長登入請求的錯誤訊息 到呼叫的地方 (會傳到 AdminProductView.vue 的 SweetAlert)
           return Promise.reject(error)
         })
       }
