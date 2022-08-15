@@ -122,6 +122,7 @@ module.exports = configure(function (/* ctx */) {
         'QPageContainer',
         'QRadio',
         'QSeparator',
+        'QToggle',
         'QToolbar',
         'QToolbarTitle',
         'QTooltip'
