@@ -373,3 +373,11 @@ button {
   }
   }
 }
+
+// AdminProductView.vue 設定 --------------------------------------------------
+#productForm {
+  width: 75vw;
+  @media (min-width: 1183px) {
+    width: 60vw;
+  }
+}
