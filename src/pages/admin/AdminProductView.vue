@@ -9,7 +9,7 @@
       </div>
 
       <div class="q-pa-md">
-        <q-table :grid="$q.screen.lt.xl" :columns="columns" :rows="products" row-key="name" square color="$primary">
+        <q-table :grid="$q.screen.lt.xl" :columns="columns" :rows="products" row-key="name" square bordered wrap-cells binary-state-sort dense :filter="filter" :loading="loading" :pagination="pagination" rows-per-page-label="每頁顯示筆數" no-results-label="Oops...找不到該筆資料">
           <!-- 搜尋列 -->
           <template v-slot:top-right>
             <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
@@ -20,19 +20,48 @@
           </template>
           <!-- 商品圖片(頭像) -->
           <template #body-cell-image="image">
-            <q-td :img="img">
+            <q-td :img="image" align="center" ellipsis>
+              <!-- <pre>{{ image.row }}</pre> -->
               <q-avatar square size="100px">
-                <img :src="image.row.image[0]" class="q-mb-xl">
+                <img :src="image.row.image" class="q-mb-xl" style="object-fit: cover;">
               </q-avatar>
             </q-td>
           </template>
           <!-- 商品編輯 -->
           <template #body-cell-edit="edit">
             <q-td :edit="edit">
+              <!-- <pre>{{ edit }}</pre> -->
               <div class="row justify-center">
-                <q-btn class="col-auto" @click='updateCart()' outline>修改商品</q-btn>
+                <q-btn class="col-auto" @click='openDialog(edit.row._id, edit.rowIndex)' outline>修改商品</q-btn>
               </div>
             </q-td>
+          </template>
+          <!-- 表格底端分頁選項 -->
+          <template v-slot:pagination="scope">
+            <q-btn v-if="scope.pagesNumber > 1" icon="first_page" color="secondary" round dense flat
+              :disable="scope.isFirstPage" @click="scope.firstPage" />
+
+            <q-btn icon="chevron_left" color="secondary" round dense flat :disable="scope.isFirstPage"
+              @click="scope.prevPage" />
+
+            <q-btn icon="chevron_right" color="secondary" round dense flat :disable="scope.isLastPage"
+              @click="scope.nextPage" />
+
+            <q-btn v-if="scope.pagesNumber > 1" icon="last_page" color="secondary" round dense flat
+              :disable="scope.isLastPage" @click="scope.lastPage" />
+          </template>
+          <!-- 找不到資料的訊息 -->
+          <template v-slot:no-data="{ message }">
+            <div class="full-width row flex-center text-accent q-gutter-sm">
+              <span>
+                {{ message }}
+              </span>
+            </div>
+          </template>
+          <!-- loading 效果 -->
+          <!-- QInnerLoading必须是其父元素内部的最后一个元素，以便它可以显示在其他内容的顶部。 -->
+          <template v-slot:loading>
+            <q-inner-loading showing dark transition-show="fade" color="primary" />
           </template>
         </q-table>
       </div>
@@ -78,7 +107,7 @@
             </q-file>
             <div class="row justify-around">
               <!-- 確定新增 -->
-              <q-btn square flat type='submit' class="col-4 bg-secondary text-dark q-my-sm" label="新增商品" />
+              <q-btn square flat type='submit' class="col-4 bg-secondary text-dark q-my-sm" label="送出編輯" />
               <!-- 取消新增 -->
               <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
                 @click='form.dialog = false' />
@@ -98,8 +127,14 @@ import Swal from 'sweetalert2'
 
 const filter = ref('')
 const $q = useQuasar()
-const prompt = ref(false)
+const loading = ref(false)
 const products = reactive([])
+
+const pagination = reactive({
+  items: [], // table要顯示的資料
+  page: 1, // 目前第幾頁
+  rowsPerPage: 5 // 每頁幾筆
+})
 
 // 表單預設格式
 const form = reactive({
@@ -134,7 +169,7 @@ const submitForm = async () => {
   // 要把東西放進去 FormData 要使用 .append(key, value)，例如：fd.append('name', form.name)
   // 可以一行一行寫，也可以一個 for 迴圈搞定
   for (const key in form) {
-    if (['_id', 'idx', 'dialog', 'valid', 'submitting'].includes(key)) continue
+    if (['_id', 'idx', 'dialog'].includes(key)) continue
     else if (key === 'image') {
       for (const image of form.image) {
         fd.append(key, image)
@@ -171,18 +206,19 @@ const submitForm = async () => {
   }
 }
 
-// 清空表單
+// 開啟表單
 const openDialog = (_id, idx) => {
   form._id = _id
+  console.log(products[idx])
   if (idx > -1) {
-    // 編輯
+    // 有 id => 編輯
     form.name = products[idx].name
     form.description = products[idx].description
     form.inventory = products[idx].inventory
     form.sell = products[idx].sell
     form.price = products[idx].price
   } else {
-    // 清空
+    // 沒 id => 清空
     form.name = ''
     form.description = ''
     form.inventory = false
@@ -194,13 +230,6 @@ const openDialog = (_id, idx) => {
   form.dialog = true
 }
 
-// const rows = reactive([{
-//   name: 'Frozen Yogurt',
-//   description: 'Frozen Yogurt',
-//   inventory: true,
-//   sell: true,
-//   price: 400
-// }])
 const columns = [
   { name: 'image', label: '商品圖片', align: 'center', field: row => row.image[0] },
   {
@@ -215,8 +244,8 @@ const columns = [
     sortable: true
   },
   // { name: 'description', label: '商品描述', field: row => row.description, align: 'left' },
-  { name: 'inventory', label: '庫存狀態', field: row => row.inventory, align: 'center', sortable: true },
-  { name: 'sell', label: '上架狀態', field: row => row.sell, align: 'center', sortable: true },
+  { name: 'inventory', label: '庫存狀態', field: row => row.inventory ? '有現貨' : '需預訂', align: 'center', sortable: true },
+  { name: 'sell', label: '上架狀態', field: row => row.sell ? '上架' : '下架', align: 'center', sortable: true },
   { name: 'price', label: '商品價格', field: row => row.price, align: 'center', sortable: true },
   { name: 'edit', label: '商品編輯', align: 'center' }
 ]
@@ -225,7 +254,6 @@ const columns = [
 const init = async () => {
   try {
     const { data } = await apiAuth.get('/products/all')
-    console.log(data)
     products.push(...data.result)
   } catch (error) {
     Swal.fire({
