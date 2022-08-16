@@ -77,15 +77,54 @@ button {
   }
 }
 
-
 // 設定 input 背景樣式
 .q-field__control {
   background-color: $dark;
 }
 
+// 設定 檔案上傳 背景樣式
+.q-field__inner {
+  background-color: $dark;
+}
+
 // 設定 input 文字樣式
-.q-field__native {
+.q-field__native,
+.q-field__counter {
   color: $secondary;
+}
+
+// 設定 表格 樣式
+.q-table__card {
+  background-color: $primary;
+  color: $secondary;
+}
+
+// 設定 表格-表頭 樣式
+.q-table__card th {
+  text-align: center;
+  font-size: large;
+}
+
+// 設定 表格-尾巴 樣式
+.q-table__middle,
+.q-table__bottom {
+  display: none;
+  @media (min-width: $breakpoint-lg) {
+    display: block;
+  }
+}
+
+// 設定 表格-內容 樣式
+.q-table__card tbody td {
+  // padding: 0px 0px;
+  font-size: medium;
+}
+
+.q-toggle__track {
+  background: #6C5E55;
+}
+.q-toggle__inner--truthy .q-toggle__thumb:after {
+  background-color: $accent;
 }
 
 .shadow {
@@ -375,9 +414,20 @@ button {
 }
 
 // AdminProductView.vue 設定 --------------------------------------------------
+//
+.createBtn {
+  height: 42px;
+  margin-top: 7px;
+}
+
+// 設定 新增商品表單 樣式
 #productForm {
   width: 75vw;
   @media (min-width: 1183px) {
     width: 60vw;
   }
 }
+
+// #productForm .q-field__inner {
+//   height: 56px;
+// }
