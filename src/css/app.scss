@@ -15,7 +15,7 @@
 
 // 內容區
 #mycontent {
-  padding:20px 10px 0 10px;
+  padding: 20px 10px 0 10px;
   @media (min-width: $breakpoint-lg) {
     padding-left: 100px;
   }
@@ -28,6 +28,7 @@
 
 // container 右側 padding
 .q-page-container {
+  background: radial-gradient(circle at center, #322A28 40%, black 100%);
   @media (min-width: $breakpoint-lg) {
     padding-right: 50px;
   }
@@ -105,26 +106,69 @@ button {
   font-size: large;
 }
 
-// 設定 表格-尾巴 樣式
+// 設定 表格-尾巴-RWD 顯示隱藏
 .q-table__middle,
 .q-table__bottom {
   display: none;
   @media (min-width: $breakpoint-lg) {
-    display: block;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 14px;
   }
+}
+
+// 設定 表格-尾巴-內容 顯示位置
+.q-table__bottom .q-table__control {
+  height: auto;
+  width: auto;
 }
 
 // 設定 表格-內容 樣式
 .q-table__card tbody td {
-  // padding: 0px 0px;
   font-size: medium;
 }
 
+// 設定 表格-RWD 卡片寬度樣式
+.q-table__grid-item-card {
+  width: 86vw;
+  @media (min-width: $breakpoint-xs) {
+    width: 42vw;
+  }
+  @media (min-width: 768px) {
+    width: 30vw;
+  }
+  @media (min-width: $breakpoint-md) {
+    width: 23vw;
+  }
+  @media (min-width: 1183px) {
+    width: 20vw;
+  }
+
+  @media (min-width: 1199px) {
+    width: 17vw;
+  }
+}
+
+// 設定 表格-RWD 文字隱藏樣式
+.q-table__grid-item-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+}
+
+// 設定 switch 滑桿底色 樣式
 .q-toggle__track {
   background: #6C5E55;
 }
+
+// 設定 switch 滑桿 true 樣式
 .q-toggle__inner--truthy .q-toggle__thumb:after {
   background-color: $accent;
+}
+
+// 設定 麵包屑 文字樣式
+.q-breadcrumbs {
+  color: $secondary;
 }
 
 .shadow {
@@ -414,9 +458,10 @@ button {
 }
 
 // AdminProductView.vue 設定 --------------------------------------------------
-//
+// 設定 新增商品鈕 樣式
 .createBtn {
   height: 42px;
+  line-height: 2;
   margin-top: 7px;
 }
 
@@ -428,6 +473,52 @@ button {
   }
 }
 
-// #productForm .q-field__inner {
-//   height: 56px;
-// }
+// ProductsView.vue 設定 --------------------------------------------------
+#ProductsView .q-card {
+  width: 45vw;
+  @media (min-width: 768px) {
+    width: 30vw;
+  }
+  @media (min-width: 1184px) {
+    width: 27vw;
+  }
+  @media (min-width: 1199px) {
+    width: 24vw;
+  }
+  @media (min-width: 1200px) {
+    width: 18vw;
+  }
+  @media (min-width: 1400px) {
+    width: 19vw;
+  }
+  @media (min-width: 1700px) {
+    width: 20vw;
+  }
+}
+
+#ProductsView .q-card .q-img {
+  width: 45vw;
+  height: 30vw;
+  @media (min-width: 768px) {
+    width: 30vw;
+    height: 20vw;
+  }
+  @media (min-width: 1184px) {
+    width: 27vw;
+    height: 18vw;
+  }
+  @media (min-width: 1199px) {
+    width: 24vw;
+    height: 16vw;
+  }
+  @media (min-width: 1200px) {
+    width: 18vw;
+    height: 12vw;
+  }
+  @media (min-width: 1400px) {
+    width: 19vw;
+  }
+  @media (min-width: 1700px) {
+    width: 20vw;
+  }
+}
