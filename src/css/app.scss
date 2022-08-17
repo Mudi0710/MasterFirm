@@ -83,6 +83,8 @@ button {
   background-color: $dark;
 }
 
+
+// 設定 搜尋外框線 樣式
 .search .q-field__control  {
   // 顏色等於 secondary
   border: 1px solid rgba(202, 182, 158, 0.4);
@@ -109,6 +111,7 @@ button {
 .q-table__card th {
   text-align: center;
   font-size: large;
+  color: $accent;
 }
 
 // 設定 表格-尾巴-RWD 顯示隱藏
@@ -527,3 +530,50 @@ button {
 //     width: 20vw;
 //   }
 // }
+
+// ProductView.vue 設定 --------------------------------------------------
+// 設定 單一產品頁輪播圖
+#ProductView-img {
+  width: 97vw;
+  @media (min-width: 1183px) {
+    width: 85vw;
+  }
+  @media (min-width: 1199px) {
+    width: 40vw;
+  }
+  @media (min-width: 1200px) {
+    width: 39vw;
+  }
+  @media (min-width: 1300px) {
+    width: 41vw;
+  }
+  @media (min-width: 1500px) {
+    width: 44vw;
+  }
+}
+
+#ProductView-content {
+  width: 97vw;
+  @media (min-width: 1183px) {
+    width: 85vw;
+  }
+  @media (min-width: 1199px) {
+    width: 40vw;
+  }
+  @media (min-width: 1200px) {
+    width: 35vw;
+  }
+  @media (min-width: 1500px) {
+    width: 35vw;
+  }
+}
+
+// 設定 訂購數量 的 input
+#ProductView .q-field,
+#ProductView .q-field__inner,
+#ProductView .q-field__control,
+#ProductView .q-field__native {
+  height: 45px;
+  background-color: $secondary;
+  color: $dark;
+}
