@@ -9,15 +9,19 @@
       </div>
 
       <div class="q-pa-md">
-        <q-table :grid="$q.screen.lt.xl" :columns="columns" :rows="products" row-key="name" square bordered wrap-cells binary-state-sort dense :filter="filter" :loading="loading" :pagination="pagination" rows-per-page-label="每頁顯示筆數" no-results-label="Oops...找不到該筆資料">
-          <!-- 搜尋列 -->
+        <q-table :grid="$q.screen.lt.xl" :columns="columns" :rows="products" row-key="name" square bordered wrap-cells
+          binary-state-sort dense :filter="filter" :loading="loading" :pagination="pagination"
+          rows-per-page-label="每頁顯示筆數" no-results-label="Oops...找不到該筆資料">
+
+          <!-- 商品搜尋 -->
           <template v-slot:top-right>
-            <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
+            <q-input borderless dense debounce="300" v-model="filter" placeholder="&nbsp;Search" class="search">
               <template v-slot:append>
                 <q-icon name="search" />
               </template>
             </q-input>
           </template>
+
           <!-- 商品圖片(頭像) -->
           <template #body-cell-image="image">
             <q-td :img="image" align="center" ellipsis>
@@ -27,15 +31,18 @@
               </q-avatar>
             </q-td>
           </template>
-          <!-- 商品編輯 -->
+
+          <!-- 商品編輯、刪除 -->
           <template #body-cell-edit="edit">
             <q-td :edit="edit">
               <!-- <pre>{{ edit }}</pre> -->
               <div class="row justify-center">
-                <q-btn class="col-auto" @click='openDialog(edit.row._id, edit.rowIndex)' outline>修改商品</q-btn>
+                <q-btn class="col-auto q-mx-sm" @click='openDialog(edit.row._id, edit.rowIndex)' outline>修改商品</q-btn>
+                <q-btn class="col-auto q-mx-sm" @click='openDeleteDialog(edit.row._id)' outline>刪除商品</q-btn>
               </div>
             </q-td>
           </template>
+
           <!-- 表格底端分頁選項 -->
           <template v-slot:pagination="scope">
             <q-btn v-if="scope.pagesNumber > 1" icon="first_page" color="secondary" round dense flat
@@ -50,6 +57,7 @@
             <q-btn v-if="scope.pagesNumber > 1" icon="last_page" color="secondary" round dense flat
               :disable="scope.isLastPage" @click="scope.lastPage" />
           </template>
+
           <!-- 找不到資料的訊息 -->
           <template v-slot:no-data="{ message }">
             <div class="full-width row flex-center text-accent q-gutter-sm">
@@ -58,6 +66,30 @@
               </span>
             </div>
           </template>
+
+          <!-- RWD 卡片 -->
+          <template v-slot:item="card">
+            <!-- <pre>{{ card }}</pre> -->
+            <div class="col-6 col-md-4 col-lg-3 q-pa-sm cursor-pointer ">
+              <q-card @click='openDialog(card.row._id, card.rowIndex)' square bordered class="bg-primary shadow">
+                <div v-for="col in card.cols" :key="col.name" class="q-pa-sm">
+                  <!-- <pre>{{ col }}</pre> -->
+                  <!-- 商品圖片 -->
+                  <q-responsive v-if="col.name == 'image'" :ratio="3 / 2">
+                    <img :src="card.row[col.name]" class="col" style="width: 100%;">
+                  </q-responsive>
+                  <!-- 商品資訊 -->
+                  <div v-else-if="col.name !== 'image' && col.name !== 'edit'" class="text-left q-mx-auto">
+                    <div class="row justify-between">
+                      <span class="text-accent">{{ col.label }}：</span>
+                      <span class="text-secondary text-right">{{ col.value }}</span>
+                    </div>
+                  </div>
+                </div>
+              </q-card>
+            </div>
+          </template>
+
           <!-- loading 效果 -->
           <!-- QInnerLoading必须是其父元素内部的最后一个元素，以便它可以显示在其他内容的顶部。 -->
           <template v-slot:loading>
@@ -75,7 +107,7 @@
             <q-input v-model="form.name" :rules='[rules.required]' type='text' outlined square dense />
             <!-- 商品描述 -->
             <p class="text-h6 text-accent">商品描述</p>
-            <q-input v-model="form.description" :rules='[rules.required]' type='text' outlined square dense />
+            <q-input v-model="form.description" :rules='[rules.required]' type='textarea' outlined square dense />
             <div class="row q-mb-sm">
               <!-- 庫存狀態 -->
               <div class="column col-6">
@@ -115,6 +147,22 @@
           </q-form>
         </q-card>
       </q-dialog>
+
+      <!-- 刪除商品時的彈出視窗 -->
+      <q-dialog v-model="deleteDialog.dialog" persistent>
+        <q-card square class="row justify-center bg-info q-pa-lg">
+          <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
+          <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除商品嗎？<br>刪除商品將無法復原！</div>
+          <div class="col-12 row justify-around">
+            <!-- 確定刪除 -->
+            <q-btn @click="deleteProduct(del)" square flat class="col-4 bg-secondary text-dark q-my-sm"
+              label="確定刪除商品" />
+            <!-- 取消刪除 -->
+            <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
+              @click='deleteDialog.dialog = false' />
+          </div>
+        </q-card>
+      </q-dialog>
     </div>
   </q-page>
 </template>
@@ -133,7 +181,7 @@ const products = reactive([])
 const pagination = reactive({
   items: [], // table要顯示的資料
   page: 1, // 目前第幾頁
-  rowsPerPage: 5 // 每頁幾筆
+  rowsPerPage: 0 // 每頁幾筆，代表 All
 })
 
 // 表單預設格式
@@ -206,10 +254,55 @@ const submitForm = async () => {
   }
 }
 
+// 預設 刪除商品的彈窗 為 false
+const deleteDialog = reactive({
+  dialog: false
+})
+
+/*
+  定義一個變數，用來將 form 裡面的 _id 帶入 deleteProduct 的 function 裡
+  又，因為開啟 刪除商品的彈窗 的按鈕放在 #body-cell-edit="edit" 裡
+  所以才會寫 @click='openDeleteDialog(edit.row._id)'
+*/
+const del = ref('')
+
+/*
+  開啟 刪除商品的彈窗，並帶入值
+  此時 del.value = edit.row._id = productId
+*/
+const openDeleteDialog = (productId) => {
+  del.value = productId
+  deleteDialog.dialog = true
+}
+
+/*
+  刪除商品
+  透過 deleteProduct(del) 將 最原始的 form._id 帶入 function
+  form._id = edit.row._id = del.value = productId
+*/
+const deleteProduct = async (productId) => {
+  deleteDialog.dialog = false
+  try {
+    await apiAuth.delete('/products/' + productId)
+    await Swal.fire({
+      icon: 'success',
+      title: '刪除成功',
+      text: '您已成功刪除商品！'
+    })
+    // init()
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: '刪除失敗',
+      text: error.isAxiosError ? error.response.data.message : error.message
+    })
+  }
+}
+
 // 開啟表單
 const openDialog = (_id, idx) => {
   form._id = _id
-  console.log(products[idx])
+  // console.log(products[idx])
   if (idx > -1) {
     // 有 id => 編輯
     form.name = products[idx].name
