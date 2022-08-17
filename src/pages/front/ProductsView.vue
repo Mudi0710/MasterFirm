@@ -1,6 +1,6 @@
 <template>
   <q-page id="ProductsView" class="column">
-    <div id="myheader" class="bg-red"></div>
+    <div id="myheader"></div>
     <div id="mycontent" class="col column content-start">
       <!-- 麵包屑 -->
       <div class="q-mb-md">
@@ -15,11 +15,13 @@
 
       <!-- 商品 Card -->
       <div class="q-mt-md">
-        <div v-if="products.length > 0" class="row">
-          <div v-for='product in products' :key="product.id" class="col-6 col-md-4 col-xl-3 q-pa-xs">
-            <q-card class="my-card" :product="product">
+        <div v-if="products.length > 0" class="row justify-start">
+          <div v-for='product in products' :key="product.id" class="col-6 col-md-4 col-xl-3 q-px-xs q-py-sm">
+            <q-card class="my-card" style="border-radius: 0;" :product="product">
               <!-- 商品圖片 -->
-              <q-img :src="product.image[0]" />
+              <q-responsive :ratio="3 / 2">
+                <q-img :src="product.image[0]" />
+              </q-responsive>
               <!-- 商品名稱 -->
               <q-card-section>
                 <div class="col text-h6 ellipsis"> {{ product.name }} </div>
