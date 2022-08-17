@@ -49,8 +49,8 @@ const routes = [
         }
       },
       {
-        path: 'Appointment',
-        name: 'Appointment',
+        path: 'appointment',
+        name: 'appointment',
         component: () => import('@/pages/front/AppointmentView.vue'),
         meta: {
           title: '法師事務所 | 預約諮詢',
@@ -59,8 +59,8 @@ const routes = [
         }
       },
       {
-        path: 'Introduction',
-        name: 'Introduction',
+        path: 'introduction',
+        name: 'introduction',
         component: () => import('@/pages/front/IntroductionView.vue'),
         meta: {
           title: '法師事務所 | 本所簡介',
@@ -69,8 +69,8 @@ const routes = [
         }
       },
       {
-        path: 'News',
-        name: 'News',
+        path: 'news',
+        name: 'news',
         component: () => import('@/pages/front/NewsView.vue'),
         meta: {
           title: '法師事務所 | 最新消息總覽',
@@ -79,8 +79,8 @@ const routes = [
         }
       },
       {
-        path: 'New/:id',
-        name: 'New',
+        path: 'new/:id',
+        name: 'new',
         component: () => import('@/pages/front/NewView.vue'),
         meta: {
           title: '法師事務所 | 最新消息',
@@ -89,8 +89,8 @@ const routes = [
         }
       },
       {
-        path: 'Services',
-        name: 'Services',
+        path: 'services',
+        name: 'services',
         component: () => import('@/pages/front/ServicesView.vue'),
         meta: {
           title: '法師事務所 | 服務項目總覽',
@@ -99,8 +99,8 @@ const routes = [
         }
       },
       {
-        path: 'Service/:id',
-        name: 'Service',
+        path: 'service/:id',
+        name: 'service',
         component: () => import('@/pages/front/ServiceView.vue'),
         meta: {
           title: '法師事務所 | 服務項目',
@@ -109,8 +109,8 @@ const routes = [
         }
       },
       {
-        path: 'Knowledges',
-        name: 'Knowledges',
+        path: 'knowledges',
+        name: 'knowledges',
         component: () => import('@/pages/front/KnowledgesView.vue'),
         meta: {
           title: '法師事務所 | 靈學知識總覽',
@@ -119,8 +119,8 @@ const routes = [
         }
       },
       {
-        path: 'Knowledge/:id',
-        name: 'Knowledge',
+        path: 'knowledge/:id',
+        name: 'knowledge',
         component: () => import('@/pages/front/KnowledgeView.vue'),
         meta: {
           title: '法師事務所 | 靈學知識',
@@ -129,8 +129,8 @@ const routes = [
         }
       },
       {
-        path: 'Cases',
-        name: 'Cases',
+        path: 'cases',
+        name: 'cases',
         component: () => import('@/pages/front/CasesView.vue'),
         meta: {
           title: '法師事務所 | 案例分享總覽',
@@ -139,8 +139,8 @@ const routes = [
         }
       },
       {
-        path: 'Case/:id',
-        name: 'Case',
+        path: 'case/:id',
+        name: 'case',
         component: () => import('@/pages/front/CaseView.vue'),
         meta: {
           title: '法師事務所 | 案例分享',
@@ -149,8 +149,8 @@ const routes = [
         }
       },
       {
-        path: 'Products',
-        name: 'Products',
+        path: 'products',
+        name: 'products',
         component: () => import('@/pages/front/ProductsView.vue'),
         meta: {
           title: '法師事務所 | 開運小物總覽',
@@ -159,8 +159,8 @@ const routes = [
         }
       },
       {
-        path: 'Product/:id',
-        name: 'Product',
+        path: 'product/:id',
+        name: 'product',
         component: () => import('@/pages/front/ProductView.vue'),
         meta: {
           title: '法師事務所 | 開運小物',
@@ -169,8 +169,8 @@ const routes = [
         }
       },
       {
-        path: 'Content',
-        name: 'Content',
+        path: 'content',
+        name: 'content',
         component: () => import('@/pages/front/ContentView.vue'),
         meta: {
           title: '法師事務所 | 聯絡我們',
@@ -211,7 +211,7 @@ const routes = [
       {
         path: 'cart',
         name: 'cart',
-        component: () => import('@/layouts/CartLayout.vue'),
+        component: () => import('@/pages/front/CartView.vue'),
         meta: {
           title: '法師事務所 | 購物車',
           login: true,
