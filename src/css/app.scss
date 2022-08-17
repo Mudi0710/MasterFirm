@@ -23,12 +23,12 @@
 
 // 背景漸層色
 .q-layout {
-  background: radial-gradient(circle at center, #322A28 40%, black 100%);
+  background: radial-gradient(circle at center, #322A28 60%, black 100%);
 }
 
 // container 右側 padding
 .q-page-container {
-  background: radial-gradient(circle at center, #322A28 40%, black 100%);
+  background: radial-gradient(circle at center, #322A28 50%, black 100%);
   @media (min-width: $breakpoint-lg) {
     padding-right: 50px;
   }
@@ -81,6 +81,11 @@ button {
 // 設定 input 背景樣式
 .q-field__control {
   background-color: $dark;
+}
+
+.search .q-field__control  {
+  // 顏色等於 secondary
+  border: 1px solid rgba(202, 182, 158, 0.4);
 }
 
 // 設定 檔案上傳 背景樣式
@@ -496,29 +501,29 @@ button {
   }
 }
 
-#ProductsView .q-card .q-img {
-  width: 45vw;
-  height: 30vw;
-  @media (min-width: 768px) {
-    width: 30vw;
-    height: 20vw;
-  }
-  @media (min-width: 1184px) {
-    width: 27vw;
-    height: 18vw;
-  }
-  @media (min-width: 1199px) {
-    width: 24vw;
-    height: 16vw;
-  }
-  @media (min-width: 1200px) {
-    width: 18vw;
-    height: 12vw;
-  }
-  @media (min-width: 1400px) {
-    width: 19vw;
-  }
-  @media (min-width: 1700px) {
-    width: 20vw;
-  }
-}
+// #ProductsView .q-card .q-img {
+//   width: 45vw;
+//   height: 30vw;
+//   @media (min-width: 768px) {
+//     width: 30vw;
+//     height: 20vw;
+//   }
+//   @media (min-width: 1184px) {
+//     width: 27vw;
+//     height: 18vw;
+//   }
+//   @media (min-width: 1199px) {
+//     width: 24vw;
+//     height: 16vw;
+//   }
+//   @media (min-width: 1200px) {
+//     width: 18vw;
+//     height: 12vw;
+//   }
+//   @media (min-width: 1400px) {
+//     width: 19vw;
+//   }
+//   @media (min-width: 1700px) {
+//     width: 20vw;
+//   }
+// }
