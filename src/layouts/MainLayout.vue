@@ -22,31 +22,31 @@
 
       <q-list class='col-4 q-mb-xl'>
         <!-- v-ripple 點擊時有波紋特效 -->
-        <q-item clickable v-ripple dense to='/Appointment'>
+        <q-item clickable v-ripple dense to='/appointment'>
           <q-item-section>預約諮詢</q-item-section>
         </q-item>
         <q-separator />
-        <q-item clickable v-ripple dense to='/Introduction'>
+        <q-item clickable v-ripple dense to='/introduction'>
           <q-item-section>本所簡介</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='/News'>
+        <q-item clickable v-ripple dense to='/news'>
           <q-item-section>最新消息</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='/Services'>
+        <q-item clickable v-ripple dense to='/services'>
           <q-item-section>服務項目</q-item-section>
         </q-item>
         <q-expansion-item label='專欄文章' dense>
-          <q-item clickable v-ripple dense class='bg-dark justify-center' to='/Knowledges'>靈學知識</q-item>
-          <q-item clickable v-ripple dense class='bg-dark justify-center' to='/Cases'>案例分享</q-item>
+          <q-item clickable v-ripple dense class='bg-dark justify-center' to='/knowledges'>靈學知識</q-item>
+          <q-item clickable v-ripple dense class='bg-dark justify-center' to='/cases'>案例分享</q-item>
         </q-expansion-item>
         <!-- <q-expansion-item label='專欄文章' dense v-model='expanded' @mouseleave='hide' @mouseover='show' to=''>
           <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>靈學知識</q-item>
           <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>案例分享</q-item>
         </q-expansion-item> -->
-        <q-item clickable v-ripple dense to='/Products'>
+        <q-item clickable v-ripple dense to='/products'>
           <q-item-section>開運小物</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='/Content'>
+        <q-item clickable v-ripple dense to='/content'>
           <q-item-section>聯絡我們</q-item-section>
         </q-item>
       </q-list>
