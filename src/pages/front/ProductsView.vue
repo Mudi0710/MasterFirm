@@ -17,37 +17,42 @@
       <div class="q-mt-md">
         <div v-if="products.length > 0" class="row justify-start">
           <div v-for='product in products' :key="product.id" class="col-6 col-md-4 col-xl-3 q-px-xs q-py-sm">
-            <q-card class="my-card" style="border-radius: 0;" :product="product">
-              <!-- 商品圖片 -->
+          <ProductCard bordered class="my-card bg-info shadow-10" style="border-radius: 0;" :product="product">
+          </ProductCard>
+
+            <!-- <q-card bordered class="my-card bg-info shadow-10" style="border-radius: 0;" :product="product">
+              商品圖片
               <q-responsive :ratio="3 / 2">
                 <q-img :src="product.image[0]" />
               </q-responsive>
-              <!-- 商品名稱 -->
+              商品名稱
               <q-card-section>
-                <div class="col text-h6 ellipsis"> {{ product.name }} </div>
+                .ellipsis => text 過多時以...代替
+                <div class="col text-h5 text-accent ellipsis"> {{ product.name }} </div>
               </q-card-section>
-              <!-- 商品描述 -->
+              商品描述
               <q-card-section class="q-pt-none">
-                <div class="text-caption text-grey">
+                <div class="text-subtitle1 text-dark ellipsis-3-lines">
                   {{ product.description }}
                 </div>
               </q-card-section>
-              <!-- 商品金額 -->
+              商品金額
               <q-card-section class="q-pt-none">
-                <div class="text-caption text-grey text-right">
+                <div class="text-subtitle2 text-accent text-right">
                   $ {{ product.price }}
                 </div>
               </q-card-section>
 
               <q-separator />
-              <!-- 訂購按鈕 -->
+              訂購按鈕
               <q-card-actions>
                 <q-btn flat round icon="event" />
                 <q-btn flat color="primary">
                   Reserve
                 </q-btn>
               </q-card-actions>
-            </q-card>
+            </q-card> -->
+
           </div>
         </div>
 
@@ -60,8 +65,9 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
-import { api } from '../../boot/axios'
+import { api } from '@/boot/axios'
 import Swal from 'sweetalert2'
+import ProductCard from '@/components/ProductCard.vue'
 
 const products = reactive([])
 
