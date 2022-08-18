@@ -36,7 +36,7 @@
           <div class="col-12 text-h3 spacing-h3 text-accent q-mb-xl">{{ product.name }}</div>
           <!-- 商品描述 -->
           <div class="col-12 text-h6 spacing-h6 text-secondary text-justify items-center q-mb-md" style="height: 45%;">
-            {{ product.description }}</div>
+            {{ product.description }}{{ product.inventory ? '有現貨' : '訂購後製作' }}</div>
           <!-- 商品價格 -->
           <div class="col-12 text-h4 spacing-h6 text-accent text-right" style="height: 10%;">$ {{ product.price }}</div>
           <!-- 商品訂購 -->
@@ -53,16 +53,13 @@
               <!-- 送出訂購按鈕 -->
               <q-btn v-if='isLogin' square flat outline class="col-7 bg-secondary text-body1 text-dark"
                 icon='fa-solid fa-cart-shopping' label="加入購物車" type="submit" />
-                <!-- 未登入導回登入頁 -->
+              <!-- 未登入導回登入頁 -->
               <q-btn v-if='!isLogin' square flat outline class="col-7 bg-dark text-body1 text-secondary"
                 label="登入以使用購物車" to='/login' />
             </q-form>
-
           </div>
         </div>
-
       </div>
-
     </div>
   </q-page>
 </template>
@@ -96,11 +93,11 @@ const quantityRule = reactive([
 const product = reactive({
   _id: '',
   name: '',
-  price: 0,
-  category: '',
+  description: '',
+  inventory: false,
   sell: false,
-  image: '',
-  description: ''
+  price: 0,
+  image: ''
 })
 
 const submit = () => {
