@@ -48,7 +48,7 @@
   border-radius:0;
 }
 
-// .router-link 樣式設定
+// 設定 .router-link 樣式
 a {
   text-decoration: none;
   color: $secondary;
@@ -61,14 +61,14 @@ a {
   }
 }
 
-// button 樣式設定
+// 設定 button hover 樣式
 button {
   &:hover {
     color: $accent !important;
   }
 }
 
-// 側邊欄項目 樣式設定
+// 設定 側邊欄項目 hover visited 樣式
 .q-item {
   &:hover {
     color: $accent !important;
@@ -95,26 +95,26 @@ button {
   background-color: $dark;
 }
 
-// 設定 input 文字樣式
+// 設定 input內 文字樣式
 .q-field__native,
 .q-field__counter {
   color: $secondary;
 }
 
-// 設定 表格 樣式
+// 設定 表格 背景顏色、文字顏色 樣式
 .q-table__card {
   background-color: $primary;
   color: $secondary;
 }
 
-// 設定 表格-表頭 樣式
+// 設定 表格-標題 對齊、字體大小、字體顏色 樣式
 .q-table__card th {
   text-align: center;
   font-size: large;
   color: $accent;
 }
 
-// 設定 表格-尾巴-RWD 顯示隱藏
+// 設定 表格-表頭+尾巴-RWD 顯示隱藏
 .q-table__middle,
 .q-table__bottom {
   display: none;
@@ -131,38 +131,40 @@ button {
   width: auto;
 }
 
-// 設定 表格-內容 樣式
+// 設定 表格-內容 字體大小 樣式
 .q-table__card tbody td {
   font-size: medium;
 }
 
+// 應該沒用了
 // 設定 表格-RWD 卡片寬度樣式
-.q-table__grid-item-card {
-  width: 86vw;
-  @media (min-width: $breakpoint-xs) {
-    width: 42vw;
-  }
-  @media (min-width: 768px) {
-    width: 30vw;
-  }
-  @media (min-width: $breakpoint-md) {
-    width: 23vw;
-  }
-  @media (min-width: 1183px) {
-    width: 20vw;
-  }
+// .q-table__grid-item-card {
+//   width: 86vw;
+//   @media (min-width: $breakpoint-xs) {
+//     width: 42vw;
+//   }
+//   @media (min-width: 768px) {
+//     width: 30vw;
+//   }
+//   @media (min-width: $breakpoint-md) {
+//     width: 23vw;
+//   }
+//   @media (min-width: 1183px) {
+//     width: 20vw;
+//   }
 
-  @media (min-width: 1199px) {
-    width: 17vw;
-  }
-}
+//   @media (min-width: 1199px) {
+//     width: 17vw;
+//   }
+// }
 
+// 應該沒用了
 // 設定 表格-RWD 文字隱藏樣式
-.q-table__grid-item-value {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-}
+// .q-table__grid-item-value {
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   display: -webkit-box;
+// }
 
 // 設定 switch 滑桿底色 樣式
 .q-toggle__track {
@@ -179,18 +181,23 @@ button {
   color: $secondary;
 }
 
+// 全局 密碼顯示/隱藏 樣式
+.q-field__marginal {
+  color: $secondary;
+}
+
+// 全局 陰影
 .shadow {
   box-shadow: 0px 0px 60px rgba(30, 25, 24, 1);
 }
 
+// 全局 字距
 .spacing-h3 {
   letter-spacing: 0.2em
 }
-
 .spacing-h4 {
   letter-spacing: 0.2em
 }
-
 .spacing-h6 {
   letter-spacing: 0.1em
 }
@@ -240,12 +247,14 @@ button {
 }
 
 // IndexPage.vue 設定 --------------------------------------------------
+// 設定 首頁 上方留白空間
 #indexPage #myheader {
   @media (min-width: $breakpoint-lg) {
     height: 10vh;
   }
 }
 
+// 設定 首頁 內容區高度、寬度
 #indexPage #mycontent {
   @media (min-width: $breakpoint-lg) {
     height: 90vh;
@@ -253,6 +262,7 @@ button {
   }
 }
 
+// 設定 首頁 promote 標題 樣式
 .indexTitle {
   @media (min-width: $breakpoint-lg) {
     display: flex;
@@ -261,7 +271,8 @@ button {
     margin-bottom: 0px;
     font-size: 3.75rem;
   }}
-
+  
+// 設定 首頁 promote 內容 樣式
 .indexContent {
   @media (min-width: $breakpoint-lg) {
     display: flex;
@@ -271,7 +282,7 @@ button {
   }
 }
 
-// 設定 首頁輪播圖 樣式
+// 設定 首頁 輪播圖 樣式
 #indexpage-img .q-carousel {
   width: 100%;
   height: 30vh;
@@ -295,7 +306,7 @@ button {
 // }
 
 // RegisterView.vue 設定 --------------------------------------------------
-// 設定 註冊視窗 樣式
+// 設定 註冊視窗 寬高 樣式
 #register-form {
   width: 300px;
   height: 700px;
@@ -306,7 +317,7 @@ button {
   }
 }
 
-// 設定 radio 樣式
+// 設定 註冊 radio 樣式
 #register-form .q-radio__inner {
   color: $secondary;
 }
@@ -315,11 +326,6 @@ button {
 #register-login {
   width: 400px;
   height: 700px;
-}
-
-// 設定 密碼顯示/隱藏 樣式
-.q-field__marginal {
-  color: $secondary;
 }
 
 // LoginView.vue 設定 --------------------------------------------------
@@ -504,6 +510,7 @@ button {
   }
 }
 
+// 應該沒用了
 // #ProductsView .q-card .q-img {
 //   width: 45vw;
 //   height: 30vw;
@@ -532,7 +539,7 @@ button {
 // }
 
 // ProductView.vue 設定 --------------------------------------------------
-// 設定 單一產品頁輪播圖
+// 設定 單一產品頁 商品輪播圖 寬度
 #ProductView-img {
   width: 97vw;
   @media (min-width: 1183px) {
@@ -552,6 +559,7 @@ button {
   }
 }
 
+// 設定 單一產品頁 商品資訊區 寬度
 #ProductView-content {
   width: 97vw;
   @media (min-width: 1183px) {
@@ -576,4 +584,29 @@ button {
   height: 45px;
   background-color: $secondary;
   color: $dark;
+}
+
+// CartView.vue 設定 --------------------------------------------------
+// 設定 表格-表頭+尾巴-RWD 顯示隱藏
+#CartView .q-table__middle {
+  display: none;
+  @media (min-width: $breakpoint-lg) {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 14px;
+  }
+}
+
+// 設定 表格-尾巴-RWD 顯示隱藏
+#CartView .q-table__bottom {
+  display: flex;
+  color: $secondary;
+  display: flex;
+  justify-content: flex-end;
+}
+
+// 設定 表格-尾巴-內容 顯示位置
+#CartView .q-table__bottom .q-table__control {
+  height: auto;
+  width: auto;
 }
