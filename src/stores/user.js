@@ -131,13 +131,16 @@ export const useUserStore = defineStore({
     },
     async checkout() {
       try {
+        // 這是後台
         await apiAuth.post('/orders')
+        // 清空購物車，後台也有清空(/controllers/order.js 的 createOrder)
         this.cart = 0
         Swal.fire({
           icon: 'success',
           title: '成功',
           text: '結帳成功，謝謝您的購買！'
         })
+        // 這是前台
         this.router.push('/order')
       } catch (error) {
         Swal.fire({
