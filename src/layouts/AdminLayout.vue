@@ -77,6 +77,10 @@
     </q-page-container>
 
   </q-layout>
+
+  <!-- <q-layout class="text-h1 text-secondary q-pt-xl">
+    footer
+  </q-layout> -->
 </template>
 
 <script setup>
