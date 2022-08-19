@@ -127,6 +127,7 @@ module.exports = configure(function (/* ctx */) {
         'QToolbarTitle',
         'QTooltip'
       ],
+      cssAddon: true,
       // directives: [],
 
       // Quasar plugins

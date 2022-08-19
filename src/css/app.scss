@@ -4,33 +4,35 @@
   letter-spacing: 0.06em;
 }
 
+// 背景漸層色
+body {
+  background: radial-gradient(circle at center, #322A28 70%, black 100%);
+}
+
 // 頂端留白區
 #myheader {
   height: 0;
   padding-left: 100px;
   @media (min-width: $breakpoint-lg) {
-    height: 20vh;
+    height: 10vh;
   }
 }
 
 // 內容區
 #mycontent {
+  // height: auto;
   padding: 20px 10px 0 10px;
-  @media (min-width: $breakpoint-lg) {
+  @media (min-width: 1200px) {
     padding-left: 100px;
   }
 }
 
-// 背景漸層色
-.q-layout {
-  background: radial-gradient(circle at center, #322A28 60%, black 100%);
-}
-
 // container 右側 padding
 .q-page-container {
-  background: radial-gradient(circle at center, #322A28 50%, black 100%);
+  // height: auto;
+  // background: radial-gradient(circle at center, #322A28 50%, black 100%);
   @media (min-width: $breakpoint-lg) {
-    padding-right: 50px;
+    padding-right: 100px;
   }
 }
 
@@ -136,36 +138,6 @@ button {
   font-size: medium;
 }
 
-// 應該沒用了
-// 設定 表格-RWD 卡片寬度樣式
-// .q-table__grid-item-card {
-//   width: 86vw;
-//   @media (min-width: $breakpoint-xs) {
-//     width: 42vw;
-//   }
-//   @media (min-width: 768px) {
-//     width: 30vw;
-//   }
-//   @media (min-width: $breakpoint-md) {
-//     width: 23vw;
-//   }
-//   @media (min-width: 1183px) {
-//     width: 20vw;
-//   }
-
-//   @media (min-width: 1199px) {
-//     width: 17vw;
-//   }
-// }
-
-// 應該沒用了
-// 設定 表格-RWD 文字隱藏樣式
-// .q-table__grid-item-value {
-//   overflow: hidden;
-//   text-overflow: ellipsis;
-//   display: -webkit-box;
-// }
-
 // 設定 switch 滑桿底色 樣式
 .q-toggle__track {
   background: #6C5E55;
@@ -189,6 +161,15 @@ button {
 // 全局 陰影
 .shadow {
   box-shadow: 0px 0px 60px rgba(30, 25, 24, 1);
+}
+
+// 全局 陰影(白色)
+.shadow-white {
+  box-shadow: 0px 0px 6px 1px rgba(255, 255, 255, 0.1);
+}
+
+.bg-product {
+  background: linear-gradient(270deg, #e0e0e0, #ECE7D7, #212121);
 }
 
 // 全局 字距
@@ -219,14 +200,12 @@ button {
 // MainLayout.vue 設定 --------------------------------------------------
 // 設定 法師 樣式
 .master {
-  font-size: 48px;
-  letter-spacing: 0.05em;
+  letter-spacing: 5px
 }
 
 // 設定 事務所 樣式
 .firm {
-  font-size: 30px;
-  letter-spacing: 0.05em;
+  line-height: 3.5rem
 }
 
 // sidebar 固定
@@ -293,6 +272,9 @@ button {
     height: 50vh;
   }
   @media (min-width: $breakpoint-lg) {
+    height: 84vh;
+  }
+  @media (min-width: $breakpoint-xl) {
     height: 84vh;
   }
 }
@@ -487,92 +469,20 @@ button {
   }
 }
 
-// ProductsView.vue 設定 --------------------------------------------------
-#ProductsView .q-card {
-  width: 45vw;
-  @media (min-width: 768px) {
-    width: 30vw;
-  }
-  @media (min-width: 1184px) {
-    width: 27vw;
-  }
-  @media (min-width: 1199px) {
-    width: 24vw;
-  }
-  @media (min-width: 1200px) {
-    width: 18vw;
-  }
-  @media (min-width: 1400px) {
-    width: 19vw;
-  }
-  @media (min-width: 1700px) {
-    width: 20vw;
-  }
-}
-
-// 應該沒用了
-// #ProductsView .q-card .q-img {
-//   width: 45vw;
-//   height: 30vw;
-//   @media (min-width: 768px) {
-//     width: 30vw;
-//     height: 20vw;
-//   }
-//   @media (min-width: 1184px) {
-//     width: 27vw;
-//     height: 18vw;
-//   }
-//   @media (min-width: 1199px) {
-//     width: 24vw;
-//     height: 16vw;
-//   }
-//   @media (min-width: 1200px) {
-//     width: 18vw;
-//     height: 12vw;
-//   }
-//   @media (min-width: 1400px) {
-//     width: 19vw;
-//   }
-//   @media (min-width: 1700px) {
-//     width: 20vw;
-//   }
-// }
-
 // ProductView.vue 設定 --------------------------------------------------
 // 設定 單一產品頁 商品輪播圖 寬度
 #ProductView-img {
-  width: 97vw;
-  @media (min-width: 1183px) {
-    width: 85vw;
-  }
-  @media (min-width: 1199px) {
-    width: 40vw;
-  }
-  @media (min-width: 1200px) {
-    width: 39vw;
-  }
-  @media (min-width: 1300px) {
-    width: 41vw;
-  }
-  @media (min-width: 1500px) {
-    width: 44vw;
+  width: 100%;
+  @media (min-width: 1400px) {
+    width: 60%;
   }
 }
 
 // 設定 單一產品頁 商品資訊區 寬度
 #ProductView-content {
-  width: 97vw;
-  @media (min-width: 1183px) {
-    width: 85vw;
-  }
-  @media (min-width: 1199px) {
-    width: 40vw;
-  }
-  @media (min-width: 1200px) {
-    width: 35vw;
-  }
-  @media (min-width: 1500px) {
-    width: 35vw;
+  width: 100%;
+  @media (min-width: 1400px) {
+    width: 40%;
   }
 }
 

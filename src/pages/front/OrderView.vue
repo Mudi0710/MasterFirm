@@ -28,6 +28,77 @@
             </q-td>
           </template>
 
+          <!-- 商品金額 -->
+          <template #body-cell-totalPrice="totalPrice">
+            <q-td :totalPrice="totalPrice" align="center">
+              <!-- <pre>{{ totalPrice.row.totalPrice }}</pre> -->
+              NT$ {{ totalPrice.row.totalPrice.toLocaleString() }}
+            </q-td>
+          </template>
+
+          <!-- 定義表頭 -->
+          <template v-slot:header="header">
+            <q-tr :header="header">
+              <q-th>訂單詳情</q-th>
+              <q-th v-for="col in header.cols" :key="col.name" :header="header">
+                {{ col.label }}
+              </q-th>
+            </q-tr>
+          </template>
+
+          <!-- 訂單詳情 -->
+          <template v-slot:body="detail">
+            <q-tr v-if="detail.cols !== totalPrice" :detail="detail" class="text-center">
+              <q-td>
+                <q-btn size="sm" color="accent" round dense @click="detail.expand = !detail.expand"
+                  :icon="detail.expand ? 'remove' : 'add'" />
+              </q-td>
+              <q-td v-for="col in detail.cols" :key="col.name" :detail="detail">
+                <!-- <pre>{{ detail.cols.value }}</pre> -->
+                {{ col.value }}
+              </q-td>
+            </q-tr>
+            <q-tr v-show="detail.expand" :detail="detail">
+              <q-td colspan="100%">
+                <div class="text-left">This is expand slot for row above: {{ detail.row.name }}.</div>
+              </q-td>
+            </q-tr>
+          </template>
+
+          <!-- <template v-slot:body="detail">
+            <q-td auto-width :detail="detail" align="center">
+              <pre>{{ detail.row }}</pre>
+              <q-btn size="sm" round @click="detail.expand = !detail.expand"
+                :icon="detail.expand ? 'fa-solid fa-angle-up' : 'fa-solid fa-angle-down'" />
+            </q-td>
+            <q-td v-for="col in detail.cols" :key="col.name" :detail="detail">
+              {{ col.value }}
+            </q-td>
+            <q-tr v-show="detail.expand" :detail="detail">
+              <q-td colspan="100%">
+                <div class="text-left">This is expand slot for row above: {{ detail.row.name }}.</div>
+              </q-td>
+            </q-tr>
+          </template> -->
+
+          <!-- <template v-slot:body="detail">
+          <pre>{{ detail.row }}</pre>
+            <q-tr :detail="detail">
+              <q-td class="text-center">
+                <q-btn size="sm" round @click="detail.expand = !detail.expand"
+                  :icon="detail.expand ? 'fa-solid fa-angle-up' : 'fa-solid fa-angle-down'" />
+              </q-td>
+              <q-td v-for="col in detail.cols" :key="col.name" :detail="detail">
+                {{ col.value }}
+              </q-td>
+            </q-tr>
+            <q-tr v-show="detail.expand" :detail="detail">
+              <q-td colspan="100%">
+                <div class="text-left">This is expand slot for row above: {{ detail.row.name }}.</div>
+              </q-td>
+            </q-tr>
+          </template> -->
+
           <!-- 找不到資料的訊息 -->
           <template v-slot:no-data="{ message }">
             <div class="full-width row flex-center text-accent text-h5 q-gutter-sm">
@@ -107,27 +178,11 @@ const orders = reactive([])
 
 // 定義每列 title
 const columns = [
-  // { name: 'image', label: '商品圖片', field: row => row.product.image[0], required: true, align: 'center' },
+  // { name: 'open', required: true, align: 'center' },
   { name: 'date', label: '訂單日期', field: row => row.date, required: true, align: 'center' },
   { name: 'id', label: '訂單編號', field: row => row._id, required: true, align: 'center' },
-  { name: 'totalPrice', label: '訂單金額', field: row => row.totalPrice, required: true, align: 'center' },
-  { name: 'edit', label: '商品編輯', align: 'center' }
-  // {
-  //   name: 'name',
-  //   label: '商品名稱',
-  //   field: row => row.product.name,
-  //   format: val => `${val}`,
-  //   // 是否凍結窗格
-  //   required: true,
-  //   align: 'center'
-  // },
-  // { name: 'inventory', label: '商品狀態', field: row => row.product.inventory ? '有現貨' : '訂購後製作', align: 'center' },
-  // { name: 'price', label: '商品單價', field: row => row.product.price, align: 'center' },
-  // { name: 'minus', align: 'right' },
-  // { name: 'quantity', label: '訂購數量', field: row => row.quantity, align: 'center' },
-  // { name: 'add', align: 'left' },
-  // { name: 'sum', label: '金額小計', field: row => (row.product.price * row.quantity), align: 'center' },
-  // { name: 'edit', label: '商品編輯', align: 'center' }
+  { name: 'totalPrice', label: '訂單金額', field: row => row.totalPrice, align: 'center' }
+  // { name: 'detail', label: '訂單詳情', align: 'center' }
 ]
 
 // 抓使用者的訂單資料

@@ -1,6 +1,6 @@
 <template>
   <q-layout>
-    <q-header class='bg-primary text-secondary lt-xl q-px-md'>
+    <q-header class='bg-primary text-secondary q-px-md desktop-none'>
       <q-toolbar>
         <q-toolbar-title>
           <router-link to='/'>
@@ -8,59 +8,51 @@
           </router-link>
         </q-toolbar-title>
         <!-- 漢堡 -->
-        <q-btn dense flat round icon='menu' @click='toggleLeftDrawer' />
+        <q-btn dense flat round icon='menu' />
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model='leftDrawerOpen' side='left' :breakpoint='1199' show-if-above :width='150'
+    <!-- <q-drawer v-model='leftDrawerOpen' side='left' :breakpoint='1200' show-if-above :width='250'
+      class='bg-primary text-secondary text-center q-py-md q-px-md column justify-center' style='overflow: visible;'> -->
+    <q-drawer elevated v-model='leftDrawerOpen' side='left' :breakpoint='1199' show-if-above :width='250'
       class='bg-primary text-secondary text-center q-py-md q-px-md column justify-center' style='overflow: visible;'>
 
-      <router-link to='/' class='col-2'>
-        <span class='text-h3 master'>法師</span>
+      <router-link to='/' class='col-2 q-pt-md'>
+        <span class='text-h3 master'>法師</span><br>
         <span class='text-h4 firm'>事務所</span>
       </router-link>
 
       <q-list class='col-4 q-mb-xl'>
         <!-- v-ripple 點擊時有波紋特效 -->
-        <q-item clickable v-ripple dense to='/appointment'>
+        <q-item clickable v-ripple dense to='/appointment' class="q-py-xs text-h6">
           <q-item-section>預約諮詢</q-item-section>
         </q-item>
         <q-separator />
-        <q-item clickable v-ripple dense to='/introduction'>
+        <q-item clickable v-ripple dense to='/introduction' class="q-py-xs text-h6">
           <q-item-section>本所簡介</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='/news'>
+        <q-item clickable v-ripple dense to='/news' class="q-py-xs text-h6">
           <q-item-section>最新消息</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='/services'>
+        <q-item clickable v-ripple dense to='/services' class="q-py-xs text-h6">
           <q-item-section>服務項目</q-item-section>
         </q-item>
-        <q-expansion-item label='專欄文章' dense>
+        <q-expansion-item label='專欄文章' dense class="q-py-xs text-h6">
           <q-item clickable v-ripple dense class='bg-dark justify-center' to='/knowledges'>靈學知識</q-item>
           <q-item clickable v-ripple dense class='bg-dark justify-center' to='/cases'>案例分享</q-item>
         </q-expansion-item>
-        <!-- <q-expansion-item label='專欄文章' dense v-model='expanded' @mouseleave='hide' @mouseover='show' to=''>
-          <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>靈學知識</q-item>
-          <q-item clickable v-ripple dense class='bg-dark justify-center' to=''>案例分享</q-item>
-        </q-expansion-item> -->
-        <q-item clickable v-ripple dense to='/products'>
+        <q-item clickable v-ripple dense to='/products' class="q-py-xs text-h6">
           <q-item-section>開運小物</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='/content'>
+        <q-item clickable v-ripple dense to='/content' class="q-py-xs text-h6">
           <q-item-section>聯絡我們</q-item-section>
         </q-item>
       </q-list>
 
-      <div class='col-5 row q-px-md'>
-        <q-list class='col-6 text-h5'>
-          <q-btn round dense flat icon='fa-brands fa-square-facebook' to='#'></q-btn>
-          <br>
-          <q-btn round dense flat icon='fa-brands fa-instagram' to='#'></q-btn>
-          <br>
-          <q-btn round dense flat icon='fa-brands fa-line' to='#'></q-btn>
-        </q-list>
-
-        <q-list class='col-6 text-h5'>
+      <!-- icon 按鈕區 -->
+      <!-- user 操作區 -->
+      <div class='col-5 column q-px-md'>
+        <q-list class='col-10 text-h5'>
           <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-address-card' to='member'>
             <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
               :offset='[-5, 0]'>
@@ -125,6 +117,13 @@
           <q-fab-action flat external-label label-position='top' @click='onClick' icon='fa-solid fa-receipt' label='訂單查詢' to='#' label-style='background-color: rgba(0,0,0,0);' label-class='text-secondary text-subtitle1' />
           <q-fab-action flat external-label label-position='top' @click='onClick' icon='fa-solid fa-right-from-bracket' label='登出' to='#' label-style='background-color: rgba(0,0,0,0);' label-class='text-secondary text-subtitle1' />
         </q-fab><br> -->
+        </q-list>
+
+        <!-- 社群區 -->
+        <q-list class='col-2 text-h5'>
+          <q-btn round dense flat icon='fa-brands fa-square-facebook' to='#'></q-btn>
+          <q-btn round dense flat icon='fa-brands fa-instagram' to='#'></q-btn>
+          <q-btn round dense flat icon='fa-brands fa-line' to='#'></q-btn>
         </q-list>
       </div>
 

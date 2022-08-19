@@ -1,9 +1,59 @@
 <template>
-  <q-page id="ProductView" class="column">
-    <div id="myheader"></div>
-    <div id="mycontent" class="col-12 column content-start">
+  <q-page>
+    <div id="myheader" class="row justify-end items-center" style="width: 100%;">
+      <q-list class='text-h5 text-secondary'>
+        <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-address-card' to='member' class="q-mx-xs">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            會員資料
+          </q-tooltip>
+        </q-btn>
+        <q-btn v-if='isLogin' round dense flat icon='fa-regular fa-calendar-days' to='booking' class="q-mx-xs">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            預約查詢
+          </q-tooltip>
+        </q-btn>
+        <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-receipt' to='order' class="q-mx-xs">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            訂單查詢
+          </q-tooltip>
+        </q-btn>
+        <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-cart-shopping' to='cart' class="q-mx-xs">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            購物車
+          </q-tooltip>
+          <q-badge v-if='cart > 0' floating color='red' rounded>{{ cart }}</q-badge>
+        </q-btn>
+        <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear' to='/admin' class="q-mx-xs">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            管理後台
+          </q-tooltip>
+        </q-btn>
+        <q-btn v-if='!isLogin' round dense flat icon='fa-solid fa-user-plus' to='register' class="q-mx-xs">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            註冊
+          </q-tooltip>
+        </q-btn>
+        <q-btn v-if='!isLogin' round dense flat icon='fa-solid fa-right-to-bracket' to='login' class="q-ml-xs q-mr-sm">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            登入
+          </q-tooltip>
+        </q-btn>
+        <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-right-from-bracket' @click='logout'
+          class="q-ml-xl q-mr-md">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            登出
+          </q-tooltip>
+        </q-btn>
+      </q-list>
+    </div>
+
+    <div id="mycontent" class="col row justify-start">
+
+      <!-- 頁面 Title -->
+      <div class="col-12 text-h3 text-secondary q-mb-md" style="width: 100%;">開運小物</div>
+
       <!-- 麵包屑 -->
-      <div class="q-mb-md">
+      <div class="col-12 q-my-md" style="width: 100%;">
         <q-breadcrumbs>
           <q-breadcrumbs-el label="首頁" icon="fa-solid fa-house" to="/" />
           <q-breadcrumbs-el label="開運小物" icon="fa-solid fa-store" to="/products" />
@@ -11,14 +61,11 @@
         </q-breadcrumbs>
       </div>
 
-      <!-- 頁面 Title -->
-      <div class="col-1 col-xl-6 text-h3 spacing-h3 text-secondary q-mb-md indexTitle">開運小物</div>
-
       <!-- 商品內容區 -->
-      <div class="row content-start">
+      <div class="col-12 row justify-start content-center bg-secondary shadow-white" style="width: 100%;">
 
         <!-- 輪播圖 -->
-        <div id="ProductView-img" class="col-12 col-xl-6 q-pa-md">
+        <div id="ProductView-img" class="col-12 q-pa-md self-center">
           <q-responsive :ratio="3 / 2">
             <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
               :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
@@ -31,28 +78,36 @@
           </q-responsive>
         </div>
 
-        <div id="ProductView-content" class="col col-xl-6 q-pa-md row wrap justify-start content-start">
+        <div id="ProductView-content" class="col-12 q-pa-md column wrap justify-start content-start q-pr-lg-lg">
           <!-- 商品名稱 -->
-          <div class="col-12 text-h3 spacing-h3 text-accent q-mb-xl">{{ product.name }}</div>
+          <div class="col-auto text-h3 text-primary spacing-h3 q-mb-lg">{{ product.name }}</div>
+          <!-- 商品狀態 -->
+          <div class="col-auto text-body2 spacing-h6 text-accent text-justify items-center q-mb-md">
+            <span class="bg-primary q-pa-xs">{{ product.inventory ? '有現貨' : '訂購後製作' }}</span>
+          </div>
           <!-- 商品描述 -->
-          <div class="col-12 text-h6 spacing-h6 text-secondary text-justify items-center q-mb-md" style="height: 45%;">
-            {{ product.description }}{{ product.inventory ? '有現貨' : '訂購後製作' }}</div>
+          <div class="col-auto text-h6 spacing-h6 text-grey-8 text-justify items-center q-mb-lg">
+            {{ product.description
+            }}你有生成跟着，就好瀏覽一座，到來每年計算機適當臺灣因為內地對此你還不對，總算發現，一句話協會關於筆者營銷高雄成果原則和諧後果動漫，科學好像優點之家熱線安排配套簽名影響減少立即因而職業一位，報名集團顯示形勢看法公里體會郵箱天氣消除嚴重導致，一位我又，高級體。你有生成跟着，就好瀏覽一座，到來每年計算機適當臺灣因為內地對此你還不對，總算發現，一句話協會關於筆者營銷高雄成果原則和諧後果動漫，科學好像優點之家熱線安排配套簽名影響減少立即因而職業一位，報名集團顯示形勢看法公里體會郵箱天氣消除嚴重導致，一位我又，高級體。你有生成跟着，就好瀏覽一座，到來每年計算機適當臺灣因為內地對此你還不對，總算發現，一句話協會關於筆者營銷高雄成果原則和諧後果動漫，科學好像優點之家熱線安排配套簽名影響減少立即因而職業一位，報名集團顯示形勢看法公里體會郵箱天氣消除嚴重導致，一位我又，高級體。你有生成跟着，就好瀏覽一座，到來每年計算機適當臺灣因為內地對此你還不對，總算發現，一句話協會關於筆者營銷高雄成果原則和諧後果動漫，科學好像優點之家熱線安排配套簽名影響減少立即因而職業一位，報名集團顯示形勢看法公里體會郵箱天氣消除嚴重導致，一位我又，高級體。
+          </div>
           <!-- 商品價格 -->
-          <div class="col-12 text-h4 spacing-h6 text-accent text-right" style="height: 10%;">$ {{ product.price }}</div>
+          <div class="col-auto text-h4 spacing-h6 text-red-4 text-right">NT$ {{
+              product.price.toLocaleString()
+          }}</div>
           <!-- 商品訂購 -->
-          <div class="q-mt-xl" style="width: 100%;">
+          <div class="col-auto row bg-white">
             <!-- 訂購表單 -->
-            <!-- <q-form class="row" v-model='valid' @submit.prevent='submit'> -->
-            <q-form class="row" @submit.prevent='submit'>
-              <div class="col-5 text-h6 spacing-h6 text-secondary text-center ">
-                <div class="row items-center">
-                  <div class="col-7 text-accent">訂購數量</div>
-                  <q-input type="number" v-model="quantity" :rules='quantityRule' class="col-4" style="width: 50px;" />
-                </div>
+            <q-form class="row justify-center bg-green" @submit.prevent='submit'>
+              <!-- <div class="col-5 text-h6 spacing-h6 text-secondary text-center" style="width: 100%;"> -->
+              <div class="col-5 row justify-center content-center items-center">
+                <div class="col-7 text-h5 text-accent" style="width: 100%;">訂購數量</div>
+                <q-input class="col-4 self-center" type="number" v-model="quantity" :rules='quantityRule'
+                  style="width: 50px;" />
               </div>
+              <!-- </div> -->
               <!-- 送出訂購按鈕 -->
-              <q-btn v-if='isLogin' square flat outline class="col-7 bg-secondary text-body1 text-dark"
-                icon='fa-solid fa-cart-shopping' label="加入購物車" type="submit" />
+              <q-btn v-if='isLogin' square flat class="col-7 bg-primary text-body1 text-secondary"
+                style="width: 100%; height:60px;" icon='fa-solid fa-cart-shopping' label="加入購物車" type="submit" />
               <!-- 未登入導回登入頁 -->
               <q-btn v-if='!isLogin' square flat outline class="col-7 bg-dark text-body1 text-secondary"
                 label="登入以使用購物車" to='/login' />

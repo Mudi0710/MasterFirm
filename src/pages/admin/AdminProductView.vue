@@ -32,6 +32,14 @@
             </q-td>
           </template>
 
+          <!-- 商品金額 -->
+          <template #body-cell-price="price">
+            <q-td :img="price" align="center">
+              <!-- <pre>{{ price.row }}</pre> -->
+              NT$ {{ price.row.price.toLocaleString() }}
+            </q-td>
+          </template>
+
           <!-- 商品編輯、刪除 -->
           <template #body-cell-edit="edit">
             <q-td :edit="edit">

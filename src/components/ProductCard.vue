@@ -1,28 +1,28 @@
 <template>
   <q-card bordered class="my-card bg-info shadow-10" style="border-radius: 0;" :product="product">
     <!-- 商品圖片 -->
-    <router-link :to="'/product/' + product._id">
-      <q-responsive :ratio="3 / 2">
-        <q-img :src="product.image[0]" />
-      </q-responsive>
-      <!-- 商品名稱 -->
-      <q-card-section>
-        <!-- .ellipsis => text 過多時以...代替 -->
-        <div class="col text-h5 text-accent ellipsis"> {{ product.name }} </div>
-      </q-card-section>
-      <!-- 商品描述 -->
-      <q-card-section class="q-pt-none">
-        <div class="text-subtitle1 text-dark ellipsis-3-lines">
-          {{ product.description }}
-        </div>
-      </q-card-section>
-      <!-- 商品金額 -->
-      <q-card-section class="q-pt-none">
-        <div class="text-h6 text-accent text-right">
-          $ {{ product.price }}
-        </div>
-      </q-card-section>
-    </router-link>
+    <!-- <router-link :to="'/product/' + product._id"> -->
+    <q-responsive :ratio="3 / 2">
+      <q-img :src="product.image[0]" />
+    </q-responsive>
+    <!-- 商品名稱 -->
+    <q-card-section>
+      <!-- .ellipsis => text 過多時以...代替 -->
+      <div class="col text-h5 text-accent ellipsis"> {{ product.name }} </div>
+    </q-card-section>
+    <!-- 商品描述 -->
+    <q-card-section class="q-pt-none">
+      <div class="text-subtitle1 text-dark ellipsis-3-lines">
+        {{ product.description }}
+      </div>
+    </q-card-section>
+    <!-- 商品金額 -->
+    <q-card-section class="q-pt-none">
+      <div class="text-h6 text-red-4 text-right">
+        NT$ {{ product.price.toLocaleString() }}
+      </div>
+    </q-card-section>
+    <!-- </router-link> -->
     <q-separator />
     <!-- 訂購按鈕 -->
     <q-card-actions class="row justify-between">
