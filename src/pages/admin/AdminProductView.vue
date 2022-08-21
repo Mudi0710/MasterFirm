@@ -1,6 +1,20 @@
 <template>
   <q-page class='column'>
-    <div id='myheader' class=''></div>
+    <div id="myheader" class="row justify-end items-center" style="width: 100%;">
+      <q-list class='text-h5 text-secondary mobile-none'>
+        <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-house' to='/' class="q-mx-xs">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            回前台
+          </q-tooltip>
+        </q-btn>
+        <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-right-from-bracket' @click='logout'
+          class="q-ml-xl q-mr-lg">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            登出
+          </q-tooltip>
+        </q-btn>
+      </q-list>
+    </div>
     <div id='mycontent' class=''>
       <div class='row justify-between'>
         <div class='col-auto text-h3 text-secondary q-my-sm'>商品管理</div>
@@ -11,7 +25,7 @@
       <div class="q-pa-md">
         <q-table :grid="$q.screen.lt.xl" :columns="columns" :rows="products" row-key="name" square bordered wrap-cells
           binary-state-sort dense :filter="filter" :loading="loading" :pagination="pagination"
-          rows-per-page-label="每頁顯示筆數" no-results-label="Oops...找不到該筆資料">
+          rows-per-page-label="每頁顯示筆數" no-results-label="Oops...找不到該筆商品">
 
           <!-- 商品搜尋 -->
           <template v-slot:top-right>
@@ -78,8 +92,8 @@
           <!-- RWD 卡片 -->
           <template v-slot:item="card">
             <!-- <pre>{{ card }}</pre> -->
-            <div class="col-6 col-md-4 col-lg-3 q-pa-sm cursor-pointer ">
-              <q-card @click='openDialog(card.row._id, card.rowIndex)' square bordered class="bg-primary shadow">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 q-pa-sm cursor-pointer ">
+              <q-card square bordered class="bg-primary shadow">
                 <div v-for="col in card.cols" :key="col.name" class="q-pa-sm">
                   <!-- <pre>{{ col }}</pre> -->
                   <!-- 商品圖片 -->
@@ -92,6 +106,21 @@
                       <span class="text-accent">{{ col.label }}：</span>
                       <span class="text-secondary text-right">{{ col.value }}</span>
                     </div>
+                  </div>
+                  <!-- 商品編輯 -->
+                  <div v-else-if="col.name === 'edit'" class="text-left q-mx-auto">
+                    <!-- <pre>{{ card.rowIndex }}</pre> -->
+
+                    <div class="row justify-between">
+                      <span class="text-accent">{{ col.label }}：</span>
+                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                        @click='openDialog(card.row._id, card.rowIndex)' outline>修改商品</q-btn>
+                    </div>
+                    <div class="row justify-end q-mt-sm">
+                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                        @click='openDeleteDialog(card.row._id)' outline>刪除商品</q-btn>
+                    </div>
+
                   </div>
                 </div>
               </q-card>
@@ -107,32 +136,33 @@
       </div>
 
       <!-- 新增商品時的彈出視窗 -->
-      <q-dialog v-model="form.dialog" persistent>
-        <q-card id="productForm" flat square bordered persistent v-if="form.dialog" class="bg-primary text-secondary">
+      <q-dialog v-model="form.dialog" seamless>
+        <q-card id="productForm" flat square bordered persistent v-if="form.dialog"
+          class="bg-info text-secondary shadow-white">
           <q-form @submit.prevent='submitForm' class="q-pa-md">
             <!-- 商品名稱 -->
-            <p class="text-h6 text-accent">商品名稱</p>
+            <p class="text-h6 text-dark">商品名稱</p>
             <q-input v-model="form.name" :rules='[rules.required]' type='text' outlined square dense />
             <!-- 商品描述 -->
-            <p class="text-h6 text-accent">商品描述</p>
+            <p class="text-h6 text-dark">商品描述</p>
             <q-input v-model="form.description" :rules='[rules.required]' type='textarea' outlined square dense />
             <div class="row q-mb-sm">
               <!-- 庫存狀態 -->
               <div class="column col-6">
-                <div class="col-6 text-h6 text-accent">庫存狀態</div>
-                <q-toggle class="col-6" v-model="form.inventory" :label="form.inventory ? '有現貨' : '沒現貨'" />
+                <div class="col-6 text-h6 text-dark">庫存狀態</div>
+                <q-toggle class="col-6 text-dark" v-model="form.inventory" :label="form.inventory ? '有現貨' : '沒現貨'" />
               </div>
               <!-- 上架狀態 -->
               <div class="column col-6">
-                <div class="col-6 text-h6 text-accent">上架狀態</div>
-                <q-toggle class="col-6" v-model="form.sell" :label="form.sell ? '上架' : '下架'" />
+                <div class="col-6 text-h6 text-dark">上架狀態</div>
+                <q-toggle class="col-6 text-dark" v-model="form.sell" :label="form.sell ? '上架' : '下架'" />
               </div>
             </div>
             <!-- 商品價格 -->
-            <p class="text-h6 text-accent">商品價格</p>
-            <q-input v-model.number="form.price" min='0' :rules='[rules.required, rules.price]' outlined square dense />
+            <p class="text-h6 text-dark">商品價格</p>
+            <q-input v-model.number="form.price" min='0' :rules='[rules.required, rules.price]' outlined square dense class="text-primary"/>
             <!-- 商品圖片 -->
-            <p class="text-h6 text-accent">商品圖片</p>
+            <p class="text-h6 text-dark">商品圖片</p>
             <q-file v-model='form.image' multiple :rules='[rules.size]' accept='image/*' filled bottom-slots counter>
               <!-- 上傳icon -->
               <template v-slot:prepend>
@@ -157,7 +187,7 @@
       </q-dialog>
 
       <!-- 刪除商品時的彈出視窗 -->
-      <q-dialog v-model="deleteDialog.dialog" persistent>
+      <q-dialog v-model="deleteDialog.dialog" seamless persistent>
         <q-card square class="row justify-center bg-info q-pa-lg">
           <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
           <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除商品嗎？<br>刪除商品將無法復原！</div>
@@ -171,6 +201,7 @@
           </div>
         </q-card>
       </q-dialog>
+
     </div>
   </q-page>
 </template>
@@ -178,8 +209,14 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { apiAuth } from '../../boot/axios'
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/stores/user'
 import { useQuasar } from 'quasar'
 import Swal from 'sweetalert2'
+
+const user = useUserStore()
+const { logout } = user
+const { isLogin } = storeToRefs(user)
 
 const filter = ref('')
 const $q = useQuasar()
@@ -297,7 +334,6 @@ const deleteProduct = async (productId) => {
       title: '刪除成功',
       text: '您已成功刪除商品！'
     })
-    // init()
   } catch (error) {
     Swal.fire({
       icon: 'error',
