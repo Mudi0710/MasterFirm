@@ -1,20 +1,141 @@
 <template>
   <q-layout>
-    <q-header class='bg-primary text-secondary q-px-md desktop-none'>
+    <q-header class='bg-primary text-secondary q-px-md desktop-none shadow-10'>
       <q-toolbar>
+        <!-- Logo Title -->
         <q-toolbar-title>
           <router-link to='/'>
             法師事務所
           </router-link>
         </q-toolbar-title>
+
+        <!-- user 操作區(576px 以下) -->
+        <q-list class='text-h5 text-secondary row xs-show'>
+          <q-fab v-if='isLogin' flat unelevated padding="xs" icon="fa-solid fa-user" direction="down right">
+            <q-fab-action v-if='isLogin' padding="sm" icon='fa-solid fa-address-card' to='/member' />
+            <q-fab-action v-if='isLogin' padding="sm" color="primary" text-color="secondary"
+              icon='fa-regular fa-calendar-days' to='/booking' />
+            <q-fab-action v-if='isLogin' padding="sm" color="primary" text-color="secondary" icon='fa-solid fa-receipt'
+              to='/order' />
+          </q-fab>
+          <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-cart-shopping' to='/cart' class="q-mx-xs">
+            <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+              購物車
+            </q-tooltip>
+            <q-badge v-if='cart > 0' floating color='red' rounded>{{ cart }}</q-badge>
+          </q-btn>
+          <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear' to='/admin' class="q-mx-xs">
+            <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+              管理後台
+            </q-tooltip>
+          </q-btn>
+          <q-btn v-if='!isLogin' round dense flat icon='fa-solid fa-user-plus' to='/register' class="q-mx-xs">
+            <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+              註冊
+            </q-tooltip>
+          </q-btn>
+          <q-btn v-if='!isLogin' round dense flat icon='fa-solid fa-right-to-bracket' to='/login'
+            class="q-ml-xs q-mr-lg">
+            <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+              登入
+            </q-tooltip>
+          </q-btn>
+          <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-right-from-bracket' @click='logout'
+            class="q-ml-xs q-mr-sm">
+            <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+              登出
+            </q-tooltip>
+          </q-btn>
+        </q-list>
+
+        <!-- user 操作區(576px 以上) -->
+        <q-list class='text-h5 text-secondary md-show'>
+          <q-btn v-if='isLogin' round dense flat size="md" icon='fa-solid fa-address-card' to='/member' class="q-mx-xs">
+            <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+              會員資料
+            </q-tooltip>
+          </q-btn>
+          <q-btn v-if='isLogin' round dense flat size="md" icon='fa-regular fa-calendar-days' to='/booking'
+            class="q-mx-xs">
+            <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+              預約查詢
+            </q-tooltip>
+          </q-btn>
+          <q-btn v-if='isLogin' round dense flat size="md" icon='fa-solid fa-receipt' to='/order' class="q-mx-xs">
+            <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+              訂單查詢
+            </q-tooltip>
+          </q-btn>
+          <q-btn v-if='isLogin' round dense flat size="md" icon='fa-solid fa-cart-shopping' to='/cart' class="q-mx-xs">
+            <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+              購物車
+            </q-tooltip>
+            <q-badge v-if='cart > 0' floating color='red' rounded>{{ cart }}</q-badge>
+          </q-btn>
+          <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear' to='/admin' class="q-mx-xs">
+            <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+              管理後台
+            </q-tooltip>
+          </q-btn>
+          <q-btn v-if='!isLogin' round dense flat size="md" icon='fa-solid fa-user-plus' to='/register' class="q-mx-xs">
+            <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+              註冊
+            </q-tooltip>
+          </q-btn>
+          <q-btn v-if='!isLogin' round dense flat size="md" icon='fa-solid fa-right-to-bracket' to='/login'
+            class="q-ml-xs q-mr-lg">
+            <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+              登入
+            </q-tooltip>
+          </q-btn>
+          <q-btn v-if='isLogin' round dense size="md" flat icon='fa-solid fa-right-from-bracket' @click='logout'
+            class="q-ml-lg q-mr-lg">
+            <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+              登出
+            </q-tooltip>
+          </q-btn>
+        </q-list>
+
         <!-- 漢堡 -->
-        <q-btn dense flat round icon='menu' />
+        <q-btn dense flat round @click="burger = !burger" :icon="burger ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'"
+          style="transition: 0.5s;">
+          <!-- menu -->
+          <q-menu square persistent transition-show="jump-down" transition-hide="jump-up" :offset="[0, 8]"
+            class="bg-primary text-secondary text-center q-py-sm shadow-10">
+            <q-list style="width: 150px">
+              <q-item clickable v-ripple dense to='/appointment' class="q-py-xs text-h6">
+                <q-item-section>預約諮詢</q-item-section>
+              </q-item>
+              <q-separator />
+              <q-item clickable v-ripple dense to='/introduction' class="q-py-xs text-h6">
+                <q-item-section>本所簡介</q-item-section>
+              </q-item>
+              <q-item clickable v-ripple dense to='/news' class="q-py-xs text-h6">
+                <q-item-section>最新消息</q-item-section>
+              </q-item>
+              <q-item clickable v-ripple dense to='/services' class="q-py-xs text-h6">
+                <q-item-section>服務項目</q-item-section>
+              </q-item>
+              <q-item clickable v-ripple dense to='/knowledges' class="q-py-xs text-h6">
+                <q-item-section>靈學知識</q-item-section>
+              </q-item>
+              <q-item clickable v-ripple dense to='/cases' class="q-py-xs text-h6">
+                <q-item-section>案例分享</q-item-section>
+              </q-item>
+              <q-item clickable v-ripple dense to='/products' class="q-py-xs text-h6">
+                <q-item-section>開運小物</q-item-section>
+              </q-item>
+              <q-item clickable v-ripple dense to='/content' class="q-py-xs text-h6">
+                <q-item-section>聯絡我們</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
       </q-toolbar>
     </q-header>
 
-    <!-- <q-drawer v-model='leftDrawerOpen' side='left' :breakpoint='1200' show-if-above :width='250'
-      class='bg-primary text-secondary text-center q-py-md q-px-md column justify-center' style='overflow: visible;'> -->
-    <q-drawer elevated v-model='leftDrawerOpen' side='left' :breakpoint='1199' show-if-above :width='250'
+    <!-- SideBar -->
+    <q-drawer elevated v-model='leftDrawerOpen' side='left' :breakpoint='1213' show-if-above :width='250'
       class='bg-primary text-secondary text-center q-py-md q-px-md column justify-center' style='overflow: visible;'>
 
       <router-link to='/' class='col-2 q-pt-md'>
@@ -49,77 +170,8 @@
         </q-item>
       </q-list>
 
-      <!-- icon 按鈕區 -->
-      <!-- user 操作區 -->
-      <div class='col-5 column q-px-md'>
-        <q-list class='col-10 text-h5'>
-          <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-address-card' to='member'>
-            <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
-              :offset='[-5, 0]'>
-              會員資料
-            </q-tooltip>
-          </q-btn>
-          <br v-if='isLogin'>
-          <q-btn v-if='isLogin' round dense flat icon='fa-regular fa-calendar-days' to='booking'>
-            <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
-              :offset='[-5, 0]'>
-              預約查詢
-            </q-tooltip>
-          </q-btn>
-          <br v-if='isLogin'>
-          <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-receipt' to='order'>
-            <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
-              :offset='[-5, 0]'>
-              訂單查詢
-            </q-tooltip>
-          </q-btn>
-          <br v-if='isLogin'>
-          <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-cart-shopping' to='cart'>
-            <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
-              :offset='[-5, 0]'>
-              購物車
-            </q-tooltip>
-            <q-badge v-if='cart > 0' floating color='red' rounded>{{ cart }}</q-badge>
-          </q-btn>
-          <br v-if='isLogin'>
-          <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear' to='/admin'>
-            <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
-              :offset='[-5, 0]'>
-              管理後台
-            </q-tooltip>
-          </q-btn>
-          <br v-if='isLogin && isAdmin'>
-          <q-btn v-if='!isLogin' round dense flat icon='fa-solid fa-user-plus' to='register'>
-            <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
-              :offset='[-5, 0]'>
-              註冊
-            </q-tooltip>
-          </q-btn>
-          <br v-if='!isLogin'>
-          <q-btn v-if='!isLogin' round dense flat icon='fa-solid fa-right-to-bracket' to='login'>
-            <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
-              :offset='[-5, 0]'>
-              登入
-            </q-tooltip>
-          </q-btn>
-          <br v-if='isLogin'>
-          <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-right-from-bracket' @click='logout'>
-            <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
-              :offset='[-5, 0]'>
-              登出
-            </q-tooltip>
-          </q-btn>
-          <!-- <q-fab v-model='fab2' icon='fa-solid fa-user' direction='right' flat q-gutter-lg>
-          <q-fab-action flat external-label label-position='top' @click='onClick' icon='fa-solid fa-user-plus' label='註冊' to='register' label-style='background-color: rgba(0,0,0,0);' label-class='text-secondary text-subtitle1' />
-          <q-fab-action flat external-label label-position='top' @click='onClick' icon='fa-solid fa-right-to-bracket' label='登入' to='login' label-style='background-color: rgba(0,0,0,0);' label-class='text-secondary text-subtitle1' />
-          <q-fab-action flat external-label label-position='top' @click='onClick' icon='fa-solid fa-address-card' label='會員資料' to='#' label-style='background-color: rgba(0,0,0,0);' label-class='text-secondary text-subtitle1' />
-          <q-fab-action flat external-label label-position='top' @click='onClick' icon='fa-regular fa-calendar-days' label='預約查詢' to='#' label-style='background-color: rgba(0,0,0,0);' label-class='text-secondary text-subtitle1' />
-          <q-fab-action flat external-label label-position='top' @click='onClick' icon='fa-solid fa-receipt' label='訂單查詢' to='#' label-style='background-color: rgba(0,0,0,0);' label-class='text-secondary text-subtitle1' />
-          <q-fab-action flat external-label label-position='top' @click='onClick' icon='fa-solid fa-right-from-bracket' label='登出' to='#' label-style='background-color: rgba(0,0,0,0);' label-class='text-secondary text-subtitle1' />
-        </q-fab><br> -->
-        </q-list>
-
-        <!-- 社群區 -->
+      <!-- 社群區 -->
+      <div class='col-5 justify-end column q-px-md'>
         <q-list class='col-2 text-h5'>
           <q-btn round dense flat icon='fa-brands fa-square-facebook' to='#'></q-btn>
           <q-btn round dense flat icon='fa-brands fa-instagram' to='#'></q-btn>
@@ -142,35 +194,29 @@
 </template>
 
 <script setup>
-import { ref, createApp } from 'vue'
+import { ref, reactive, createApp } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 
-const leftDrawerOpen = ref(false)
-// const expanded = ref(false)
+// 漢堡開關
+const burger = ref(false)
 
+// sidebar 開關
+const leftDrawerOpen = ref(false)
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
 
-// const QExpansionItem = createApp({
-//   el: '.q-expansion-item',
-//   data: function () {
-//     return {
-//       expanded: false
-//     }
-//   },
-//   methods: {
-//     show: function () {
-//       this.expanded = false
-//     },
-//     hide: function () {
-//       this.expanded = false
-//     }
-//   }
-// })
-// https://www.itxst.com/ant-design-vue/ajf3uamq.html
-// http://www.quasarchs.com/vue-components/expansion-item/
+const fabPos = ref([18, 18])
+const draggingFab = ref(false)
+const moveFab = reactive((touchstart) => {
+  // draggingFab.value = ev.isFirst !== true && ev.isFinal !== true
+
+  fabPos.value = [
+    fabPos.value[0] - touchstart.delta.x,
+    fabPos.value[1] - touchstart.delta.y
+  ]
+})
 
 const user = useUserStore()
 const { logout } = user
