@@ -1,17 +1,63 @@
 <template>
   <q-page id="CartView" class="column">
-    <div id="myheader"></div>
+    <div id="myheader" class="row justify-end items-center" style="width: 100%;">
+      <q-list class='text-h5 text-secondary mobile-none'>
+        <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-address-card' to='/member' class="q-mx-xs">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            會員資料
+          </q-tooltip>
+        </q-btn>
+        <q-btn v-if='isLogin' round dense flat icon='fa-regular fa-calendar-days' to='/booking' class="q-mx-xs">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            預約查詢
+          </q-tooltip>
+        </q-btn>
+        <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-receipt' to='/order' class="q-mx-xs">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            訂單查詢
+          </q-tooltip>
+        </q-btn>
+        <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-cart-shopping' to='/cart' class="q-mx-xs">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            購物車
+          </q-tooltip>
+          <q-badge v-if='cart.length > 0' floating color='red' rounded>{{ cart.length }}</q-badge>
+        </q-btn>
+        <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear' to='/admin' class="q-mx-xs">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            管理後台
+          </q-tooltip>
+        </q-btn>
+        <q-btn v-if='!isLogin' round dense flat icon='fa-solid fa-user-plus' to='/register' class="q-mx-xs">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            註冊
+          </q-tooltip>
+        </q-btn>
+        <q-btn v-if='!isLogin' round dense flat icon='fa-solid fa-right-to-bracket' to='/login' class="q-ml-xs q-mr-sm">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            登入
+          </q-tooltip>
+        </q-btn>
+        <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-right-from-bracket' @click='logout'
+          class="q-ml-xl q-mr-md">
+          <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
+            登出
+          </q-tooltip>
+        </q-btn>
+      </q-list>
+    </div>
+
     <div id="mycontent" class="col-12 row content-start">
+      <!-- 頁面 Title -->
+      <div class="col-12 text-h3 text-secondary q-mb-md" style="width: 100%;">購物車</div>
+
       <!-- 麵包屑 -->
-      <div class="col-12 q-mb-md">
+      <div class="col-12 q-my-md" style="width: 100%;">
         <q-breadcrumbs>
           <q-breadcrumbs-el label="首頁" icon="fa-solid fa-house" to="/" />
           <q-breadcrumbs-el label="購物車" icon="fa-solid fa-store" />
         </q-breadcrumbs>
       </div>
-
-      <!-- 頁面 Title -->
-      <div class="col-12 col-xl-6 text-h3 spacing-h3 text-secondary q-mb-md indexTitle">購物車</div>
 
       <!-- 商品內容區 -->
       <div class="col-12 q-pa-md" style="width: 100%;">
@@ -25,6 +71,15 @@
               <q-avatar square size="100px">
                 <img :src="image.row.product.image" class="q-mb-xl" style="object-fit: cover;">
               </q-avatar>
+            </q-td>
+          </template>
+
+          <!-- 商品圖片(頭像) -->
+          <template #body-cell-name="name">
+            <q-td :name="name" align="center" ellipsis>
+              <router-link :to="{ name: 'product', params: { id: name.row.product._id } }">
+                {{ name.row.product.name }}
+              </router-link>
             </q-td>
           </template>
 
@@ -66,9 +121,10 @@
               <div class="text-h4 text-accent" style="width:200px;">總金額：</div>
               <div class="text-h4">{{ totalPrice }}</div>
             </div>
-            <div class="col-12 row justify-end q-my-md">
+            <div class="col-12 row justify-between q-my-md">
+              <q-btn square class="col-5 bg-secondary text-dark text-h6" style="width:auto;" to="/products">繼續購物</q-btn>
               <!-- @click='user.checkout' 的 checkout 是從 /stores/user.js 來的 -->
-              <q-btn square class="bg-secondary text-dark text-h6 " style="width:270px;" @click='user.checkout'
+              <q-btn square class="col-5 bg-secondary text-dark text-h6" style="width:270px;" @click='user.checkout'
                 :disabled='!canCheckout'>結帳
               </q-btn>
             </div>
@@ -90,21 +146,29 @@
           <!-- RWD 卡片 -->
           <template v-slot:item="card">
             <!-- <pre>{{ card.row.product.image }}</pre> -->
-            <div class="col-6 col-md-4 col-lg-3 q-pa-sm cursor-pointer">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 q-pa-sm cursor-pointer">
               <q-card @click='openDialog(card.row._id, card.rowIndex)' square bordered class="bg-primary shadow">
                 <div v-for="col in card.cols" :key="col.name" class="q-pa-sm">
-                  <!-- <pre>{{ col }}</pre> -->
+                  <!-- <pre>{{ card.row.product._id }}</pre> -->
                   <!-- 商品圖片 -->
                   <q-responsive v-if="col.name == 'image'" :ratio="3 / 2">
                     <img :src="card.row.product.image" class="col" style="width: 100%;">
                   </q-responsive>
                   <!-- 商品資訊 -->
                   <div
-                    v-else-if="col.name !== 'image' && col.name !== 'minus' && col.name !== 'quantity' && col.name !== 'add' && col.name !== 'edit'"
+                    v-else-if="col.name !== 'image' && col.name !== 'name' && col.name !== 'minus' && col.name !== 'quantity' && col.name !== 'add' && col.name !== 'edit'"
                     class="text-left q-mx-auto">
                     <div class="row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
                       <span class="text-secondary text-right">{{ col.value }}</span>
+                    </div>
+                  </div>
+                  <!-- 商品名稱 -->
+                  <div v-else-if="col.name === 'name'" class="text-left q-mx-auto">
+                    <div class="row justify-between items-center">
+                      <span class="text-accent">{{ col.label }}：</span>
+                      <router-link :to="{ name: 'product', params: { id: card.row.product._id } }"
+                        class="text-secondary text-right">{{ col.value }}</router-link>
                     </div>
                   </div>
                   <!-- 商品數量 -->
@@ -150,10 +214,14 @@
 import { ref, reactive, computed } from 'vue'
 import { apiAuth } from '@/boot/axios'
 import { useUserStore } from '@/stores/user'
+import { storeToRefs } from 'pinia'
 import { useQuasar } from 'quasar'
 import Swal from 'sweetalert2'
 
 const user = useUserStore()
+
+const { logout } = user
+const { isLogin, isAdmin } = storeToRefs(user)
 
 // 宣告購物車陣列
 const cart = reactive([])
