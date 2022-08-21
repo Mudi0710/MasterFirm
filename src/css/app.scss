@@ -14,7 +14,7 @@ body {
   height: 0;
   padding-left: 100px;
   @media (min-width: $breakpoint-lg) {
-    height: 10vh;
+    height: 50px;
   }
 }
 
@@ -97,6 +97,11 @@ button {
   background-color: $dark;
 }
 
+// 設定 檔案上傳 檔案大小文字顏色
+.q-field__counter {
+  color: $dark !important;
+}
+
 // 設定 input內 文字樣式
 .q-field__native,
 .q-field__counter {
@@ -145,7 +150,7 @@ button {
 
 // 設定 switch 滑桿 true 樣式
 .q-toggle__inner--truthy .q-toggle__thumb:after {
-  background-color: $accent;
+  background-color: $primary;
 }
 
 // 設定 麵包屑 文字樣式
@@ -153,9 +158,28 @@ button {
   color: $secondary;
 }
 
+// 設定彈出視窗背景
+.q-dialog__backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
 // 全局 密碼顯示/隱藏 樣式
 .q-field__marginal {
   color: $secondary;
+}
+
+// 彈出視窗 RWD 尺寸
+.q-dialog__inner--minimized > div {
+  max-width: 85vw;
+  @media (min-width: $breakpoint-sm) {
+    max-width: 80vw;
+  }
+  @media (min-width: $breakpoint-lg) {
+    max-width: 75vw;
+  }
+  @media (min-width: $breakpoint-xl) {
+    max-width: 70vw;
+  }
 }
 
 // 全局 陰影
@@ -168,10 +192,21 @@ button {
   box-shadow: 0px 0px 6px 1px rgba(255, 255, 255, 0.1);
 }
 
-.bg-product {
-  background: linear-gradient(270deg, #e0e0e0, #ECE7D7, #212121);
+// 文字 RWD
+.text-sm-h6 {
+  @media (min-width: 577px) {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: 0.0125em;
+  }
 }
 
+.text-wrap {
+  overflow-wrap: break-word;
+  word-break: break-all;
+  word-wrap:break-word;
+}
 // 全局 字距
 .spacing-h3 {
   letter-spacing: 0.2em
@@ -183,16 +218,34 @@ button {
   letter-spacing: 0.1em
 }
 
-// 在 移動裝置 隱藏
+// 在 移動裝置(1199px含以下) 隱藏
 .mobile-none {
-  @media (max-width: $breakpoint-lg) {
+  @media (max-width: 1199px) {
     display: none;
   }
 }
 
-// 在 桌機模式 隱藏
+// 在 桌機模式(1200px含以上) 隱藏
 .desktop-none {
-  @media (min-width: $breakpoint-lg) {
+  @media (min-width: 1200px) {
+    display: none;
+  }
+}
+
+// 只在 xs(575px以下) 尺寸顯示
+.xs-show {
+  @media (min-width: 576px) {
+    display: none;
+  }
+}
+
+// 只在 sm-lg(576px~1199px)尺寸顯示
+.md-show {
+  display: none;
+  @media (min-width: 576px) {
+    display: block;
+  }
+  @media (min-width: 1200px) {
     display: none;
   }
 }
@@ -229,7 +282,7 @@ button {
 // 設定 首頁 上方留白空間
 #indexPage #myheader {
   @media (min-width: $breakpoint-lg) {
-    height: 10vh;
+    height: 50px;
   }
 }
 
@@ -242,7 +295,7 @@ button {
 }
 
 // 設定 首頁 promote 標題 樣式
-.indexTitle {
+#indexPage .indexTitle {
   @media (min-width: $breakpoint-lg) {
     display: flex;
     align-items: center;
@@ -252,7 +305,7 @@ button {
   }}
   
 // 設定 首頁 promote 內容 樣式
-.indexContent {
+#indexPage .indexContent {
   @media (min-width: $breakpoint-lg) {
     display: flex;
     align-items: flex-end;
@@ -345,113 +398,132 @@ button {
 }
 
 // AdminHomeView.vue 設定 --------------------------------------------------
-// 頂端留白區 RWD
-#adminHomeHeader {
-  height: 10vh;
-  font-size: 3rem;
+
+#adminHome .indexTitle {
+  font-size: 1.5rem;
   font-weight: 400;
-  line-height: 3.125rem;
-  letter-spacing: 0.2em;
-  padding-top: 30px;
-  // padding-left: 100px;
-  @media (min-width: 1200px) {
-    height: 15vh;
-    font-size: 3.75rem;
-    font-weight: 300;
-    line-height: 3.75rem;
-    padding-top: 50px;
+  line-height: 2rem;
+  letter-spacing: normal;
+  @media (min-width: 460px) {
+    font-size: 2.125rem;
+    font-weight: 400;
+    line-height: 2.5rem;
+    letter-spacing: 0.00735em;
   }
-    @media (min-width: 1400px) {
-    height: 20vh;
-    font-size: 5rem;
-    font-weight: 300;
-    line-height: 5rem;
-    padding-top: 60px;
+  @media (min-width: 768px) {
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 3.125rem;
+    letter-spacing: normal;
   }
 }
+// 頂端留白區 RWD
+// #adminHomeHeader {
+//   height: 10vh;
+//   font-size: 3rem;
+//   font-weight: 400;
+//   line-height: 3.125rem;
+//   letter-spacing: 0.2em;
+//   padding-top: 30px;
+//   // padding-left: 100px;
+//   @media (min-width: 1200px) {
+//     height: 15vh;
+//     font-size: 3.75rem;
+//     font-weight: 300;
+//     line-height: 3.75rem;
+//     padding-top: 50px;
+//   }
+//     @media (min-width: 1400px) {
+//     height: 20vh;
+//     font-size: 5rem;
+//     font-weight: 300;
+//     line-height: 5rem;
+//     padding-top: 60px;
+//   }
+// }
 
-// 內容區(card) RWD
-#adminHome .q-card {
-  width: 44vw;
-  height: 44vw;
-  @media (min-width: 1183px) {
-    width: 35vh;
-    height: 40vh;
-  }
-  @media (min-width: 1300px) {
-    width: 39vh;
-    height: 40vh;
-  }
-  @media (min-width: 1400px) {
-    width: 40vh;
-    height: 38vh;
-  }
-  @media (min-width: 1500px) {
-    width: 45vh;
-    height: 38vh;
-  }
-  @media (min-width: 1600px) {
-    width: 50vh;
-    height: 38vh;
-  }
-}
+// // 內容區(card) RWD
+// #adminHome .q-card {
+//   width: 44vw;
+//   height: 44vw;
+//   @media (min-width: 1183px) {
+//     width: 35vh;
+//     height: 40vh;
+//   }
+//   @media (min-width: 1300px) {
+//     width: 39vh;
+//     height: 40vh;
+//   }
+//   @media (min-width: 1400px) {
+//     width: 40vh;
+//     height: 38vh;
+//   }
+//   @media (min-width: 1500px) {
+//     width: 45vh;
+//     height: 38vh;
+//   }
+//   @media (min-width: 1600px) {
+//     width: 50vh;
+//     height: 38vh;
+//   }
+// }
 
-// card內文字 RWD
-.adminHomeLayout .title {
-  @media (min-width: $breakpoint-xs) {
-    font-size: 6rem;
-    font-weight: 300;
-    line-height: 6rem;
-    letter-spacing: -0.01562em;
-  }
-  @media (min-width: $breakpoint-sm) {
-    font-size: 6rem;
-    font-weight: 300;
-    line-height: 6rem;
-  }
-  @media (min-width: $breakpoint-md) {
-    font-size: 7rem;
-    font-weight: 300;
-    line-height: 7rem;
-  }
-  @media (min-width: 1183px) {
-    font-size: 3.75rem;
-    font-weight: 300;
-    line-height: 3.75rem;
-    letter-spacing: -0.00833em;
-  }
-}
+// // card內文字 RWD
+// .adminHomeLayout .title {
+//   @media (min-width: $breakpoint-xs) {
+//     font-size: 6rem;
+//     font-weight: 300;
+//     line-height: 6rem;
+//     letter-spacing: -0.01562em;
+//   }
+//   @media (min-width: $breakpoint-sm) {
+//     font-size: 6rem;
+//     font-weight: 300;
+//     line-height: 6rem;
+//   }
+//   @media (min-width: $breakpoint-md) {
+//     font-size: 7rem;
+//     font-weight: 300;
+//     line-height: 7rem;
+//   }
+//   @media (min-width: 1183px) {
+//     font-size: 3.75rem;
+//     font-weight: 300;
+//     line-height: 3.75rem;
+//     letter-spacing: -0.00833em;
+//   }
+// }
 
-// card內文字斷行 RWD
-.adminHomeLayout .br {
-  @media (min-width: $breakpoint-lg) {
-    display: none;
-  }
-}
+// // card內文字斷行 RWD
+// .adminHomeLayout .br {
+//   @media (min-width: $breakpoint-lg) {
+//     display: none;
+//   }
+// }
 
-// card順序 RWD
-.adminHomeLayout a {
-  @media (min-width: $breakpoint-lg) {
-    &:nth-child(1) {
-      order: 1;
-  }
-    &:nth-child(2) {
-      order: 4;
-  }
-    &:nth-child(3) {
-      order: 2;
-  }
-    &:nth-child(4) {
-      order: 5;
-  }
-    &:nth-child(5) {
-      order: 3;
-  }
-    &:nth-child(6) {
-      order: 6;
-  }
-  }
-}
+// // card順序 RWD
+// .adminHomeLayout a {
+//   @media (min-width: $breakpoint-lg) {
+//     &:nth-child(1) {
+//       order: 1;
+//   }
+//     &:nth-child(2) {
+//       order: 4;
+//   }
+//     &:nth-child(3) {
+//       order: 2;
+//   }
+//     &:nth-child(4) {
+//       order: 5;
+//   }
+//     &:nth-child(5) {
+//       order: 3;
+//   }
+//     &:nth-child(6) {
+//       order: 6;
+//   }
+//   }
+// }
 
 // AdminProductView.vue 設定 --------------------------------------------------
 // 設定 新增商品鈕 樣式
