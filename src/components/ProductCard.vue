@@ -18,7 +18,7 @@
     </q-card-section>
     <!-- 商品金額 -->
     <q-card-section class="q-pt-none">
-      <div class="text-h6 text-red-4 text-right">
+      <div class="text-h6 text-warning text-right">
         NT$ {{ product.price.toLocaleString() }}
       </div>
     </q-card-section>
