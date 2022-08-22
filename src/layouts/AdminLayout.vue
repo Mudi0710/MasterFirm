@@ -83,7 +83,7 @@
         <span class='text-h4 firm'>事務所</span>
       </router-link>
 
-      <q-list class='col-4 q-mb-xl'>
+      <q-list class='col-4 q-mb-xl q-mt-md'>
         <!-- v-ripple 點擊時有波紋特效 -->
         <q-item clickable v-ripple dense to='/admin' class="q-py-xs text-h5">
           <q-item-section>管理後台</q-item-section>
