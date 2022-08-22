@@ -380,7 +380,6 @@ const columns = [
     // 是否可以排序(A-Z or Z-A)
     sortable: true
   },
-  // { name: 'description', label: '商品描述', field: row => row.description, align: 'left' },
   { name: 'inventory', label: '庫存狀態', field: row => row.inventory ? '有現貨' : '需預訂', align: 'center', sortable: true },
   { name: 'sell', label: '上架狀態', field: row => row.sell ? '上架' : '下架', align: 'center', sortable: true },
   { name: 'price', label: '商品價格', field: row => row.price, align: 'center', sortable: true },
