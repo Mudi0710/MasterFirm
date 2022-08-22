@@ -180,7 +180,7 @@
                   </div>
                   <div class="col-12 row">
                     <div class="col-12 col-sm-auto text-h6 text-accent">商品金額：&nbsp; </div>
-                    <div class="col-12 col-sm text-sm-h6 text-dark">NT$ {{ product.product.price.toLocaleString() }}
+                    <div class="col-12 col-sm text-sm-h6 text-dark">NT$ {{ product.price.toLocaleString() }}
                     </div>
                   </div>
                   <div class="col-12 row">
@@ -188,7 +188,7 @@
                     <div class="col-12 col-sm text-sm-h6 text-dark">{{ product.quantity }}</div>
                   </div>
                   <div class="col-12 text-h6 text-accent text-right">小計：&nbsp;<span class="text-dark">NT$
-                      {{ (product.product.price * product.quantity).toLocaleString() }}</span>
+                      {{ (product.price * product.quantity).toLocaleString() }}</span>
                   </div>
                 </div>
               </div>
@@ -270,7 +270,7 @@ const init = async () => {
     const { data } = await apiAuth.get('/orders/all')
     orders.push(...data.result.map(order => {
       order.totalPrice = order.products.reduce((a, b) => {
-        return a + b.product.price * b.quantity
+        return a + b.price * b.quantity
       }, 0)
       return order
     }))
