@@ -211,7 +211,7 @@ import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 import { useQuasar } from 'quasar'
 import { isEmail } from 'validator'
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
 import Swal from 'sweetalert2'
 
 const user = useUserStore()
@@ -223,7 +223,7 @@ const avatar = (gender, account) => {
   return 'https://joeschmoe.io/api/v1/' + '/' + gender + '/' + account
 }
 
-const router = useRouter()
+// const router = useRouter()
 const isPwd = ref(true)
 
 // 表格篩選功能
@@ -389,7 +389,7 @@ const columns = [
   { name: 'control', label: '會員管理', align: 'center' }
 ]
 
-// 抓後台所有商品的資料
+// 抓後台所有會員的資料
 const init = async () => {
   try {
     const { data } = await apiAuth.get('/users/all')
