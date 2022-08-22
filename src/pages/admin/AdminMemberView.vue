@@ -22,11 +22,24 @@
           class='col-auto q-mr-xl bg-secondary text-dark text-h6 q-my-sm createBtn'>新增會員</q-btn>
       </div>
 
+      <!-- <pre class="text-secondary">{{ members }}</pre> -->
       <!-- 會員表格區 -->
       <div class="q-pa-md">
         <q-table :grid="$q.screen.lt.xl" :columns="columns" :rows="members" row-key="name" square bordered wrap-cells
           binary-state-sort dense :filter="filter" :loading="loading" :pagination="pagination"
           rows-per-page-label="每頁顯示筆數" no-results-label="Oops...找不到該會員">
+
+          <!-- 會員圖片(頭像) -->
+          <template #body-cell-image="image">
+            <q-td :img="image" align="center" ellipsis>
+                <!-- <pre>{{ image.row.name }}</pre> -->
+                <!-- <pre>{{ image.row.gender }}</pre> -->
+              <q-avatar square size="100px">
+
+                <img :src="avatar((image.row.gender === 1) ? 'male' : 'female', image.row.account)" class="q-mb-xl" style="object-fit: cover;">
+              </q-avatar>
+            </q-td>
+          </template>
 
           <!-- 會員搜尋 -->
           <template v-slot:top-right>
@@ -203,7 +216,12 @@ import Swal from 'sweetalert2'
 
 const user = useUserStore()
 const { logout } = user
-const { isLogin, avatar } = storeToRefs(user)
+const { isLogin } = storeToRefs(user)
+
+// 定義會員圖片變數
+const avatar = (gender, account) => {
+  return 'https://joeschmoe.io/api/v1/' + '/' + gender + '/' + account
+}
 
 const router = useRouter()
 const isPwd = ref(true)
@@ -362,6 +380,7 @@ const openDialog = (_id, idx) => {
 }
 
 const columns = [
+  { name: 'image', label: '會員照片', align: 'center' },
   { name: 'account', label: '會員帳號', align: 'center', field: row => row.account },
   { name: 'role', label: '會員身份', align: 'center', field: row => (row.role === 1) ? '管理者' : '一般會員' },
   { name: 'name', label: '會員姓名', align: 'center', field: row => row.name },
