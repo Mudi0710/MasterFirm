@@ -130,10 +130,6 @@
             </div>
           </template>
 
-          <!-- <template v-slot:body>
-
-          </template> -->
-
           <!-- 找不到資料的訊息 -->
           <template v-slot:no-data="{ message }">
             <div class="full-width row flex-center text-accent text-h5 q-gutter-sm">
@@ -211,11 +207,10 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { reactive, computed } from 'vue'
 import { apiAuth } from '@/boot/axios'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
-import { useQuasar } from 'quasar'
 import Swal from 'sweetalert2'
 
 const user = useUserStore()
