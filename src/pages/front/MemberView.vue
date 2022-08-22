@@ -60,9 +60,53 @@
       </div>
 
       <!-- 會員資料區 -->
-      <div class="col-12 q-pa-md bg-red" style="width: 100%;">
-
+      <div class="col-12 q-pa-md bg" style="width: 100%;">
+        <!-- 外框 -->
+        <div class="row justify-center q-py-lg-lg" style="border: 1px solid #CAB69E;">
+          <!-- 真正放內容的區塊，避免外框異常 -->
+          <div class="row justify-start" style="width: 100%;">
+            <!-- 會員圖片區 -->
+            <div class="col-12 col-xl-5 row justify-center q-pa-lg bg">
+              <!-- 再包一個 -->
+              <q-avatar class="bg-info row justify-center" style="width: 20rem; height: 20rem;">
+                <img src="https://joeschmoe.io/api/v1/admin" alt="">
+              </q-avatar>
+            </div>
+            <!-- 會員資料區 -->
+            <div class="col-12 col-xl-7 row justify-start content-around text-accent text-h6 text-lg-h5 q-pa-lg bg">
+              <div class="col-12 row">
+                <div class="col-3 col-xl-2">帳號：</div>
+                <div class="col col-xl-10 text-secondary">{{ member.account }}</div>
+              </div>
+              <div class="col-12 col-xl-6 row">
+                <div class="col-3 col-xl-4">姓名：</div>
+                <div class="col col-xl-8 text-secondary">{{ member.name }}</div>
+              </div>
+              <div class="col-12 col-xl-6 row">
+                <div class="col-3 col-xl-4">生日：</div>
+                <div class="col col-xl-8 text-secondary">{{ new Date(member.birthday).toLocaleDateString() }}</div>
+              </div>
+              <div class="col-12 col-xl-6 row">
+                <div class="col-3 col-xl-4">性別：</div>
+                <div class="col col-xl-8 text-secondary">{{ (member.gender === 1) ? '男' : '女' }}</div>
+              </div>
+              <div class="col-12 col-xl-6 row">
+                <div class="col-3 col-xl-4">電話：</div>
+                <div class="col col-xl-8 text-secondary">{{ member.tel }}</div>
+              </div>
+              <div class="col-12 row">
+                <div class="col-3 col-xl-2">信箱：</div>
+                <div class="col col-xl-10 text-secondary">{{ member.email }}</div>
+              </div>
+              <div class="col-12 row">
+                <div class="col-3 col-xl-2">住址：</div>
+                <div class="col col-xl-10 text-secondary">{{ member.address }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
   </q-page>
 </template>
@@ -75,78 +119,40 @@ import { storeToRefs } from 'pinia'
 import Swal from 'sweetalert2'
 
 const user = useUserStore()
-
 const { logout } = user
-const { isLogin, isAdmin } = storeToRefs(user)
+const { isLogin, isAdmin, cart } = storeToRefs(user)
 
-// 宣告購物車陣列
-const cart = reactive([])
-
-// 結帳總金額
-// computed 運算
-const totalPrice = computed(() => {
-  // reduce 累加器，a => 目前累計多少，b => 下一個要累加的值(目前迴圈跑到的參數)
-  return cart.reduce((a, b) => {
-    return a + b.product.price * b.quantity
-    // 0 => a 的初始值
-  }, 0)
+// 定義 members 空陣列，讓後台抓資料推進去
+const member = reactive({
+  _id: '',
+  account: '',
+  name: '',
+  gender: '',
+  birthday: '',
+  tel: '',
+  email: '',
+  address: '',
+  avatar: ''
 })
 
-// 更新購物車(商品數量+1、-1、刪除)
-const updateCart = async (idx, quantity) => {
-  const result = await user.updateCart({ product: cart[idx].product._id, quantity })
-  if (result) {
-    // 如果商品數量為 0
-    if (quantity === 0) {
-      // 刪除商品
-      cart.splice(idx, 1)
-      // 如果商品數量不為 0
-    } else {
-      // 修改商品數量
-      cart[idx].quantity = quantity
-    }
-  }
-}
-
-// 結帳功能
-const canCheckout = computed(() => {
-  // 如果 購物車長度 > 0 且 不包含下架商品，就可以結帳
-  return cart.length > 0 && !cart.some(item => {
-    return !item.product.sell
-  })
-})
-
-// 定義每列 title
-const columns = [
-  { name: 'image', label: '商品圖片', field: row => row.product.image[0], required: true, align: 'center' },
-  {
-    name: 'name',
-    label: '商品名稱',
-    field: row => row.product.name,
-    format: val => `${val}`,
-    // 是否凍結窗格
-    required: true,
-    align: 'center'
-  },
-  { name: 'inventory', label: '商品狀態', field: row => row.product.inventory ? '有現貨' : '訂購後製作', align: 'center' },
-  { name: 'price', label: '商品單價', field: row => row.product.price, align: 'center' },
-  { name: 'minus', align: 'right' },
-  { name: 'quantity', label: '訂購數量', field: row => row.quantity, align: 'center' },
-  { name: 'add', align: 'left' },
-  { name: 'sum', label: '金額小計', field: row => (row.product.price * row.quantity), align: 'center' },
-  { name: 'edit', label: '商品編輯', align: 'center' }
-]
-
-// 抓購物車的資料
+// 抓後台該會員的資料
 const init = async () => {
   try {
-    const { data } = await apiAuth.get('/users/cart')
-    cart.push(...data.result)
+    const { data } = await apiAuth.get('/users/')
+    member._id = data.result._id
+    member.account = data.result.account
+    member.name = data.result.name
+    member.gender = data.result.gender
+    member.birthday = data.result.birthday
+    member.tel = data.result.tel
+    member.email = data.result.email
+    member.address = data.result.address
+    member.avatar = data.result.avatar
   } catch (error) {
     Swal.fire({
       icon: 'error',
       title: '失敗',
-      text: '伺服器錯誤'
+      text: error.isAxiosError ? error.response.data.message : error.message
     })
   }
 }
