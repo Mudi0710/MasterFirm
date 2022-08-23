@@ -25,7 +25,7 @@
       <div class="q-pa-md">
         <q-table :grid="$q.screen.lt.xl" :columns="columns" :rows="products" row-key="name" square bordered wrap-cells
           binary-state-sort dense :filter="filter" :loading="loading" :pagination="pagination"
-          rows-per-page-label="每頁顯示筆數" no-results-label="Oops...找不到該筆商品">
+          rows-per-page-label="每頁顯示筆數" no-data-label="目前沒有新增任何商品" no-results-label="Oops...找不到該筆商品">
 
           <!-- 商品搜尋 -->
           <template v-slot:top-right>
