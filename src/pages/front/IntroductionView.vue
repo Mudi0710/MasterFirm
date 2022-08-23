@@ -60,7 +60,28 @@
         </q-breadcrumbs>
       </div>
 
-      <div class="col-12 q-mt-md" style="width: 100%;">
+      <div id="introduction-content" class="col-12 row q-mt-md" style="width: 100%;">
+        <!-- 本所簡介區 -->
+
+        <!-- <pre class="text-secondary">{{ introduction[0].content }}</pre> -->
+        <!-- 右邊文字 -->
+        <div class="myorder col-12 col-xl-7 q-pa-md row justify-start content-start">
+          <div class="col-12 text-h3 spacing-h3 text-secondary q-my-sm">{{ introduction[0].title }}</div>
+          <div v-html="introduction[0].content" class="col-12 text-h6 spacing-h6 text-secondary text-justify q-my-xl q-pr-xl-lg"></div>
+        </div>
+        <!-- 左邊圖片 -->
+        <div class="myorder col-12 col-xl-5 q-pa-md" style="max-height: 700px;">
+          <q-responsive :ratio="4 / 5" style="padding-bottom: 0px !important;">
+            <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
+              :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
+              @mouseleave="autoplay = true">
+              <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg" />
+              <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg" />
+              <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg" />
+              <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" />
+            </q-carousel>
+          </q-responsive>
+        </div>
 
       </div>
 
@@ -79,4 +100,24 @@ const user = useUserStore()
 const { logout } = user
 const { isLogin, isAdmin, cart } = storeToRefs(user)
 
+const slide = ref(1)
+const autoplay = ref(true)
+
+// 簡介文章陣列
+const introduction = reactive([])
+
+// 抓資料庫本所簡介的資料
+const initIntroduction = async () => {
+  try {
+    const { data } = await api.get('/introduction')
+    introduction.push(...data.result)
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: '失敗',
+      text: error.isAxiosError ? error.response.data.message : error.message
+    })
+  }
+}
+initIntroduction()
 </script>
