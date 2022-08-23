@@ -210,12 +210,23 @@ button {
     letter-spacing: normal;
   }
 }
-
+// 文字超過範圍自動換行
 .text-wrap {
-  overflow-wrap: break-word;
+  // overflow-wrap: break-word;
+  white-space: pre-wrap;
   word-break: break-all;
   word-wrap:break-word;
 }
+
+// 內文多行省略 => https://codepen.io/tynadesigner/pen/ZEBGpGN
+.text-hidden {
+  overflow: hidden;
+  // text-overflow: clip;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;  // 省略第n行後的文字
+  -webkit-box-orient: vertical ;  // 設定元素是垂直布局
+}
+
 // 全局 字距
 .spacing-h3 {
   letter-spacing: 0.2em
@@ -288,12 +299,6 @@ button {
 }
 
 // IndexPage.vue 設定 --------------------------------------------------
-// 設定 首頁 上方留白空間
-#indexPage #myheader {
-  @media (min-width: $breakpoint-lg) {
-    height: 50px;
-  }
-}
 
 // 設定 首頁 內容區高度、寬度
 #indexPage #mycontent {
@@ -600,4 +605,16 @@ button {
 #CartView .q-table__bottom .q-table__control {
   height: auto;
   width: auto;
+}
+
+//
+#introduction-content .myorder {
+  @media (min-width: $breakpoint-lg) {
+    &:nth-child(1) {
+      order: 2;
+    }
+    &:nth-child(2) {
+      order: 1;
+    }
+  }
 }
