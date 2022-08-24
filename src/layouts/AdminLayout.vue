@@ -40,10 +40,10 @@
         </q-list>
 
         <!-- 漢堡 -->
-        <q-btn dense flat round @click="burger = !burger" :icon="burger ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'"
+        <q-btn dense flat round  icon="fa-solid fa-bars"
           style="transition: 0.5s;">
           <!-- menu -->
-          <q-menu square persistent transition-show="jump-down" transition-hide="jump-up" :offset="[0, 8]"
+          <q-menu square auto-close transition-show="jump-down" transition-hide="jump-up" :offset="[0, 8]"
             class="bg-primary text-secondary text-center q-py-sm shadow-10">
             <q-list style="width: 150px">
               <q-item clickable v-ripple dense to='/admin' class="q-py-xs text-h6">
@@ -76,42 +76,39 @@
 
     <!-- SideBar -->
     <q-drawer elevated v-model='leftDrawerOpen' side='left' :breakpoint='1199' show-if-above :width='250'
-      class='bg-primary text-secondary text-center q-py-md q-px-md column justify-center' style='overflow: visible;'>
+      class='bg-primary text-secondary text-center q-py-md q-px-md column justify-start' style='overflow: visible;'>
 
-      <router-link to='/admin' class='col-2 q-pt-lg'>
-        <span class='text-h3 master'>法師</span><br>
-        <span class='text-h4 firm'>事務所</span>
+      <router-link to='/admin' class='col-2 q-pt-md q-mb-lg' style="height: auto;">
+        <span class='master'>法師</span><br>
+        <span class='firm'>事務所</span>
       </router-link>
 
-      <q-list class='col-4 q-mb-xl q-mt-md'>
+      <q-list class='col list'>
         <!-- v-ripple 點擊時有波紋特效 -->
-        <q-item clickable v-ripple dense to='/admin' class="q-py-xs text-h5">
+        <q-item clickable v-ripple dense to='/admin' class="text-h5 q-py-xs">
           <q-item-section>管理後台</q-item-section>
         </q-item>
-        <q-separator class='q-my-lg' />
-        <q-item clickable v-ripple dense to='/admin/adminMember' class="q-py-xs text-h6">
+        <q-separator class="q-my-md" />
+        <q-item clickable v-ripple dense to='/admin/adminMember' class="q-py-xs">
           <q-item-section>會員管理</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='/admin/adminCase' class="q-py-xs text-h6">
+        <q-item clickable v-ripple dense to='/admin/adminCase' class="q-py-xs">
           <q-item-section>預約管理</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='/admin/adminProduct' class="q-py-xs text-h6">
+        <q-item clickable v-ripple dense to='/admin/adminProduct' class="q-py-xs">
           <q-item-section>商品管理</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='/admin/adminOrder' class="q-py-xs text-h6">
+        <q-item clickable v-ripple dense to='/admin/adminOrder' class="q-py-xs">
           <q-item-section>訂單管理</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='/admin/adminArticle' class="q-py-xs text-h6">
+        <q-item clickable v-ripple dense to='/admin/adminArticle' class="q-py-xs">
           <q-item-section>文章管理</q-item-section>
         </q-item>
-        <q-item clickable v-ripple dense to='/admin/adminPromote' class="q-py-xs text-h6">
+        <q-item clickable v-ripple dense to='/admin/adminPromote' class="q-py-xs">
           <q-item-section>推播管理</q-item-section>
         </q-item>
       </q-list>
 
-      <!-- 留白區 -->
-      <div class='col-5 justify-end column q-px-md'>
-      </div>
       <!-- <q-list class='col-3 text-h5'>
         <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-house' to='/'>
           <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
