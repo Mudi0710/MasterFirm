@@ -78,12 +78,12 @@
     <q-drawer elevated v-model='leftDrawerOpen' side='left' :breakpoint='1199' show-if-above :width='250'
       class='bg-primary text-secondary text-center q-py-md q-px-md column justify-start' style='overflow: visible;'>
 
-      <router-link to='/admin' class='col-2 q-pt-md q-mb-lg' style="height: auto;">
+      <router-link to='/admin' class='col-2 q-pt-md q-mb-xl' style="height: auto;">
         <span class='master'>法師</span><br>
         <span class='firm'>事務所</span>
       </router-link>
 
-      <q-list class='col list'>
+      <q-list class='col q-mt-xs list'>
         <!-- v-ripple 點擊時有波紋特效 -->
         <q-item clickable v-ripple dense to='/admin' class="text-h5 q-py-xs">
           <q-item-section>管理後台</q-item-section>
@@ -108,23 +108,6 @@
           <q-item-section>推播管理</q-item-section>
         </q-item>
       </q-list>
-
-      <!-- <q-list class='col-3 text-h5'>
-        <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-house' to='/'>
-          <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
-            :offset='[-5, 0]'>
-            回前台
-          </q-tooltip>
-        </q-btn>
-      </q-list>
-      <q-list class='col-2 text-h5'>
-        <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-right-from-bracket' @click='logout'>
-          <q-tooltip transition-show='fade' transition-hide='fade' anchor='center right' self='center left'
-            :offset='[-5, 0]'>
-            登出
-          </q-tooltip>
-        </q-btn>
-      </q-list> -->
     </q-drawer>
 
     <q-page-container>
