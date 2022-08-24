@@ -60,7 +60,7 @@
               <!-- <pre>{{ edit }}</pre> -->
               <div class="row justify-center">
                 <q-btn class="col-auto q-mx-sm" @click='openDialog(edit.row._id, edit.rowIndex)' outline>修改商品</q-btn>
-                <q-btn class="col-auto q-mx-sm" @click='openDeleteDialog(edit.row._id)' outline>刪除商品</q-btn>
+                <q-btn class="col-auto q-mx-sm" @click='openDeleteDialog(edit.row._id, edit.row.name)' outline>刪除商品</q-btn>
               </div>
             </q-td>
           </template>
@@ -118,7 +118,7 @@
                     </div>
                     <div class="row justify-end q-mt-sm">
                       <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
-                        @click='openDeleteDialog(card.row._id)' outline>刪除商品</q-btn>
+                        @click='openDeleteDialog(card.row._id, card.row.name)' outline>刪除商品</q-btn>
                     </div>
 
                   </div>
@@ -137,7 +137,7 @@
 
       <!-- 新增商品時的彈出視窗 -->
       <q-dialog v-model="form.dialog" seamless>
-        <q-card id="productForm" flat square bordered persistent v-if="form.dialog"
+        <q-card id="dialog" flat square bordered persistent v-if="form.dialog"
           class="bg-info text-secondary shadow-white">
           <q-form @submit.prevent='submitForm' class="q-pa-md">
             <!-- 商品名稱 -->
@@ -190,10 +190,10 @@
       <q-dialog v-model="deleteDialog.dialog" seamless persistent>
         <q-card square class="row justify-center bg-info q-pa-lg">
           <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
-          <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除商品嗎？<br>刪除商品將無法復原！</div>
+          <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除【{{ del.name }}】商品嗎？<br>刪除【{{ del.name }}】商品將無法復原！</div>
           <div class="col-12 row justify-around">
             <!-- 確定刪除 -->
-            <q-btn @click="deleteProduct(del)" square flat class="col-4 bg-secondary text-dark q-my-sm"
+            <q-btn @click="deleteProduct(del._id)" square flat class="col-4 bg-secondary text-dark q-my-sm"
               label="確定刪除商品" />
             <!-- 取消刪除 -->
             <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
@@ -278,7 +278,7 @@ const submitForm = async () => {
       Swal.fire({
         icon: 'success',
         title: '新增成功',
-        text: '您已成功新增商品！'
+        text: '您已成功新增一筆商品！'
       })
     } else {
       const { data } = await apiAuth.patch('/products/' + form._id, fd)
@@ -286,7 +286,7 @@ const submitForm = async () => {
       Swal.fire({
         icon: 'success',
         title: '修改成功',
-        text: '您已成功修改商品！'
+        text: '您已成功修改該筆商品！'
       })
     }
     form.dialog = false
@@ -309,14 +309,18 @@ const deleteDialog = reactive({
   又，因為開啟 刪除商品的彈窗 的按鈕放在 #body-cell-edit="edit" 裡
   所以才會寫 @click='openDeleteDialog(edit.row._id)'
 */
-const del = ref('')
+const del = reactive({
+  _id: '',
+  name: ''
+})
 
 /*
   開啟 刪除商品的彈窗，並帶入值
   此時 del.value = edit.row._id = productId
 */
-const openDeleteDialog = (productId) => {
-  del.value = productId
+const openDeleteDialog = (productId, productName) => {
+  del._id = productId
+  del.name = productName
   deleteDialog.dialog = true
 }
 
@@ -332,8 +336,9 @@ const deleteProduct = async (productId) => {
     await Swal.fire({
       icon: 'success',
       title: '刪除成功',
-      text: '您已成功刪除商品！'
+      text: '您已成功刪除該筆商品！'
     })
+    init()
   } catch (error) {
     Swal.fire({
       icon: 'error',
@@ -390,6 +395,7 @@ const columns = [
 const init = async () => {
   try {
     const { data } = await apiAuth.get('/products/all')
+    products.splice(0, products.length)
     products.push(...data.result)
   } catch (error) {
     Swal.fire({
