@@ -70,7 +70,7 @@ const { isLogin } = storeToRefs(user)
       <div class="q-pa-md">
         <!-- 最新消息最新消息最新消息最新消息最新消息最新消息最新消息最新消息最新消息最新消息最新消息最新消息最新消息最新消息最新消息最新消息 -->
         <q-table :grid="$q.screen.lt.xl" :columns="columns" :rows="newses" row-key="date" separator="cell"
-          square bordered wrap-cells binary-state-sort column-sort-order="ad" dense :filter="filter" :loading="loading"
+          square bordered wrap-cells dense :filter="filter" :loading="loading"
           :pagination="paginationNews" rows-per-page-label="每頁顯示筆數" no-data-label="目前沒有新增任何最新消息"
           no-results-label="Oops...找不到該筆最新消息">
 
@@ -80,7 +80,7 @@ const { isLogin } = storeToRefs(user)
               class='col-auto q-mr-xl bg-secondary text-dark text-body1 q-my-sm createBtn'>新增最新消息</q-btn>
           </template>
 
-          <!-- 商品搜尋 -->
+          <!-- 消息搜尋 -->
           <template v-slot:top-right>
             <q-input borderless dense debounce="300" v-model="filter" placeholder="&nbsp;Search" class="search">
               <template v-slot:append>
@@ -496,6 +496,7 @@ const initNewses = async () => {
     const { data } = await apiAuth.get('/newses/all')
     newses.splice(0, newses.length)
     newses.push(...data.result)
+    newses.reverse()
   } catch (error) {
     Swal.fire({
       icon: 'error',
