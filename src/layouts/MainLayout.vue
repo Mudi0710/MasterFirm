@@ -138,13 +138,13 @@
       class='bg-primary text-secondary text-center q-py-md q-px-md column justify-start' style='overflow: visible;'>
 
       <!-- Logo 區 -->
-      <router-link to='/' class='col-2 q-pt-md q-mb-lg' style="height: auto;">
+      <router-link to='/' class='col-2 q-pt-md q-mb-xl' style="height: auto;">
         <span class='master'>法師</span><br>
         <span class='firm'>事務所</span>
       </router-link>
 
       <!-- 選單區 -->
-      <div class="col column justify-between">
+      <div class="col column q-mt-xs justify-between">
         <q-list class='col-auto list'>
           <!-- v-ripple 點擊時有波紋特效 -->
           <q-item clickable v-ripple dense to='/appointment' class="q-py-xs">
