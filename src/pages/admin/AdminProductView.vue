@@ -226,7 +226,7 @@ const products = reactive([])
 const pagination = reactive({
   items: [], // table要顯示的資料
   page: 1, // 目前第幾頁
-  rowsPerPage: 0 // 每頁幾筆，代表 All
+  rowsPerPage: 5 // 每頁幾筆，0 代表 All
 })
 
 // 表單預設格式
@@ -397,6 +397,7 @@ const init = async () => {
     const { data } = await apiAuth.get('/products/all')
     products.splice(0, products.length)
     products.push(...data.result)
+    products.reverse()
   } catch (error) {
     Swal.fire({
       icon: 'error',
