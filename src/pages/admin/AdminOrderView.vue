@@ -274,6 +274,7 @@ const init = async () => {
       }, 0)
       return order
     }))
+    orders.reverse()
   } catch (error) {
     console.log(error)
     Swal.fire({
