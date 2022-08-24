@@ -232,7 +232,10 @@ button {
   letter-spacing: 0.2em
 }
 .spacing-h4 {
-  letter-spacing: 0.2em
+  letter-spacing: 0.15em
+}
+.spacing-h5 {
+  letter-spacing: 0.12em
 }
 .spacing-h6 {
   letter-spacing: 0.1em
@@ -248,6 +251,20 @@ button {
 // 在 桌機模式(1200px含以上) 隱藏
 .desktop-none {
   @media (min-width: 1200px) {
+    display: none;
+  }
+}
+
+// 1400px 以下隱藏
+.xl-none {
+  display: block;
+  @media (min-width: 475px) {
+    display: none;
+  }
+  @media (min-width: 1201px) {
+    display: block;
+  }
+  @media (min-width: 1385px) {
     display: none;
   }
 }
@@ -270,15 +287,45 @@ button {
   }
 }
 
+
+
 // MainLayout.vue 設定 --------------------------------------------------
 // 設定 法師 樣式
 .master {
-  letter-spacing: 5px
+  // text-h3
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 3.125rem;
+  letter-spacing: 0.08em;
 }
 
 // 設定 事務所 樣式
 .firm {
-  line-height: 3.5rem
+  // text-h4
+  font-size: 2.125rem;
+  font-weight: 400;
+  line-height: 2.5rem;
+  letter-spacing: 0.008em;
+}
+
+// 設定 選單區 樣式
+.list {
+  // text-h6
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 2rem;
+  letter-spacing: 0.0125em;
+}
+
+// 設定 社群區樣式
+.social {
+  // text-h6
+  @media (min-width: 1200px) {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 2rem;
+    letter-spacing: 0.0125em;
+  }
 }
 
 // sidebar 固定
@@ -308,28 +355,15 @@ button {
   }
 }
 
-// 設定 首頁 promote 標題 樣式
-#indexPage .indexTitle {
-  @media (min-width: $breakpoint-lg) {
-    display: flex;
-    align-items: center;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    font-size: 3.75rem;
-  }}
-  
-// 設定 首頁 promote 內容 樣式
-#indexPage .indexContent {
-  @media (min-width: $breakpoint-lg) {
-    display: flex;
-    align-items: flex-end;
-    margin-top: 0px;
-    margin-bottom: 0px;
+#indexPage .line-height {
+  @media (min-width: 1400px) {
+    line-height: 1.8em;
   }
 }
 
 // 設定 首頁 輪播圖 樣式
-#indexpage-img .q-carousel {
+#indexpage-img .q-carousel,
+#introductionpage-img .q-carousel {
   width: 100%;
   height: 30vh;
   @media (min-width: $breakpoint-xs) {
@@ -339,10 +373,10 @@ button {
     height: 50vh;
   }
   @media (min-width: $breakpoint-lg) {
-    height: 84vh;
+    min-height: 100%;
   }
   @media (min-width: $breakpoint-xl) {
-    height: 84vh;
+    min-height: 84vh;
   }
 }
 
@@ -548,7 +582,7 @@ button {
 }
 
 // 設定 新增商品表單 樣式
-#productForm {
+#dialog {
   width: 75vw;
   @media (min-width: 1183px) {
     width: 60vw;
@@ -616,5 +650,23 @@ button {
     &:nth-child(2) {
       order: 1;
     }
+  }
+}
+
+// 設定 首頁 輪播圖 樣式
+#introductionpage-img .q-carousel {
+  width: 100%;
+  height: 30vh;
+  @media (min-width: $breakpoint-xs) {
+    height: 45vh;
+  }
+  @media (min-width: $breakpoint-sm) {
+    height: 50vh;
+  }
+  @media (min-width: $breakpoint-lg) {
+    min-height: 100%;
+  }
+  @media (min-width: $breakpoint-xl) {
+    min-height: 84vh;
   }
 }
