@@ -26,12 +26,18 @@
     <q-separator />
     <!-- 訂購按鈕 -->
     <q-card-actions class="row justify-between">
-      <q-btn square flat class="col-4 text-caption bg-secondary text-dark q-my-sm" label="商品詳情"
-        :to="'/product/' + product._id" />
+      <q-btn square flat class="col-4 text-caption bg-secondary text-dark q-my-sm" :to="'/product/' + product._id">商品<br
+          class="xl-none">詳情</q-btn>
       <q-btn v-if='isLogin' square flat outline class="col-7 bg-dark text-caption text-secondary q-my-sm"
-        icon='fa-solid fa-cart-shopping' label="加入購物車" @click='addCart({ product: product._id, quantity: 1 })' />
-      <q-btn v-if='!isLogin' square flat outline class="col-7 bg-dark text-caption text-secondary q-my-sm"
-        label="登入以使用購物車" to='login' />
+        @click='addCart({ product: product._id, quantity: 1 })' style="height: 100%;">
+        <span>
+          <q-icon name="fa-solid fa-cart-shopping" size="xs" />
+          <br class="xl-none">
+          加入購物車
+        </span>
+      </q-btn>
+      <q-btn v-if='!isLogin' square flat outline class="col-7 bg-dark text-caption text-secondary q-my-sm" to='login'>
+        登入以使用<br class="xl-none">購物車</q-btn>
     </q-card-actions>
   </q-card>
 </template>
