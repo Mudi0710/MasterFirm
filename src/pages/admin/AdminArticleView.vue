@@ -23,13 +23,13 @@
       <!-- 文章管理區 -->
       <div class="q-pa-md">
         <!-- 本所簡介本所簡介本所簡介本所簡介本所簡介本所簡介本所簡介本所簡介本所簡介本所簡介本所簡介本所簡介本所簡介本所簡介本所簡介本所簡介 -->
-        <q-table title="本所簡介" :grid="$q.screen.lt.xl" :columns="columns" :rows="introduction" row-key="title"
+        <q-table :grid="$q.screen.lt.xl" :columns="columns" :rows="introduction" row-key="title"
           separator="cell" square bordered wrap-cells binary-state-sort dense :filter="filter" :loading="loading"
           :pagination="pagination" rows-per-page-label="每頁顯示筆數" no-data-label="目前沒有新增任何簡介文章"
           no-results-label="Oops...找不到該筆簡介文章">
 
           <!-- 新增本所簡介按鈕 -->
-          <template v-slot:top-right>
+          <template v-slot:top-left>
             <q-btn @click="openIntroductionDialog('', -1)" square flat :disable="introduction.length > 0"
               class='col-auto q-mr-xl bg-secondary text-dark text-body1 q-my-sm createBtn'>新增本所簡介</q-btn>
           </template>
@@ -57,7 +57,7 @@
                 <q-btn class="col-auto q-mx-sm q-my-xs" @click='openIntroductionDialog(edit.row._id, edit.rowIndex)'
                   outline>
                   修改簡介</q-btn>
-                <q-btn class="col-auto q-mx-sm q-my-xs" @click='openDeleteIntroductionDialog(edit.row._id)' outline>
+                <q-btn class="col-auto q-mx-sm q-my-xs" @click='openDeleteIntroductionDialog(edit.row._id, edit.row.title)' outline>
                   刪除簡介</q-btn>
               </div>
             </q-td>
@@ -111,7 +111,7 @@
                     </div>
                     <div class="col-12 row justify-end q-mt-sm">
                       <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
-                        @click='openDeleteIntroductionDialog(card.row._id)' outline>刪除簡介</q-btn>
+                        @click='openDeleteIntroductionDialog(card.row._id, card.row.title)' outline>刪除簡介</q-btn>
                     </div>
                   </div>
                 </div>
@@ -128,7 +128,7 @@
 
         <!-- 新增本所簡介文章時的彈出視窗 -->
         <q-dialog v-model="introductionForm.dialog" seamless>
-          <q-card id="productForm" flat square bordered persistent v-if="introductionForm.dialog"
+          <q-card id="dialog" flat square bordered persistent v-if="introductionForm.dialog"
             class="bg-info text-secondary shadow-white">
             <q-form @submit.prevent='submitIntroductionForm' class="q-pa-md">
               <!-- 商品名稱 -->
@@ -136,89 +136,6 @@
               <q-input v-model="introductionForm.title" :rules='[rules.required]' type='text' outlined square dense />
               <!-- 商品描述 -->
               <p class="text-h6 text-dark">簡介內容</p>
-              <!-- <q-editor v-model="qeditor" :dense="$q.screen.lt.md" :toolbar="[
-                [
-                  {
-                    label: $q.lang.editor.align,
-                    icon: $q.iconSet.editor.align,
-                    fixedLabel: true,
-                    list: 'only-icons',
-                    options: ['left', 'center', 'right', 'justify']
-                  },
-                  {
-                    label: $q.lang.editor.align,
-                    icon: $q.iconSet.editor.align,
-                    fixedLabel: true,
-                    options: ['left', 'center', 'right', 'justify']
-                  }
-                ],
-                ['bold', 'italic', 'strike', 'underline', 'subscript', 'superscript'],
-                ['token', 'hr', 'link', 'custom_btn'],
-                ['print', 'fullscreen'],
-                [
-                  {
-                    label: $q.lang.editor.formatting,
-                    icon: $q.iconSet.editor.formatting,
-                    list: 'no-icons',
-                    options: [
-                      'p',
-                      'h1',
-                      'h2',
-                      'h3',
-                      'h4',
-                      'h5',
-                      'h6',
-                      'code'
-                    ]
-                  },
-                  {
-                    label: $q.lang.editor.fontSize,
-                    icon: $q.iconSet.editor.fontSize,
-                    fixedLabel: true,
-                    fixedIcon: true,
-                    list: 'no-icons',
-                    options: [
-                      'size-1',
-                      'size-2',
-                      'size-3',
-                      'size-4',
-                      'size-5',
-                      'size-6',
-                      'size-7'
-                    ]
-                  },
-                  {
-                    label: $q.lang.editor.defaultFont,
-                    icon: $q.iconSet.editor.font,
-                    fixedIcon: true,
-                    list: 'no-icons',
-                    options: [
-                      'default_font',
-                      'arial',
-                      'arial_black',
-                      'comic_sans',
-                      'courier_new',
-                      'impact',
-                      'lucida_grande',
-                      'times_new_roman',
-                      'verdana'
-                    ]
-                  },
-                  'removeFormat'
-                ],
-                ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
-                ['undo', 'redo'],
-                ['viewsource']
-              ]" :fonts="{
-  arial: 'Arial',
-  arial_black: 'Arial Black',
-  comic_sans: 'Comic Sans MS',
-  courier_new: 'Courier New',
-  impact: 'Impact',
-  lucida_grande: 'Lucida Grande',
-  times_new_roman: 'Times New Roman',
-  verdana: 'Verdana'
-}"> -->
               <q-editor model="qeditor" v-model="introductionForm.content" ref="editorRef" @paste="onPaste"
                 :rules='[rules.required]' outlined square content-class="bg-dark" toolbar-bg="secondary"
                 toolbar-text-color="dark" :dense="$q.screen.lt.lg" :toolbar="[
@@ -277,18 +194,16 @@
                   ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
                   ['undo', 'redo'],
                   ['viewsource']
-                ]"
-                :fonts="{
-                  arial: 'Arial',
-                  arial_black: 'Arial Black',
-                  comic_sans: 'Comic Sans MS',
-                  courier_new: 'Courier New',
-                  impact: 'Impact',
-                  lucida_grande: 'Lucida Grande',
-                  times_new_roman: 'Times New Roman',
-                  verdana: 'Verdana'
-                }" />
-              <!-- </q-editor> -->
+                ]" :fonts="{
+  arial: 'Arial',
+  arial_black: 'Arial Black',
+  comic_sans: 'Comic Sans MS',
+  courier_new: 'Courier New',
+  impact: 'Impact',
+  lucida_grande: 'Lucida Grande',
+  times_new_roman: 'Times New Roman',
+  verdana: 'Verdana'
+}" />
               <!-- 簡介圖片 -->
               <p class="text-h6 text-dark">簡介圖片</p>
               <q-file v-model='introductionForm.image' multiple :rules='[rules.size]' accept='image/*' filled
@@ -319,10 +234,10 @@
         <q-dialog v-model="deleteIntroductionDialog.dialog" seamless persistent>
           <q-card square class="row justify-center bg-info q-pa-lg">
             <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
-            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除【本所簡介】文章嗎？<br>刪除【本所簡介】文章將無法復原！</div>
+            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除【{{ del.title }}】文章嗎？<br>刪除【{{ del.title }}】文章將無法復原！</div>
             <div class="col-12 row justify-around">
               <!-- 確定刪除 -->
-              <q-btn @click="deleteIntroduction(del)" square flat class="col-4 bg-secondary text-dark q-my-sm"
+              <q-btn @click="deleteIntroduction(del._id)" square flat class="col-4 bg-secondary text-dark q-my-sm"
                 label="確定刪除" />
               <!-- 取消刪除 -->
               <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
@@ -429,7 +344,7 @@ const submitIntroductionForm = async () => {
       Swal.fire({
         icon: 'success',
         title: '新增成功',
-        text: '您已成功新增本所簡介！'
+        text: '您已成功新增一筆本所簡介！'
       })
     } else {
       const { data } = await apiAuth.patch('/introduction/' + introductionForm._id, fd)
@@ -437,7 +352,7 @@ const submitIntroductionForm = async () => {
       Swal.fire({
         icon: 'success',
         title: '修改成功',
-        text: '您已成功修改本所簡介！'
+        text: '您已成功修改該筆本所簡介！'
       })
     }
     introductionForm.dialog = false
@@ -460,14 +375,18 @@ const deleteIntroductionDialog = reactive({
   又，因為開啟 刪除商品的彈窗 的按鈕放在 #body-cell-edit="edit" 裡
   所以才會寫 @click='openDeleteDialog(edit.row._id)'
 */
-const del = ref('')
+const del = reactive({
+  _id: '',
+  title: ''
+})
 
 /*
-  開啟 刪除商品的彈窗，並帶入值
+  開啟 刪除文章的彈窗，並帶入值
   此時 del.value = edit.row._id = articleId
 */
-const openDeleteIntroductionDialog = (articleId) => {
-  del.value = articleId
+const openDeleteIntroductionDialog = (articleId, articleTitle) => {
+  del._id = articleId
+  del.title = articleTitle
   deleteIntroductionDialog.dialog = true
 }
 
@@ -483,8 +402,9 @@ const deleteIntroduction = async (articleId) => {
     await Swal.fire({
       icon: 'success',
       title: '刪除成功',
-      text: '您已成功刪除本所簡介！'
+      text: '您已成功刪除該筆本所簡介！'
     })
+    initIntroduction()
   } catch (error) {
     Swal.fire({
       icon: 'error',
@@ -522,6 +442,7 @@ const columns = [
 const initIntroduction = async () => {
   try {
     const { data } = await apiAuth.get('/introduction/all')
+    introduction.splice(0, introduction.length)
     introduction.push(...data.result)
   } catch (error) {
     Swal.fire({
