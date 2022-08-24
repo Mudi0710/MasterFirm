@@ -134,7 +134,7 @@
 
       <!-- 新增商品時的彈出視窗 -->
       <q-dialog v-model="form.dialog" seamless>
-        <q-card id="productForm" flat square bordered persistent v-if="form.dialog"
+        <q-card id="dialog" flat square bordered persistent v-if="form.dialog"
           class="bg-info text-secondary shadow-white">
           <q-form @submit.prevent='submitForm' class="q-pa-md">
             <!-- 商品名稱 -->
