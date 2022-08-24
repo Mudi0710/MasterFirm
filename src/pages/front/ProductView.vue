@@ -67,14 +67,6 @@
         <!-- 輪播圖 -->
         <div id="ProductView-img" class="col-12 q-pa-md">
           <q-responsive :ratio="3 / 2">
-            <!-- <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
-              :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
-              @mouseleave="autoplay = true">
-              <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg" />
-              <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg" />
-              <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg" />
-              <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" />
-            </q-carousel> -->
             <q-carousel animated infinite swipeable v-model="slide" thumbnails :autoplay="autoplay"
               @mouseenter="autoplay = false" @mouseleave="autoplay = true" arrows ransition-prev="slide-right"
               transition-next="slide-left">
