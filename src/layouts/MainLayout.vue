@@ -97,10 +97,9 @@
         </q-list>
 
         <!-- 漢堡 -->
-        <q-btn dense flat round @click="burger = !burger" :icon="burger ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'"
-          style="transition: 0.5s;">
+        <q-btn dense flat round icon="fa-solid fa-bars" style="transition: 0.5s;">
           <!-- menu -->
-          <q-menu square persistent transition-show="jump-down" transition-hide="jump-up" :offset="[0, 8]"
+          <q-menu square auto-close transition-show="jump-down" transition-hide="jump-up" :offset="[0, 8]"
             class="bg-primary text-secondary text-center q-py-sm shadow-10">
             <q-list style="width: 150px">
               <q-item clickable v-ripple dense to='/appointment' class="q-py-xs text-h6">
@@ -136,49 +135,51 @@
 
     <!-- SideBar -->
     <q-drawer elevated v-model='leftDrawerOpen' side='left' :breakpoint='1213' show-if-above :width='250'
-      class='bg-primary text-secondary text-center q-py-md q-px-md column justify-center' style='overflow: visible;'>
+      class='bg-primary text-secondary text-center q-py-md q-px-md column justify-start' style='overflow: visible;'>
 
-      <router-link to='/' class='col-2 q-pt-md'>
-        <span class='text-h3 master'>法師</span><br>
-        <span class='text-h4 firm'>事務所</span>
+      <!-- Logo 區 -->
+      <router-link to='/' class='col-2 q-pt-md q-mb-lg' style="height: auto;">
+        <span class='master'>法師</span><br>
+        <span class='firm'>事務所</span>
       </router-link>
 
-      <q-list class='col-4 q-mb-xl'>
-        <!-- v-ripple 點擊時有波紋特效 -->
-        <q-item clickable v-ripple dense to='/appointment' class="q-py-xs text-h6">
-          <q-item-section>預約諮詢</q-item-section>
-        </q-item>
-        <q-separator />
-        <q-item clickable v-ripple dense to='/introduction' class="q-py-xs text-h6">
-          <q-item-section>本所簡介</q-item-section>
-        </q-item>
-        <q-item clickable v-ripple dense to='/news' class="q-py-xs text-h6">
-          <q-item-section>最新消息</q-item-section>
-        </q-item>
-        <q-item clickable v-ripple dense to='/services' class="q-py-xs text-h6">
-          <q-item-section>服務項目</q-item-section>
-        </q-item>
-        <q-expansion-item label='專欄文章' dense class="q-py-xs text-h6">
-          <q-item clickable v-ripple dense class='bg-dark justify-center' to='/knowledges'>靈學知識</q-item>
-          <q-item clickable v-ripple dense class='bg-dark justify-center' to='/cases'>案例分享</q-item>
-        </q-expansion-item>
-        <q-item clickable v-ripple dense to='/products' class="q-py-xs text-h6">
-          <q-item-section>開運小物</q-item-section>
-        </q-item>
-        <q-item clickable v-ripple dense to='/content' class="q-py-xs text-h6">
-          <q-item-section>聯絡我們</q-item-section>
-        </q-item>
-      </q-list>
+      <!-- 選單區 -->
+      <div class="col column justify-between">
+        <q-list class='col-auto list'>
+          <!-- v-ripple 點擊時有波紋特效 -->
+          <q-item clickable v-ripple dense to='/appointment' class="q-py-xs">
+            <q-item-section>預約諮詢</q-item-section>
+          </q-item>
+          <q-separator />
+          <q-item clickable v-ripple dense to='/introduction' class="q-py-xs">
+            <q-item-section>本所簡介</q-item-section>
+          </q-item>
+          <q-item clickable v-ripple dense to='/news' class="q-py-xs">
+            <q-item-section>最新消息</q-item-section>
+          </q-item>
+          <q-item clickable v-ripple dense to='/services' class="q-py-xs">
+            <q-item-section>服務項目</q-item-section>
+          </q-item>
+          <q-expansion-item label='專欄文章' dense class="q-py-xs">
+            <q-item clickable v-ripple dense class='bg-dark justify-center' to='/knowledges'>靈學知識</q-item>
+            <q-item clickable v-ripple dense class='bg-dark justify-center' to='/cases'>案例分享</q-item>
+          </q-expansion-item>
+          <q-item clickable v-ripple dense to='/products' class="q-py-xs">
+            <q-item-section>開運小物</q-item-section>
+          </q-item>
+          <q-item clickable v-ripple dense to='/content' class="q-py-xs">
+            <q-item-section>聯絡我們</q-item-section>
+          </q-item>
+        </q-list>
 
-      <!-- 社群區 -->
-      <div class='col-5 justify-end column q-px-md'>
-        <q-list class='col-2 text-h5'>
+        <!-- 社群區 -->
+        <q-list class='col-auto row justify-center content-end q-px-md social'>
           <q-btn round dense flat icon='fa-brands fa-square-facebook' to='#'></q-btn>
           <q-btn round dense flat icon='fa-brands fa-instagram' to='#'></q-btn>
           <q-btn round dense flat icon='fa-brands fa-line' to='#'></q-btn>
         </q-list>
-      </div>
 
+      </div>
     </q-drawer>
 
     <q-page-container>
@@ -197,9 +198,6 @@
 import { ref, reactive, createApp } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
-
-// 漢堡開關
-const burger = ref(false)
 
 // sidebar 開關
 const leftDrawerOpen = ref(false)
