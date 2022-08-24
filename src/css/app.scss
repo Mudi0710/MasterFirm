@@ -641,7 +641,8 @@ button {
   width: auto;
 }
 
-//
+// Introduction.vue 設定 --------------------------------------------------
+// 設定 本所簡介區塊順序 樣式
 #introduction-content .myorder {
   @media (min-width: $breakpoint-lg) {
     &:nth-child(1) {
@@ -653,8 +654,39 @@ button {
   }
 }
 
-// 設定 首頁 輪播圖 樣式
-#introductionpage-img .q-carousel {
+// 設定 本所簡介 輪播圖 樣式
+#introduction-img .q-carousel {
+  width: 100%;
+  height: 30vh;
+  @media (min-width: $breakpoint-xs) {
+    height: 45vh;
+  }
+  @media (min-width: $breakpoint-sm) {
+    height: 50vh;
+  }
+  @media (min-width: $breakpoint-lg) {
+    min-height: 100%;
+  }
+  @media (min-width: $breakpoint-xl) {
+    min-height: 84vh;
+  }
+}
+
+// news.vue 設定 --------------------------------------------------
+// 設定 本所簡介區塊順序 樣式
+#news-content .myorder {
+  @media (min-width: $breakpoint-lg) {
+    &:nth-child(1) {
+      order: 2;
+    }
+    &:nth-child(2) {
+      order: 1;
+    }
+  }
+}
+
+// 設定 本所簡介 輪播圖 樣式
+#news-img .q-carousel {
   width: 100%;
   height: 30vh;
   @media (min-width: $breakpoint-xs) {
