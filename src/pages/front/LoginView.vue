@@ -19,7 +19,8 @@
               <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd" />
             </template>
           </q-input>
-          <q-btn square flat label='登入' type='submit' class='bg-secondary text-dark q-my-sm' style="width: 100%;">
+          <q-btn square flat label='登入' type='submit' @click="simulateProgress(0)" :loading="loading[0]"
+            class='bg-secondary text-dark q-my-sm' style="width: 100%;">
           </q-btn>
         </q-form>
         <router-link to='register' class='text-center q-my-sm desktop-none'>沒有帳號？</router-link>
@@ -34,6 +35,11 @@ import { useUserStore } from '@/stores/user'
 
 const user = useUserStore()
 const isPwd = ref(true)
+
+const loading = ref(false)
+const simulateProgress = (number) => {
+  loading.value[number] = true
+}
 
 const form = reactive({
   account: '',
