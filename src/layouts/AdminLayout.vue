@@ -26,7 +26,7 @@
 
         <!-- user 操作區(576px 以上) -->
         <q-list class='text-h5 text-secondary md-show'>
-          <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-house' to='/' class="q-mx-xs">
+          <q-btn v-if='isLogin && isAdmin' round dense size="md" flat icon='fa-solid fa-house' to='/' class="q-mx-xs">
             <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
               回前台
             </q-tooltip>
@@ -75,7 +75,7 @@
     </q-header>
 
     <!-- SideBar -->
-    <q-drawer elevated v-model='leftDrawerOpen' side='left' :breakpoint='1199' show-if-above :width='250'
+    <q-drawer elevated side='left' :breakpoint='1213' show-if-above no-swipe-open :width='250'
       class='bg-primary text-secondary text-center q-py-md q-px-md column justify-start' style='overflow: visible;'>
 
       <router-link to='/admin' class='col-2 q-pt-md q-mb-xl' style="height: auto;">
@@ -128,12 +128,6 @@ import { useUserStore } from '@/stores/user'
 
 // 漢堡開關
 const burger = ref(false)
-
-const leftDrawerOpen = ref(false)
-
-const toggleLeftDrawer = () => {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
 
 const user = useUserStore()
 const { logout } = user
