@@ -61,7 +61,112 @@
         </q-breadcrumbs>
       </div>
 
-      <div class="col-12 q-mt-md" style="width: 100%;">
+      <!-- 靈學知識區 -->
+      <div id="knowledges-content" class="col-12 row justify-between q-mt-md" style="height: auto;">
+
+        <!-- 左邊圖片 -->
+        <div id="knowledges-img" class="col-12 col-xl-5 q-pa-md" style="height: auto;">
+          <!-- <q-responsive :ratio="4 / 5"> -->
+          <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
+            :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
+            @mouseleave="autoplay = true">
+            <!-- <q-carousel-slide v-for="(image, idx) in introduction[0].image" :key="image" :name="idx + 1" :img-src="image" /> -->
+            <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg" />
+            <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg" />
+            <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg" />
+            <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" />
+          </q-carousel>
+          <!-- </q-responsive> -->
+        </div>
+
+        <!-- <pre class="text-secondary">{{ introduction[0].image }}</pre> -->
+        <!-- 右邊表格 -->
+        <div class="col-12 col-xl-7 q-pa-md">
+
+          <q-table :columns="columns" :rows="knowledges" square dense wrap-cells :filter="filter" :loading="loading"
+            :pagination="paginationKnowledges" rows-per-page-label="每頁顯示筆數" no-data-label="目前沒有新增任何靈學知識"
+            no-results-label="Oops...找不到該筆靈學知識" class="row bg-transparent no-shadow">
+
+            <!-- 文章搜尋 -->
+            <template v-slot:top-right>
+              <q-input borderless dense debounce="300" v-model="filter" placeholder="&nbsp;Search" class="search">
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
+            </template>
+
+            <!-- 自定義表頭 -->
+            <template v-slot:header="props">
+              <q-tr :props="props" class="col-auto">
+                <div>
+                  <marquee class="text-subtitle1 spacing-h6 text-accent">歡迎來我們這一家，充滿歡樂的這一家</marquee>
+                </div>
+              </q-tr>
+            </template>
+
+            <!-- 自定義表格內容 -->
+            <template v-slot:body="props">
+              <!-- <pre>{{ props.row.title }}</pre> -->
+              <q-tr :props="props" class="col-auto row no-wrap q-mb-sm" style="min-height: 130px;height: auto;">
+                <!-- 前端裝飾線 -->
+                <div class="col-auto row q-mt-md q-mr-lg">
+                  <div class="bg-accent" style="width: 10px;height: 70px;"></div>
+                </div>
+                <!-- 靈學文章區 -->
+                <div class="col">
+                  <!-- 文章日期 -->
+                  <div class="text-subtitle1 spacing-h6 q-my-sm">{{ new Date(props.row.date).toLocaleDateString() }}
+                  </div>
+                  <!-- 文章標題 -->
+                  <div class="text-h6 spacing-h7 q-mt-md q-pr-lg text-wrap">{{
+                    props.row.title
+                    }}
+                  </div>
+                  <!-- 文章連結 -->
+                  <div class="text-right q-pr-lg q-mb-sm">
+                    <router-link class="spacing-h5" :to="'/knowledge/' + props.row._id" :news="news">&lt;繼續閱讀&gt;
+                    </router-link>
+                  </div>
+                  <q-separator color="accent" inset />
+                </div>
+                <!-- style="font-size: calc(14px + 0.1vw);" -->
+                <!-- <div v-html="props.row.content"></div> -->
+              </q-tr>
+            </template>
+
+            <!-- 表格底端分頁選項 -->
+            <template v-slot:pagination="scope">
+              <q-btn v-if="scope.pagesNumber > 1" icon="first_page" color="secondary" round dense flat
+                :disable="scope.isFirstPage" @click="scope.firstPage" />
+
+              <q-btn icon="chevron_left" color="secondary" round dense flat :disable="scope.isFirstPage"
+                @click="scope.prevPage" />
+
+              <q-btn icon="chevron_right" color="secondary" round dense flat :disable="scope.isLastPage"
+                @click="scope.nextPage" />
+
+              <q-btn v-if="scope.pagesNumber > 1" icon="last_page" color="secondary" round dense flat
+                :disable="scope.isLastPage" @click="scope.lastPage" />
+            </template>
+
+            <!-- 找不到資料的訊息 -->
+            <template v-slot:no-data="{ message }">
+              <div class="full-width row flex-center text-accent q-gutter-sm">
+                <span>
+                  {{ message }}
+                </span>
+              </div>
+            </template>
+
+            <!-- loading 效果 -->
+            <!-- QInnerLoading必须是其父元素内部的最后一个元素，以便它可以显示在其他内容的顶部。 -->
+            <template v-slot:loading>
+              <q-inner-loading showing dark transition-show="fade" color="primary" />
+            </template>
+
+          </q-table>
+        </div>
 
       </div>
 
@@ -79,5 +184,43 @@ import Swal from 'sweetalert2'
 const user = useUserStore()
 const { logout } = user
 const { isLogin, isAdmin, cart } = storeToRefs(user)
+
+// 輪播圖
+const slide = ref(1)
+const autoplay = ref(true)
+
+// 最新消息陣列
+const knowledges = reactive([])
+
+// 分頁選項
+const paginationKnowledges = reactive({
+  items: [], // table要顯示的資料
+  page: 1, // 目前第幾頁
+  rowsPerPage: 5 // 每頁幾筆，0 代表 All
+})
+
+const loading = ref(false)
+
+const columns = [
+  { name: 'date', label: '發布日期', field: row => row.date, align: 'center' },
+  { name: 'title', label: '消息標題', field: row => row.title, align: 'center' },
+  { name: 'content', label: '消息內容', field: row => row.content, align: 'left' }
+]
+
+// 抓資料庫本所簡介的資料
+const initKnowledges = async () => {
+  try {
+    const { data } = await api.get('/knowledges')
+    knowledges.push(...data.result)
+    knowledges.reverse()
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: '失敗',
+      text: error.isAxiosError ? error.response.data.message : error.message
+    })
+  }
+}
+initKnowledges()
 
 </script>
