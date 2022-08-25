@@ -84,7 +84,7 @@
 
           <q-table :columns="columns" :rows="newses" square dense wrap-cells :filter="filter" :loading="loading"
             :pagination="paginationNews" rows-per-page-label="每頁顯示筆數" no-data-label="目前沒有新增任何最新消息"
-            no-results-label="Oops...找不到該筆最新消息" class="row no-shadow">
+            no-results-label="Oops...找不到該筆最新消息" class="row bg-transparent no-shadow">
 
             <!-- 消息搜尋 -->
             <template v-slot:top-right>
