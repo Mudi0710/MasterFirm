@@ -21,7 +21,7 @@
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
             購物車
           </q-tooltip>
-          <q-badge v-if='cart > 0' floating color='red' rounded>{{ cart }}</q-badge>
+          <q-badge v-if='cart.length > 0' floating color='red' rounded>{{ cart.length }}</q-badge>
         </q-btn>
         <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear' to='/admin' class="q-mx-xs">
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
