@@ -81,7 +81,7 @@ module.exports = configure(function (/* ctx */) {
       // vitePlugins: [
       //   [ 'package-name', { ..options.. } ]
       // ]
-      extendViteConf (viteConf) {
+      extendViteConf(viteConf) {
         viteConf.base = ''
       },
       alias: {
@@ -97,7 +97,19 @@ module.exports = configure(function (/* ctx */) {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
-      config: {},
+      config: {
+        loading: {
+          delay: 400,
+          message: 'Loading...',
+          spinnerSize: 500,
+          spinnerColor: 'primary',
+          messageColor: 'secondary'
+        },
+        loadingBar: {
+          size: '5px',
+          color: 'accent'
+        }
+      },
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
@@ -131,7 +143,10 @@ module.exports = configure(function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Loading',
+        'LoadingBar'
+      ]
     },
 
     // animations: 'all', // --- includes all animations
