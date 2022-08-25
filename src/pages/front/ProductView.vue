@@ -21,7 +21,7 @@
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
             購物車
           </q-tooltip>
-          <q-badge v-if='cart.length > 0' floating color='red' rounded>{{ cart.length }}</q-badge>
+          <q-badge v-if='cart > 0' floating color='red' rounded>{{ cart }}</q-badge>
         </q-btn>
         <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear' to='/admin' class="q-mx-xs">
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
@@ -50,10 +50,10 @@
     <div id="mycontent" class="col row justify-start">
 
       <!-- 頁面 Title -->
-      <div class="col-12 text-h3 text-secondary q-mb-md" style="width: 100%;">開運小物</div>
+      <div class="col-12 text-h4 text-xl-h3 text-secondary q-mb-md q-pl-md" style="width: 100%;">開運小物</div>
 
       <!-- 麵包屑 -->
-      <div class="col-12 q-my-md" style="width: 100%;">
+      <div class="col-12 q-mt-md q-pl-lg" style="width: 100%;">
         <q-breadcrumbs>
           <q-breadcrumbs-el label="首頁" icon="fa-solid fa-house" to="/" />
           <q-breadcrumbs-el label="開運小物" icon="fa-solid fa-store" to="/products" />
@@ -62,7 +62,7 @@
       </div>
 
       <!-- 商品內容區 -->
-      <div class="col-12 row justify-start content-center bg-secondary shadow-white q-mb-lg" style="width: 100%;">
+      <div class="col-12 row justify-start content-center bg-secondary shadow-white q-mt-lg q-mb-xl q-ml-sm" style="width: 100%;">
 
         <!-- 輪播圖 -->
         <div id="ProductView-img" class="col-12 q-pa-md">
@@ -78,20 +78,19 @@
         <!-- 商品資訊 -->
         <div id="ProductView-content" class="col-12 q-pa-md column wrap justify-start content-start q-pr-lg-lg">
           <!-- 商品名稱 -->
-          <div class="col-auto text-h3 text-primary spacing-h3 q-mb-lg">{{ product.name }}</div>
+          <div class="col-auto text-h4 spacing-h6 text-xl-h3 text-primary q-mb-lg">{{ product.name }}</div>
           <!-- 商品狀態 -->
           <div class="col-auto text-body2 spacing-h6 text-accent text-justify items-center q-mb-md">
             <span class="bg-primary q-pa-xs">{{ product.inventory ? '有現貨' : '訂購後製作' }}</span>
           </div>
           <!-- 商品描述 -->
-          <div class="col-auto text-h6 spacing-h6 text-grey-8 text-justify items-center q-mb-lg">
+          <div class="col-auto text-xl-h6 spacing-h6 text-grey-8 text-justify items-center q-pt-md q-mb-lg">
             {{ product.description
             }}你有生成跟着，就好瀏覽一座，到來每年計算機適當臺灣因為內地對此你還不對，總算發現，一句話協會關於筆者營銷高雄成果原則和諧後果動漫，科學好像優點之家熱線安排配套簽名影響減少立即因而職業一位，報名集團顯示形勢看法公里體會郵箱天氣消除嚴重導致，一位我又，高級體。你有生成跟着，就好瀏覽一座，到來每年計算機適當臺灣因為內地對此你還不對，總算發現，一句話協會關於筆者營銷高雄成果原則和諧後果動漫，科學好像優點之家熱線安排配套簽名影響減少立即因而職業一位，報名集團顯示形勢看法公里體會郵箱天氣消除嚴重導致，一位我又，高級體。你有生成跟着，就好瀏覽一座，到來每年計算機適當臺灣因為內地對此你還不對，總算發現，一句話協會關於筆者營銷高雄成果原則和諧後果動漫，科學好像優點之家熱線安排配套簽名影響減少立即因而職業一位，報名集團顯示形勢看法公里體會郵箱天氣消除嚴重導致，一位我又，高級體。你有生成跟着，就好瀏覽一座，到來每年計算機適當臺灣因為內地對此你還不對，總算發現，一句話協會關於筆者營銷高雄成果原則和諧後果動漫，科學好像優點之家熱線安排配套簽名影響減少立即因而職業一位，報名集團顯示形勢看法公里體會郵箱天氣消除嚴重導致，一位我又，高級體。
           </div>
           <!-- 商品價格 -->
-          <div class="col-auto text-h4 spacing-h6 text-warning text-right q-mb-lg">NT$ {{
-            product.price.toLocaleString()
-            }}
+          <div class="col-auto text-h6 text-xl-h4 spacing-h6 text-warning text-right q-mb-lg">NT$ {{
+            product.price.toLocaleString() }}
           </div>
           <!-- 商品訂購 -->
           <div class="col-auto">
@@ -117,7 +116,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { api } from '../../boot/axios'
+import { api } from '@/boot/axios'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
 import Swal from 'sweetalert2'
@@ -139,6 +138,7 @@ const quantityRule = reactive([
   v => v >= 1 || '數量錯誤'
 ])
 
+// 定義單一商品模型
 const product = reactive({
   _id: '',
   name: '',
