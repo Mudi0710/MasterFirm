@@ -57,7 +57,7 @@
         <q-breadcrumbs>
           <q-breadcrumbs-el label="首頁" icon="fa-solid fa-house" to="/" />
           <q-breadcrumbs-el label="最新消息" icon="fa-solid fa-bullhorn" to="/news" />
-          <q-breadcrumbs-el icon="fa-regular fa-newspaper">&nbsp;{{ news.title }}</q-breadcrumbs-el>
+          <q-breadcrumbs-el :label="news.title" icon="fa-regular fa-newspaper" style="display: inline-block;" />
         </q-breadcrumbs>
       </div>
 
@@ -70,7 +70,7 @@
           </div>
           <div class="col">
             <!-- 消息日期 -->
-            <div class="text-secondary text-subtitle1 spacing-h6 q-my-sm">{{ new Date(news.date).toLocaleDateString() }}
+            <div class="text-secondary text-subtitle1 spacing-h6 q-my-sm">{{ new Date(news.date).toLocaleString() }}
             </div>
             <!-- 消息標題 -->
             <div class="text-accent text-h6 text-xl-h5 spacing-h7 q-mt-md q-pr-lg text-wrap">{{ news.title }}
@@ -80,7 +80,7 @@
         <!-- 內文區 -->
         <div class="q-mt-lg" style="height: auto;">
           <!-- 消息內容 -->
-          <p v-html="news.content" class="col-12 col-xl-6 text-xl-h6 text-secondary text-justify q-mt-lg q-pr-md"></p>
+          <p v-html="news.content" class="col-12 col-xl-6 text-xl-h6 text-secondary text-justify q-mt-lg q-pr-lg"></p>
         </div>
       </div>
     </div>
@@ -99,8 +99,8 @@ const route = useRoute()
 const router = useRouter()
 
 const user = useUserStore()
-const { isLogin } = storeToRefs(user)
-const { addCart } = user
+const { logout } = user
+const { isLogin, isAdmin, cart } = storeToRefs(user)
 
 // 輪播圖
 const slide = ref(1)
