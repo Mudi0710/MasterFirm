@@ -17,7 +17,7 @@
     </div>
     <div id='mycontent' class=''>
       <div class='row justify-between'>
-        <div class='col-auto text-h3 text-secondary q-my-sm'>預約管理</div>
+        <div class='col-auto text-h3 text-secondary q-my-sm q-pl-md'>預約管理</div>
         <!-- <q-btn @click="openDialog('', -1)" square flat
           class='col-auto q-mr-xl bg-secondary text-dark text-h6 q-my-sm createBtn'>新增會員</q-btn> -->
       </div>
