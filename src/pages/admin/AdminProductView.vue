@@ -17,7 +17,7 @@
     </div>
     <div id='mycontent' class=''>
       <div class='row justify-between'>
-        <div class='col-auto text-h3 text-secondary q-my-sm'>商品管理</div>
+        <div class='col-auto text-h3 text-secondary q-my-sm q-pl-md'>商品管理</div>
         <q-btn @click="openDialog('', -1)" square flat
           class='col-auto q-mr-xl bg-secondary text-dark text-h6 q-my-sm createBtn'>新增商品</q-btn>
       </div>
@@ -60,7 +60,8 @@
               <!-- <pre>{{ edit }}</pre> -->
               <div class="row justify-center">
                 <q-btn class="col-auto q-mx-sm" @click='openDialog(edit.row._id, edit.rowIndex)' outline>修改商品</q-btn>
-                <q-btn class="col-auto q-mx-sm" @click='openDeleteDialog(edit.row._id, edit.row.name)' outline>刪除商品</q-btn>
+                <q-btn class="col-auto q-mx-sm" @click='openDeleteDialog(edit.row._id, edit.row.name)' outline>刪除商品
+                </q-btn>
               </div>
             </q-td>
           </template>
@@ -160,7 +161,8 @@
             </div>
             <!-- 商品價格 -->
             <p class="text-h6 text-dark">商品價格</p>
-            <q-input v-model.number="form.price" min='0' :rules='[rules.required, rules.price]' outlined square dense class="text-primary"/>
+            <q-input v-model.number="form.price" min='0' :rules='[rules.required, rules.price]' outlined square dense
+              class="text-primary" />
             <!-- 商品圖片 -->
             <p class="text-h6 text-dark">商品圖片</p>
             <q-file v-model='form.image' multiple :rules='[rules.size]' accept='image/*' filled bottom-slots counter>
@@ -190,7 +192,8 @@
       <q-dialog v-model="deleteDialog.dialog" seamless persistent>
         <q-card square class="row justify-center bg-info q-pa-lg">
           <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
-          <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除【{{ del.name }}】商品嗎？<br>刪除【{{ del.name }}】商品將無法復原！</div>
+          <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除【{{ del.name }}】商品嗎？<br>刪除【{{ del.name
+            }}】商品將無法復原！</div>
           <div class="col-12 row justify-around">
             <!-- 確定刪除 -->
             <q-btn @click="deleteProduct(del._id)" square flat class="col-4 bg-secondary text-dark q-my-sm"
@@ -280,6 +283,7 @@ const submitForm = async () => {
         title: '新增成功',
         text: '您已成功新增一筆商品！'
       })
+      init()
     } else {
       const { data } = await apiAuth.patch('/products/' + form._id, fd)
       products[form.idx] = data.result
@@ -288,6 +292,7 @@ const submitForm = async () => {
         title: '修改成功',
         text: '您已成功修改該筆商品！'
       })
+      init()
     }
     form.dialog = false
   } catch (error) {
