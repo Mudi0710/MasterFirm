@@ -57,12 +57,13 @@
         <q-breadcrumbs>
           <q-breadcrumbs-el label="首頁" icon="fa-solid fa-house" to="/" />
           <q-breadcrumbs-el label="開運小物" icon="fa-solid fa-store" to="/products" />
-          <q-breadcrumbs-el icon="fa-solid fa-gift">&nbsp;{{ product.name }}</q-breadcrumbs-el>
+          <q-breadcrumbs-el :label="product.name" icon="fa-solid fa-gift" />
         </q-breadcrumbs>
       </div>
 
       <!-- 商品內容區 -->
-      <div class="col-12 row justify-start content-center bg-secondary shadow-white q-mt-lg q-mb-xl q-ml-sm" style="width: 100%;">
+      <div class="col-12 row justify-start content-center bg-secondary shadow-white q-mt-lg q-mb-xl q-ml-sm"
+        style="width: 100%;">
 
         <!-- 輪播圖 -->
         <div id="ProductView-img" class="col-12 q-pa-md">
@@ -90,7 +91,7 @@
           </div>
           <!-- 商品價格 -->
           <div class="col-auto text-h6 text-xl-h4 spacing-h6 text-warning text-right q-mb-lg">NT$ {{
-            product.price.toLocaleString() }}
+          product.price.toLocaleString() }}
           </div>
           <!-- 商品訂購 -->
           <div class="col-auto">
