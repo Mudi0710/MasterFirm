@@ -21,7 +21,7 @@
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
             購物車
           </q-tooltip>
-          <q-badge v-if='cart > 0' floating color='red' rounded>{{ cart }}</q-badge>
+          <q-badge v-if='cart.length > 0' floating color='red' rounded>{{ cart.length }}</q-badge>
         </q-btn>
         <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear' to='/admin' class="q-mx-xs">
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
@@ -64,8 +64,7 @@
       <div class="col-12 q-mt-md" style="width: 100%;">
         <div v-if="products.length > 0" class="row justify-start items-center">
           <!-- <pre>{{ products }}</pre> -->
-          <div v-for='product in products' :key="product.id"
-            class="col-6 col-md-4 col-xl-3 q-px-xs q-py-sm">
+          <div v-for='product in products' :key="product.id" class="col-6 col-md-4 col-xl-3 q-px-xs q-py-sm">
             <ProductCard bordered class="my-card bg-info shadow-10" style="border-radius: 0; width: 100%;"
               :product="product">
             </ProductCard>
