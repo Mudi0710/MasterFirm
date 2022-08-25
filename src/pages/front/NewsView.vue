@@ -21,7 +21,7 @@
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
             購物車
           </q-tooltip>
-          <q-badge v-if='cart.length > 0' floating color='red' rounded>{{ cart.length }}</q-badge>
+          <q-badge v-if='cart > 0' floating color='red' rounded>{{ cart }}</q-badge>
         </q-btn>
         <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear' to='/admin' class="q-mx-xs">
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
@@ -50,27 +50,41 @@
     <div id="mycontent" class="col row justify-start">
 
       <!-- 頁面 Title -->
-      <div class="col-12 text-h3 text-secondary q-mb-md" style="width: 100%;">最新消息</div>
+      <div class="col-12 text-h4 text-xl-h3 text-secondary q-mb-md q-pl-md" style="width: 100%;">最新消息</div>
 
       <!-- 麵包屑 -->
-      <div class="col-12 q-mt-md" style="width: 100%;">
+      <div class="col-12 q-mt-md q-pl-lg" style="width: 100%;">
         <q-breadcrumbs>
           <q-breadcrumbs-el label="首頁" icon="fa-solid fa-house" to="/" />
           <q-breadcrumbs-el label="最新消息" icon="fa-solid fa-bullhorn" />
         </q-breadcrumbs>
       </div>
 
-      <div id="news-content" class="col-12 row q-mt-md bg-red" style="width: 100%;">
-        <!-- 本所簡介區 -->
+      <!-- 本所簡介區 -->
+      <div id="news-content" class="col-12 row justify-between q-mt-md" style="height: auto;">
+
+        <!-- 左邊圖片 -->
+        <div id="news-img" class="col-12 col-xl-5 q-pa-md" style="height: auto;">
+          <!-- <q-responsive :ratio="4 / 5"> -->
+          <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
+            :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
+            @mouseleave="autoplay = true">
+            <!-- <q-carousel-slide v-for="(image, idx) in introduction[0].image" :key="image" :name="idx + 1" :img-src="image" /> -->
+            <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg" />
+            <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg" />
+            <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg" />
+            <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" />
+          </q-carousel>
+          <!-- </q-responsive> -->
+        </div>
 
         <!-- <pre class="text-secondary">{{ introduction[0].image }}</pre> -->
         <!-- 右邊表格 -->
-        <div class="myorder col-12 col-xl-7 q-pa-md row justify-start content-start bg-blue">
-          <!-- <div class="col-12 text-h3 spacing-h4 text-secondary q-my-sm">123</div>
-          <div class="col-12 text-h6 spacing-h6 text-secondary text-justify q-my-xl q-pr-xl-lg">123</div> -->
-          <q-table :columns="columns" :rows="newses" row-key="title" separator="cell" square bordered wrap-cells dense
-            table-colspan="1" :filter="filter" :loading="loading" :pagination="paginationNews"
-            rows-per-page-label="每頁顯示筆數" no-data-label="目前沒有新增任何最新消息" no-results-label="Oops...找不到該筆最新消息">
+        <div class="col-12 col-xl-7 q-pa-md">
+
+          <q-table :columns="columns" :rows="newses" square dense wrap-cells :filter="filter" :loading="loading"
+            :pagination="paginationNews" rows-per-page-label="每頁顯示筆數" no-data-label="目前沒有新增任何最新消息"
+            no-results-label="Oops...找不到該筆最新消息" class="row no-shadow">
 
             <!-- 消息搜尋 -->
             <template v-slot:top-right>
@@ -81,41 +95,41 @@
               </q-input>
             </template>
 
-            <!-- 發布日期 -->
-            <!-- <template #body-cell-date="date">
-              <pre>{{ date.row.date }}</pre>
-              <q-td :date="date" class="text-center" style="min-width: 50px;max-width: 120px;">{{ new
-                  Date(date.row.date).toLocaleString()
-              }}
-              </q-td>
-            </template> -->
+            <!-- 自定義表頭 -->
+            <template v-slot:header="props">
+              <q-tr :props="props" class="col-auto">
+                <div>
+                  <marquee class="text-subtitle1 spacing-h6 text-accent">歡迎來我們這一家，充滿歡樂的這一家</marquee>
+                </div>
+              </q-tr>
+            </template>
 
-            <!-- 消息標題 -->
-            <!-- <template #body-cell-title="title">
-              <pre>{{ title.row.title }}</pre>
-              <q-td :title="title" class="ellipsis" style="max-width: 200px;">
-                {{ title.row.title }}
-              </q-td>
-            </template> -->
-
-            <!-- 消息內容 -->
-            <!-- <template #body-cell-content="content">
-              <pre>{{ content.row.content }}</pre>
-              <q-td :content="content" class="ellipsis" style="max-width: 300px;">
-                {{ content.row.content }}
-              </q-td>
-            </template> -->
-
+            <!-- 自定義表格內容 -->
             <template v-slot:body="props">
               <!-- <pre>{{ props.row.title }}</pre> -->
-              <q-tr :props="props">
-                <span></span>
-                <div>{{ props.row.date }}</div>
-                <div>{{ props.row.title }}</div>
-                <div v-html="props.row.content"></div>
-                <q-separator />
-                <!-- <q-td key="name" :props="props">
-                </q-td> -->
+              <q-tr :props="props" class="col-auto row no-wrap q-mb-sm" style="min-height: 130px;height: auto;">
+                <!-- 前端裝飾線 -->
+                <div class="col-auto row q-mt-md q-mr-lg">
+                  <div class="bg-accent" style="width: 10px;height: 70px;"></div>
+                </div>
+                <!-- 最新消息區 -->
+                <div class="col">
+                  <!-- 消息日期 -->
+                  <div class="text-subtitle1 spacing-h6 q-my-sm">{{ new Date(props.row.date).toLocaleDateString() }}
+                  </div>
+                  <!-- 消息標題 -->
+                  <div class="text-h6 spacing-h7 q-mt-md q-pr-lg text-wrap">{{
+                      props.row.title
+                  }}
+                  </div>
+                  <!-- 消息連結 -->
+                  <div class="text-right q-pr-lg q-mb-sm">
+                    <router-link class="spacing-h5" :to="'/new/' + props.row._id" :news="news">&lt;繼續閱讀&gt;</router-link>
+                  </div>
+                  <q-separator color="accent" inset />
+                </div>
+                <!-- style="font-size: calc(14px + 0.1vw);" -->
+                <!-- <div v-html="props.row.content"></div> -->
               </q-tr>
             </template>
 
@@ -151,20 +165,7 @@
 
           </q-table>
         </div>
-        <!-- 左邊圖片 -->
-        <div id="news-img" class="myorder col-12 col-xl-5 q-pa-md" style="max-height: 700px;">
-          <q-responsive :ratio="4 / 5">
-            <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
-              :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
-              @mouseleave="autoplay = true">
-              <!-- <q-carousel-slide v-for="(image, idx) in introduction[0].image" :key="image" :name="idx + 1" :img-src="image" /> -->
-              <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg" />
-              <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg" />
-              <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg" />
-              <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" />
-            </q-carousel>
-          </q-responsive>
-        </div>
+
       </div>
 
     </div>
@@ -182,6 +183,7 @@ const user = useUserStore()
 const { logout } = user
 const { isLogin, isAdmin, cart } = storeToRefs(user)
 
+// 輪播圖
 const slide = ref(1)
 const autoplay = ref(true)
 
