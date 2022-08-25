@@ -17,7 +17,7 @@
     </div>
     <div id='mycontent' class=''>
       <div class='row justify-between'>
-        <div class='col-auto text-h3 text-secondary q-my-sm'>會員管理</div>
+        <div class='col-auto text-h3 text-secondary q-my-sm q-pl-md'>會員管理</div>
         <q-btn @click="openDialog('', -1)" square flat
           class='col-auto q-mr-xl bg-secondary text-dark text-h6 q-my-sm createBtn'>新增會員</q-btn>
       </div>
@@ -32,11 +32,12 @@
           <!-- 會員圖片(頭像) -->
           <template #body-cell-image="image">
             <q-td :img="image" align="center" ellipsis>
-                <!-- <pre>{{ image.row.name }}</pre> -->
-                <!-- <pre>{{ image.row.gender }}</pre> -->
+              <!-- <pre>{{ image.row.name }}</pre> -->
+              <!-- <pre>{{ image.row.gender }}</pre> -->
               <q-avatar square size="100px">
 
-                <img :src="avatar((image.row.gender === 1) ? 'male' : 'female', image.row.account)" class="q-mb-xl" style="object-fit: cover;">
+                <img :src="avatar((image.row.gender === 1) ? 'male' : 'female', image.row.account)" class="q-mb-xl"
+                  style="object-fit: cover;">
               </q-avatar>
             </q-td>
           </template>
