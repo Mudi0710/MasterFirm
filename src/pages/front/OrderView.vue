@@ -21,7 +21,7 @@
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
             購物車
           </q-tooltip>
-          <q-badge v-if='cart > 0' floating color='red' rounded>{{ cart }}</q-badge>
+          <q-badge v-if='cart.length > 0' floating color='red' rounded>{{ cart.length }}</q-badge>
         </q-btn>
         <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear' to='/admin' class="q-mx-xs">
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
@@ -122,8 +122,8 @@
                     <div class="row justify-between items-center">
                       <span class="text-accent">{{ col.label }}：</span>
                       <span class="text-secondary text-body2 text-right ellipsis-3-lines">{{ new
-                          Date(col.value).toLocaleString()
-                      }}</span>
+                        Date(col.value).toLocaleString()
+                        }}</span>
                     </div>
                   </div>
                   <!-- 訂單id -->
@@ -138,7 +138,7 @@
                     <div class="row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
                       <span class="text-secondary text-right ellipsis-3-lines">NT$ {{ col.value.toLocaleString()
-                      }}</span>
+                        }}</span>
                     </div>
                   </div>
                   <!-- 訂單詳情 -->
@@ -188,7 +188,7 @@
 
             <!-- 訂單詳情 -->
             <div v-for="product in detail.row.products" :key="product._id" class="col-12 text-accent">
-            <!-- <pre>{{ detail.row.products}}</pre> -->
+              <!-- <pre>{{ detail.row.products}}</pre> -->
               <div class="row">
                 <!-- 單一商品圖片 -->
                 <div class="col-12 col-lg-3">
@@ -224,8 +224,8 @@
             <div class="col-12 row justify-end q-px-lg-lg">
               <div class="col-12 col-lg-auto text-h4 text-accent q-my-sm">訂單金額：</div>
               <div class="col-12 col-lg-auto text-h4 text-warning text-right q-my-sm">NT$ {{
-                  detail.row.totalPrice.toLocaleString()
-              }}</div>
+                detail.row.totalPrice.toLocaleString()
+                }}</div>
             </div>
           </div>
           <!-- 關閉按鈕 -->
