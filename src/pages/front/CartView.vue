@@ -48,11 +48,12 @@
     </div>
 
     <div id="mycontent" class="col-12 row content-start">
+
       <!-- 頁面 Title -->
-      <div class="col-12 text-h3 text-secondary q-mb-md" style="width: 100%;">購物車</div>
+      <div class="col-12 text-h4 text-xl-h3 text-secondary q-mb-md q-pl-md" style="width: 100%;">購物車</div>
 
       <!-- 麵包屑 -->
-      <div class="col-12 q-my-md" style="width: 100%;">
+      <div class="col-12 q-mt-md q-pl-lg" style="width: 100%;">
         <q-breadcrumbs>
           <q-breadcrumbs-el label="首頁" icon="fa-solid fa-house" to="/" />
           <q-breadcrumbs-el label="購物車" icon="fa-solid fa-store" />
