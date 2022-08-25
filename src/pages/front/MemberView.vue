@@ -21,7 +21,7 @@
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
             購物車
           </q-tooltip>
-          <q-badge v-if='cart.length > 0' floating color='red' rounded>{{ cart.length }}</q-badge>
+          <q-badge v-if='cart > 0' floating color='red' rounded>{{ cart }}</q-badge>
         </q-btn>
         <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear' to='/admin' class="q-mx-xs">
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
@@ -49,10 +49,10 @@
 
     <div id="mycontent" class="col-12 row content-start">
       <!-- 頁面 Title -->
-      <div class="col-12 text-h3 text-secondary q-mb-md" style="width: 100%;">會員資料</div>
+      <div class="col-12 text-h4 text-xl-h3 text-secondary q-mb-md q-pl-md" style="width: 100%;">會員資料</div>
 
       <!-- 麵包屑 -->
-      <div class="col-12 q-my-md" style="width: 100%;">
+      <div class="col-12 q-mt-md q-pl-lg" style="width: 100%;">
         <q-breadcrumbs>
           <q-breadcrumbs-el label="首頁" icon="fa-solid fa-house" to="/" />
           <q-breadcrumbs-el label="會員資料" icon="fa-solid fa-address-card" />
