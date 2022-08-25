@@ -21,7 +21,7 @@
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
             購物車
           </q-tooltip>
-          <q-badge v-if='cart > 0' floating color='red' rounded>{{ cart }}</q-badge>
+          <q-badge v-if='cart.length > 0' floating color='red' rounded>{{ cart.length }}</q-badge>
         </q-btn>
         <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear' to='/admin' class="q-mx-xs">
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
@@ -76,7 +76,8 @@
             <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
               :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
               @mouseleave="autoplay = true">
-              <q-carousel-slide v-for="(image, idx) in introduction[0].image" :key="image" :name="idx + 1" :img-src="image" />
+              <q-carousel-slide v-for="(image, idx) in introduction[0].image" :key="image" :name="idx + 1"
+                :img-src="image" />
             </q-carousel>
           </q-responsive>
         </div>
