@@ -1,3 +1,4 @@
+// 儲存狀態並持久化儲存 step 2
 import { defineStore } from 'pinia'
 import { api, apiAuth } from '@/boot/axios'
 import Swal from 'sweetalert2'
@@ -155,6 +156,7 @@ export const useUserStore = defineStore({
       try {
         const { data } = await apiAuth.get('/users')
         this.account = data.result.account
+        this.name = data.result.name
         this.role = data.result.role
         this.cart = data.result.cart
       } catch (error) {

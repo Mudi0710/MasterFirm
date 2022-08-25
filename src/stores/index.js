@@ -11,6 +11,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
  * with the Store instance.
  */
 
+// 儲存狀態並持久化儲存 step 1
 export default store((/* { ssrContext } */) => {
   const pinia = createPinia()
 
