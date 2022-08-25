@@ -72,7 +72,7 @@
             </q-tooltip>
             <q-badge v-if='cart > 0' floating color='red' rounded>{{ cart }}</q-badge>
           </q-btn>
-          <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear' to='/admin' class="q-mx-xs">
+          <q-btn v-if='isLogin && isAdmin' round dense flat size="md" icon='fa-solid fa-user-gear' to='/admin' class="q-mx-xs">
             <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
               管理後台
             </q-tooltip>
@@ -134,8 +134,10 @@
     </q-header>
 
     <!-- SideBar -->
-    <q-drawer elevated v-model='leftDrawerOpen' side='left' :breakpoint='1213' show-if-above :width='250'
+    <q-drawer elevated side='left' :breakpoint='1213' show-if-above no-swipe-open :width='250'
       class='bg-primary text-secondary text-center q-py-md q-px-md column justify-start' style='overflow: visible;'>
+    <!-- <q-drawer elevated v-model='leftDrawerOpen' side='left' :breakpoint='1213' show-if-above :width='250'
+      class='bg-primary text-secondary text-center q-py-md q-px-md column justify-start mobile-none' style='overflow: visible;'> -->
 
       <!-- Logo 區 -->
       <router-link to='/' class='col-2 q-pt-md q-mb-xl' style="height: auto;">
@@ -198,12 +200,6 @@
 import { ref, reactive, createApp } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
-
-// sidebar 開關
-const leftDrawerOpen = ref(false)
-const toggleLeftDrawer = () => {
-  leftDrawerOpen.value = !leftDrawerOpen.value
-}
 
 const fabPos = ref([18, 18])
 const draggingFab = ref(false)
