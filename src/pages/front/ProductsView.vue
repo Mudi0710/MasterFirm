@@ -21,7 +21,7 @@
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
             購物車
           </q-tooltip>
-          <q-badge v-if='cart.length > 0' floating color='red' rounded>{{ cart.length }}</q-badge>
+          <q-badge v-if='cart > 0' floating color='red' rounded>{{ cart }}</q-badge>
         </q-btn>
         <q-btn v-if='isLogin && isAdmin' round dense flat icon='fa-solid fa-user-gear' to='/admin' class="q-mx-xs">
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
@@ -50,10 +50,10 @@
     <div id="mycontent" class="col row justify-start">
 
       <!-- 頁面 Title -->
-      <div class="col-12 text-h3 text-secondary q-mb-md" style="width: 100%;">開運小物</div>
+      <div class="col-12 text-h4 text-xl-h3 text-secondary q-mb-md q-pl-md" style="width: 100%;">開運小物</div>
 
       <!-- 麵包屑 -->
-      <div class="col-12 q-mt-md" style="width: 100%;">
+      <div class="col-12 q-mt-md q-pl-lg" style="width: 100%;">
         <q-breadcrumbs>
           <q-breadcrumbs-el label="首頁" icon="fa-solid fa-house" to="/" />
           <q-breadcrumbs-el label="開運小物" icon="fa-solid fa-store" />
@@ -61,51 +61,17 @@
       </div>
 
       <!-- 商品 Card -->
-      <div class="col-12 q-mt-md" style="width: 100%;">
+      <div class="col-12 q-mt-md q-mb-xl" style="width: 100%;">
         <div v-if="products.length > 0" class="row justify-start items-center">
           <!-- <pre>{{ products }}</pre> -->
-          <div v-for='product in products' :key="product.id" class="col-6 col-md-4 col-xl-3 q-px-xs q-py-sm">
+          <div v-for='product in products' :key="product.id" class="col-6 col-md-4 col-xl-3 q-px-xs q-py-md">
             <ProductCard bordered class="my-card bg-info shadow-10" style="border-radius: 0; width: 100%;"
               :product="product">
             </ProductCard>
-
-            <!-- <q-card bordered class="my-card bg-info shadow-10" style="border-radius: 0;" :product="product">
-              商品圖片
-              <q-responsive :ratio="3 / 2">
-                <q-img :src="product.image[0]" />
-              </q-responsive>
-              商品名稱
-              <q-card-section>
-                .ellipsis => text 過多時以...代替
-                <div class="col text-h5 text-accent ellipsis"> {{ product.name }} </div>
-              </q-card-section>
-              商品描述
-              <q-card-section class="q-pt-none">
-                <div class="text-subtitle1 text-dark ellipsis-3-lines">
-                  {{ product.description }}
-                </div>
-              </q-card-section>
-              商品金額
-              <q-card-section class="q-pt-none">
-                <div class="text-subtitle2 text-accent text-right">
-                  $ {{ product.price }}
-                </div>
-              </q-card-section>
-
-              <q-separator />
-              訂購按鈕
-              <q-card-actions>
-                <q-btn flat round icon="event" />
-                <q-btn flat color="primary">
-                  Reserve
-                </q-btn>
-              </q-card-actions>
-            </q-card> -->
-
           </div>
         </div>
 
-        <div v-else class="text-h4 text-secondary q-mt-xl">很抱歉，目前沒有任何商品</div>
+        <div v-else class="text-h4 text-secondary q-mt-xl">商品加載中......</div>
       </div>
 
     </div>
