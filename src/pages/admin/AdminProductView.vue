@@ -22,6 +22,7 @@
           class='col-auto q-mr-xl bg-secondary text-dark text-h6 q-my-sm createBtn'>新增商品</q-btn>
       </div>
 
+      <!-- 商品管理區 -->
       <div class="q-pa-md">
         <q-table :grid="$q.screen.lt.xl" :columns="columns" :rows="products" row-key="name" square bordered wrap-cells
           binary-state-sort dense :filter="filter" :loading="loading" :pagination="pagination"
@@ -59,8 +60,8 @@
             <q-td :edit="edit">
               <!-- <pre>{{ edit }}</pre> -->
               <div class="row justify-center">
-                <q-btn class="col-auto q-mx-sm" @click='openDialog(edit.row._id, edit.rowIndex)' outline>修改商品</q-btn>
-                <q-btn class="col-auto q-mx-sm" @click='openDeleteDialog(edit.row._id, edit.row.name)' outline>刪除商品
+                <q-btn class="col-auto q-mx-sm q-my-xs" @click='openDialog(edit.row._id, edit.rowIndex)' outline>修改商品</q-btn>
+                <q-btn class="col-auto q-mx-sm q-my-xs" @click='openDeleteDialog(edit.row._id, edit.row.name)' outline>刪除商品
                 </q-btn>
               </div>
             </q-td>
@@ -211,7 +212,7 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
-import { apiAuth } from '../../boot/axios'
+import { apiAuth } from '@/boot/axios'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 import { useQuasar } from 'quasar'
