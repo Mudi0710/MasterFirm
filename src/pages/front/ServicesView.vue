@@ -60,8 +60,18 @@
         </q-breadcrumbs>
       </div>
 
-      <div class="col-12 q-mt-md" style="width: 100%;">
+      <!-- 商品 Card -->
+      <div class="col-12 q-mt-md q-mb-xl" style="width: 100%;">
+        <div v-if="services.length > 0" class="row justify-start items-center">
+          <!-- <pre>{{ services }}</pre> -->
+          <div v-for='service in services' :key="service.id" class="col-6 col-md-4 col-xl-3 col-xxl-25 col-xxl-2 q-px-xs q-py-md">
+            <serviceCard bordered class="my-card bg-info shadow-10 q-mx-sm" style="border-radius: 0; width: 100%;"
+              :service="service">
+            </serviceCard>
+          </div>
+        </div>
 
+        <div v-else class="text-h4 text-secondary q-mt-xl">服務項目加載中......</div>
       </div>
 
     </div>
@@ -74,9 +84,27 @@ import { api } from '@/boot/axios'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 import Swal from 'sweetalert2'
+import serviceCard from '@/components/ServiceCard.vue'
+
+const services = reactive([])
 
 const user = useUserStore()
 const { logout } = user
 const { isLogin, isAdmin, cart } = storeToRefs(user)
+
+// 抓後台所有商品的資料
+const init = async () => {
+  try {
+    const { data } = await api.get('/services')
+    services.push(...data.result)
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: '失敗',
+      text: '伺服器錯誤'
+    })
+  }
+}
+init()
 
 </script>
