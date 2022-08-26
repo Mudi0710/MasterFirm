@@ -66,8 +66,8 @@
         <!-- <pre class="text-secondary">{{ introduction[0].image }}</pre> -->
         <!-- 右邊文字 -->
         <div class="myorder col-12 col-xl-7 q-pa-md row justify-start content-start">
-          <div class="col-12 text-h5 text-xl-h4 spacing-h4 text-secondary q-my-sm">{{ introduction[0].title }}</div>
-          <div v-html="introduction[0].content"
+          <div class="col-12 text-h5 text-xl-h4 spacing-h4 text-secondary q-my-sm">{{ introduction.length > 0 ? introduction[0]?.title : '目前沒有簡介標題' }}</div>
+          <div v-html="introduction.length > 0 ? introduction[0]?.content : '目前沒有簡介內容'"
             class="col-12 text-xl-h6 spacing-h6 line-height-h6 text-secondary text-justify q-my-xl q-pr-xl-lg"></div>
         </div>
         <!-- 左邊圖片 -->
@@ -76,7 +76,7 @@
             <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
               :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
               @mouseleave="autoplay = true">
-              <q-carousel-slide v-for="(image, idx) in introduction[0].image" :key="image" :name="idx + 1"
+              <q-carousel-slide v-for="(image, idx) in introduction.length > 0 ? introduction[0]?.image : '目前沒有簡介圖片' " :key="image" :name="idx + 1"
                 :img-src="image" />
             </q-carousel>
           </q-responsive>
