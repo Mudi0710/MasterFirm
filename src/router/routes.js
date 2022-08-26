@@ -246,6 +246,16 @@ const routes = [
         }
       },
       {
+        path: 'adminService',
+        name: 'admin-service',
+        component: () => import('@/pages/admin/AdminServiceView.vue'),
+        meta: {
+          title: '法師事務所 | 服務管理',
+          login: true,
+          admin: true
+        }
+      },
+      {
         path: 'adminCase',
         name: 'admin-case',
         component: () => import('@/pages/admin/AdminCaseView.vue'),
