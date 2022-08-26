@@ -27,7 +27,7 @@
       <div class="q-pa-md">
         <q-table :grid="$q.screen.lt.xl" :columns="columns" :rows="members" row-key="name" square bordered wrap-cells
           binary-state-sort dense :filter="filter" :loading="loading" :pagination="pagination"
-          rows-per-page-label="每頁顯示筆數" no-results-label="Oops...找不到該會員">
+          rows-per-page-label="每頁顯示筆數" no-data-label="目前沒有新增任何會員" no-results-label="Oops...找不到該會員">
 
           <!-- 會員圖片(頭像) -->
           <template #body-cell-image="image">
@@ -95,8 +95,12 @@
                 <div v-for="col in card.cols" :key="col.name" class="q-pa-sm">
                   <!-- <pre>{{ col }}</pre> -->
                   <!-- 商品圖片 -->
-                  <q-responsive v-if="col.name == 'image'" :ratio="3 / 2">
-                    <img :src="card.row[col.name]" class="col" style="width: 100%;">
+                  <!-- <img :src="avatar((card.row.gender === 1) ? 'male' : 'female', card.row.account)" class="q-mb-xl"
+                  style="object-fit: cover;"> -->
+                  <!-- <pre class="text-secondary">{{ card.row.account }}</pre> -->
+                  <q-responsive v-if="col.name == 'image'" :ratio="1 / 1">
+                    <img :src="avatar((card.row.gender === 1) ? 'male' : 'female', card.row.account)" class="q-mb-xl"
+                  style="object-fit: cover;">
                   </q-responsive>
                   <!-- 商品資訊 -->
                   <div v-else-if="col.name !== 'image' && col.name !== 'edit'" class="text-left q-mx-auto">
