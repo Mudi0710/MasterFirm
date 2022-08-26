@@ -52,24 +52,29 @@
       <div class="col-12 col-xl-7 q-pa-md column justify-between">
         <div class="col-auto q-mt-lg-xl q-pt-lg-xl q-mb-lg-lg">
           <!-- 主標題 -->
-          <div class="col-auto text-h4 text-xl-h3 spacing-h6 text-secondary"> 法師事務所 </div>
+          <div class="col-auto text-h4 text-xl-h3 spacing-h6 text-secondary">{{ slogan.length > 0 ? slogan[0]?.title :
+              ''
+          }}</div>
           <!-- 副標題 -->
-          <div class="col-auto text-h6 text-xl-h5 spacing-h5 text-secondary q-my-lg q-pr-xl-lg text-right"> 副標題 </div>
+          <div class="col-auto text-h6 text-xl-h5 spacing-h5 text-secondary q-my-lg q-pr-xl-lg text-right">{{
+              slogan.length > 0 ? slogan[0]?.subtitle : ''
+          }}</div>
         </div>
         <!-- 內文 -->
-        <div class="col-auto text-xl-h6 spacing-h6 text-secondary text-justify items-center q-pr-xl-lg line-height">
-          你有生成跟着，就好瀏覽一座，到來每年計算機適當臺灣因為內地對此你還不對，總算發現，一句話協會關於筆者營銷高雄成果原則和諧後果動漫，科學好像優點之家熱線安排配套簽名影響減少立即因而職業一位，報名集團顯示形勢看法公里體會郵箱天氣消除嚴重導致，一位我又，高級體。你有生成跟着，就好瀏覽一座，到來每年計算機適當臺灣因為內地對此你還不對，總算發現，一句話協會關於筆者營銷高雄成果原則和諧後果動漫，科學好像優點之家熱線安排配套簽名影響減少立即因而職業一位，報名集團顯示形勢看法公里體會郵箱天氣消除嚴重導致，一位我又，高級體。
-        </div>
+        <div class="col-auto text-xl-h6 spacing-h6 text-secondary text-justify items-center q-pr-xl-lg line-height">{{
+            slogan.length > 0 ? slogan[0]?.content : ''
+        }}</div>
       </div>
       <!-- 輪播圖 -->
       <div id="indexpage-img" class="col-12 col-xl-5 q-pa-md q-pr-xl-lg">
         <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
           :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
           @mouseleave="autoplay = true">
-          <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg" />
+          <q-carousel-slide v-for="(image, idx) in slogan.length > 0 ? slogan[0]?.image : ''" :key="image" :name="idx + 1" :img-src="image" />
+          <!-- <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg" />
           <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg" />
           <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg" />
-          <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" />
+          <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" /> -->
         </q-carousel>
       </div>
     </div>
@@ -77,9 +82,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
+import { api } from '@/boot/axios'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
+import Swal from 'sweetalert2'
 
 const slide = ref(1)
 const autoplay = ref(true)
@@ -87,4 +94,22 @@ const autoplay = ref(true)
 const user = useUserStore()
 const { logout } = user
 const { isLogin, isAdmin, cart } = storeToRefs(user)
+
+// 簡介文章陣列
+const slogan = reactive([])
+
+// 抓資料庫本所簡介的資料
+const initSlogan = async () => {
+  try {
+    const { data } = await api.get('/slogan/')
+    slogan.push(...data.result)
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: '失敗',
+      text: error.isAxiosError ? error.response.data.message : error.message
+    })
+  }
+}
+initSlogan()
 </script>
