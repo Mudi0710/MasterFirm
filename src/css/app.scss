@@ -183,6 +183,35 @@ button {
   }
 }
 
+@media (min-width: 1450px) {
+  .row > .col-xxl-25 {
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .col-xxl-25 {
+    flex: 0 0 auto;
+  }
+  .row > .col-xxl-25 {
+    height: auto;
+    width: 20%;
+  }
+}
+@media (min-width: 1700px) {
+  .row > .col-xxl-2 {
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .col-xxl-2 {
+    flex: 0 0 auto;
+  }
+  .row > .col-xxl-2 {
+    height: auto;
+    width: 16.6667%;
+  }
+}
+
 // 全局 陰影
 .shadow {
   box-shadow: 0px 0px 60px rgba(30, 25, 24, 1);
@@ -831,4 +860,31 @@ button {
   @media (min-width: $breakpoint-xl) {
     min-height: 84vh;
   }
+}
+
+// ServiceView.vue 設定 --------------------------------------------------
+// 設定 單一產品頁 商品輪播圖 寬度
+#ServiceView-img {
+  width: 100%;
+  @media (min-width: 1400px) {
+    width: 60%;
+  }
+}
+
+// 設定 單一產品頁 商品資訊區 寬度
+#ServiceView-content {
+  width: 100%;
+  @media (min-width: 1400px) {
+    width: 40%;
+  }
+}
+
+// 設定 訂購數量 的 input
+#ServiceView .q-field,
+#ServiceView .q-field__inner,
+#ServiceView .q-field__control,
+#ServiceView .q-field__native {
+  height: 45px;
+  background-color: $secondary;
+  color: $dark;
 }
