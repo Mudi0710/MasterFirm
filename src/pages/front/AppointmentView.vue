@@ -67,10 +67,11 @@
         <div class="row justify-center">
           <!-- 內容區設定 80% 寬度 -->
           <div class="row" style="width: 85%;border: 5px solid #D09139;">
-            <!-- <pre class="text-secondary">{{ notice[0].content }}</pre> -->
-            <div class="col-12 text-h5 text-xl-h4 spacing-h6 text-accent text-center q-py-sm">{{ notice[0].title }}
+            <div class="col-12 text-h5 text-xl-h4 spacing-h6 text-accent text-center q-py-sm">{{ notice.length > 0 ? notice[0]?.title : '目前沒有預約須知標題' }}
             </div>
-            <div v-html="notice[0].content" class="col-12 text-xl-h6 text-secondary text-justify q-my-md q-px-md"></div>
+            <div v-html="notice.length > 0 ? notice[0]?.content : '目前沒有預約須知內容'"
+              class="col-12 text-xl-h6 text-secondary text-justify q-my-md q-px-md">
+            </div>
           </div>
         </div>
       </div>
@@ -99,7 +100,7 @@ const notice = reactive([])
 // 抓資料庫本所簡介的資料
 const initNotice = async () => {
   try {
-    const { data } = await api.get('/notice')
+    const { data } = await api.get('/notice/')
     notice.push(...data.result)
   } catch (error) {
     Swal.fire({
