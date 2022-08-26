@@ -92,6 +92,9 @@
         <q-item clickable v-ripple dense to='/admin/adminMember' class="q-py-xs">
           <q-item-section>會員管理</q-item-section>
         </q-item>
+        <q-item clickable v-ripple dense to='/admin/adminService' class="q-py-xs">
+          <q-item-section>服務管理</q-item-section>
+        </q-item>
         <q-item clickable v-ripple dense to='/admin/adminCase' class="q-py-xs">
           <q-item-section>預約管理</q-item-section>
         </q-item>
