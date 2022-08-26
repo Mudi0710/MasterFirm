@@ -60,8 +60,19 @@
         </q-breadcrumbs>
       </div>
 
-      <div class="col-12 q-mt-md" style="width: 100%;">
-
+      <!-- 內容區 -->
+      <div class="col-12 q-mt-md q-mb-xl" style="width: 100%;">
+        <!-- 預約須知區 -->
+        <!-- 外面包一層 div -->
+        <div class="row justify-center">
+          <!-- 內容區設定 80% 寬度 -->
+          <div class="row" style="width: 85%;border: 5px solid #D09139;">
+            <!-- <pre class="text-secondary">{{ notice[0].content }}</pre> -->
+            <div class="col-12 text-h5 text-xl-h4 spacing-h6 text-accent text-center q-py-sm">{{ notice[0].title }}
+            </div>
+            <div v-html="notice[0].content" class="col-12 text-xl-h6 text-secondary text-justify q-my-md q-px-md"></div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -79,4 +90,24 @@ const user = useUserStore()
 const { logout } = user
 const { isLogin, isAdmin, cart } = storeToRefs(user)
 
+const slide = ref(1)
+const autoplay = ref(true)
+
+// 簡介文章陣列
+const notice = reactive([])
+
+// 抓資料庫本所簡介的資料
+const initNotice = async () => {
+  try {
+    const { data } = await api.get('/notice')
+    notice.push(...data.result)
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: '失敗',
+      text: error.isAxiosError ? error.response.data.message : error.message
+    })
+  }
+}
+initNotice()
 </script>
