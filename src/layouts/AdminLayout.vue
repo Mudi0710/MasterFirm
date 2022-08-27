@@ -53,6 +53,9 @@
               <q-item clickable v-ripple dense to='/admin/adminMember' class="q-py-xs text-h6">
                 <q-item-section>會員管理</q-item-section>
               </q-item>
+              <q-item clickable v-ripple dense to='/admin/adminService' class="q-py-xs text-h6">
+                <q-item-section>服務管理</q-item-section>
+              </q-item>
               <q-item clickable v-ripple dense to='/admin/adminCase' class="q-py-xs text-h6">
                 <q-item-section>預約管理</q-item-section>
               </q-item>
@@ -67,6 +70,9 @@
               </q-item>
               <q-item clickable v-ripple dense to='/admin/adminPromote' class="q-py-xs text-h6">
                 <q-item-section>推播管理</q-item-section>
+              </q-item>
+              <q-item clickable v-ripple dense to='/admin/adminTest' class="q-py-xs text-h6">
+                <q-item-section>測試頁</q-item-section>
               </q-item>
             </q-list>
           </q-menu>
@@ -109,6 +115,9 @@
         </q-item>
         <q-item clickable v-ripple dense to='/admin/adminPromote' class="q-py-xs">
           <q-item-section>推播管理</q-item-section>
+        </q-item>
+        <q-item clickable v-ripple dense to='/admin/adminTest' class="q-py-xs">
+          <q-item-section>測試頁</q-item-section>
         </q-item>
       </q-list>
     </q-drawer>
