@@ -60,7 +60,38 @@
         </q-breadcrumbs>
       </div>
 
-      <div class="col-12 q-mt-md" style="width: 100%;">
+      <div class="col-12 q-mt-md q-mb-xl q-px-md" style="width: 100%;">
+        <!-- 聯絡資訊區 -->
+        <div class="row q-mt-md">
+          <!-- 左邊聯絡地圖 -->
+          <div class="col-12 col-xl-6">
+            <!-- <pre class="text-secondary">{{ localmap }}</pre> -->
+            <q-responsive :ratio="1 / 1">
+              <iframe :src="localmap.length > 0 ? localmap[0]?.localmap : ''"
+                style="width: 100%; height: 100%;"></iframe>
+            </q-responsive>
+          </div>
+          <!-- 右邊聯絡資訊 -->
+          <div class="col-12 col-xl-6 row content-between">
+            <!-- <pre class="text-secondary">{{ connections }}</pre> -->
+            <div class="col-12 row justify-start" style="width: 100%;">
+              <div v-for="connection in connections" :key="connection"
+                class="col-12 row justify-start q-ml-xs q-ml-xl-lg q-my-xl-md" style="width: 100%;">
+                <!-- icon -->
+                <q-icon :name="connection.icon" color="secondary" class="col-1" style="font-size: calc(20px + 0.8vw);">
+                </q-icon>
+                <!-- 各項聯絡資訊 -->
+                <div class="col-11 text-lg-h6 text-secondary text-wrap q-pl-md"
+                  style="font-size: calc(16px + 4 * ((100vw - 360px) / 840)); line-height: 3rem;">
+                  {{ connection.content }}</div>
+              </div>
+            </div>
+            <div class="col-12 row justify-center q-mt-lg q-mt-xl-xs">
+              <q-btn square flat class="bg-secondary text-dark" label="立即預約諮詢" to='/appointment'
+                style="font-size: calc(16px + 4 * ((100vw - 360px) / 840));" />
+            </div>
+          </div>
+        </div>
 
       </div>
 
@@ -79,4 +110,36 @@ const user = useUserStore()
 const { logout } = user
 const { isLogin, isAdmin, cart } = storeToRefs(user)
 
+// 聯絡地圖陣列
+const localmap = reactive([])
+const connections = reactive([])
+
+// 抓資料庫聯絡地圖的資料
+const initLocalmap = async () => {
+  try {
+    const { data } = await api.get('/localmap/')
+    localmap.push(...data.result)
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: '失敗',
+      text: error.isAxiosError ? error.response.data.message : error.message
+    })
+  }
+}
+initLocalmap()
+// 抓資料庫聯絡地圖的資料
+const initConnection = async () => {
+  try {
+    const { data } = await api.get('/connections/')
+    connections.push(...data.result)
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: '失敗',
+      text: error.isAxiosError ? error.response.data.message : error.message
+    })
+  }
+}
+initConnection()
 </script>
