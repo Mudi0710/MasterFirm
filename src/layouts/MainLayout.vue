@@ -72,7 +72,8 @@
             </q-tooltip>
             <q-badge v-if='cart > 0' floating color='red' rounded>{{ cart }}</q-badge>
           </q-btn>
-          <q-btn v-if='isLogin && isAdmin' round dense flat size="md" icon='fa-solid fa-user-gear' to='/admin' class="q-mx-xs">
+          <q-btn v-if='isLogin && isAdmin' round dense flat size="md" icon='fa-solid fa-user-gear' to='/admin'
+            class="q-mx-xs">
             <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
               管理後台
             </q-tooltip>
@@ -124,7 +125,7 @@
               <q-item clickable v-ripple dense to='/products' class="q-py-xs text-h6">
                 <q-item-section>開運小物</q-item-section>
               </q-item>
-              <q-item clickable v-ripple dense to='/content' class="q-py-xs text-h6">
+              <q-item clickable v-ripple dense to='/connection' class="q-py-xs text-h6">
                 <q-item-section>聯絡我們</q-item-section>
               </q-item>
             </q-list>
@@ -136,7 +137,7 @@
     <!-- SideBar -->
     <q-drawer elevated side='left' :breakpoint='1213' show-if-above no-swipe-open :width='250'
       class='bg-primary text-secondary text-center q-py-md q-px-md column justify-start' style='overflow: visible;'>
-    <!-- <q-drawer elevated v-model='leftDrawerOpen' side='left' :breakpoint='1213' show-if-above :width='250'
+      <!-- <q-drawer elevated v-model='leftDrawerOpen' side='left' :breakpoint='1213' show-if-above :width='250'
       class='bg-primary text-secondary text-center q-py-md q-px-md column justify-start mobile-none' style='overflow: visible;'> -->
 
       <!-- Logo 區 -->
@@ -169,7 +170,7 @@
           <q-item clickable v-ripple dense to='/products' class="q-py-xs">
             <q-item-section>開運小物</q-item-section>
           </q-item>
-          <q-item clickable v-ripple dense to='/content' class="q-py-xs">
+          <q-item clickable v-ripple dense to='/connection' class="q-py-xs">
             <q-item-section>聯絡我們</q-item-section>
           </q-item>
         </q-list>
