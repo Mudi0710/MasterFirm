@@ -169,9 +169,9 @@ const routes = [
         }
       },
       {
-        path: 'content',
-        name: 'content',
-        component: () => import('@/pages/front/ContentView.vue'),
+        path: 'connection',
+        name: 'connection',
+        component: () => import('@/pages/front/ConnectionView.vue'),
         meta: {
           title: '法師事務所 | 聯絡我們',
           login: false,
@@ -301,6 +301,16 @@ const routes = [
         component: () => import('@/pages/admin/AdminPromoteView.vue'),
         meta: {
           title: '法師事務所 | 推播管理',
+          login: true,
+          admin: true
+        }
+      },
+      {
+        path: 'adminTest',
+        name: 'admin-test',
+        component: () => import('@/pages/admin/AdminTestView.vue'),
+        meta: {
+          title: '法師事務所 | 測試頁',
           login: true,
           admin: true
         }
