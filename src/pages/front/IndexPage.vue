@@ -104,12 +104,12 @@ const user = useUserStore()
 const { logout } = user
 const { isLogin, isAdmin, cart } = storeToRefs(user)
 
-// 簡介文章陣列
+// 宣傳文案陣列
 const slogan = reactive([])
-// 簡介文章陣列
+// 輪播圖片陣列
 const carousels = reactive([])
 
-// 抓資料庫本所簡介的資料
+// 抓資料庫宣傳文案的資料
 const initSlogan = async () => {
   try {
     const { data } = await api.get('/slogan/')
