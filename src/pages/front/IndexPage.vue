@@ -56,7 +56,7 @@
           ''
           }}</div>
           <!-- 副標題 -->
-          <div class="col-auto text-h6 text-xl-h5 spacing-h5 text-secondary q-my-lg q-pr-xl-lg text-right">{{
+          <div class="col-auto text-h6 text-xl-h5 spacing-h5 text-secondary q-mt-xl q-pr-xl-lg text-right">{{
           slogan.length > 0 ? slogan[0]?.subtitle : ''
           }}</div>
         </div>
@@ -74,10 +74,6 @@
           <q-carousel-slide
             v-for="(indexImageMobile, idx) in carousels.length > 0 ? carousels[0]?.indexImageMobile : ''"
             :key="indexImageMobile" :name="idx + 1" :img-src="indexImageMobile" />
-          <!-- <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg" />
-          <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg" />
-          <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg" />
-          <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" /> -->
         </q-carousel>
         <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
           :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
