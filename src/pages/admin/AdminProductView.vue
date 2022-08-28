@@ -42,7 +42,7 @@
             <q-td :img="image" align="center" ellipsis>
               <!-- <pre>{{ image.row }}</pre> -->
               <q-avatar square size="100px">
-                <img :src="image.row.image" class="q-mb-xl" style="object-fit: cover;">
+                <img :src="image.row.image[0]" class="q-mb-xl" style="object-fit: cover;">
               </q-avatar>
             </q-td>
           </template>
@@ -100,7 +100,7 @@
                   <!-- <pre>{{ col }}</pre> -->
                   <!-- 商品圖片 -->
                   <q-responsive v-if="col.name == 'image'" :ratio="3 / 2">
-                    <img :src="card.row[col.name]" class="col" style="width: 100%;">
+                    <img :src="card.row[col.name][0]" class="col" style="width: 100%; object-fit: cover;">
                   </q-responsive>
                   <!-- 商品資訊 -->
                   <div v-else-if="col.name !== 'image' && col.name !== 'edit'" class="text-left q-mx-auto">
