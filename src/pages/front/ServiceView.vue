@@ -50,7 +50,7 @@
     <div id="mycontent" class="col row justify-start">
 
       <!-- 頁面 Title -->
-      <div class="col-12 text-h4 text-xl-h3 text-secondary q-mb-md q-pl-md" style="width: 100%;">開運小物</div>
+      <div class="col-12 text-h4 text-xl-h3 text-secondary q-mb-md q-pl-md" style="width: 100%;">服務項目</div>
 
       <!-- 麵包屑 -->
       <div class="col-12 q-mt-md q-pl-lg" style="width: 100%;">
@@ -85,19 +85,18 @@
             <span class="bg-primary q-pa-xs">{{ service.time }}&nbsp;分鐘&nbsp;&frasl;&nbsp;人</span>
           </div>
           <!-- 服務描述 -->
-          <div class="col-auto text-xl-h6 spacing-h6 text-grey-8 text-justify items-center q-pt-md q-mb-lg">
-            {{ service.description
-            }}你有生成跟着，就好瀏覽一座，到來每年計算機適當臺灣因為內地對此你還不對，總算發現，一句話協會關於筆者營銷高雄成果原則和諧後果動漫，科學好像優點之家熱線安排配套簽名影響減少立即因而職業一位，報名集團顯示形勢看法公里體會郵箱天氣消除嚴重導致，一位我又，高級體。你有生成跟着，就好瀏覽一座，到來每年計算機適當臺灣因為內地對此你還不對，總算發現，一句話協會關於筆者營銷高雄成果原則和諧後果動漫，科學好像優點之家熱線安排配套簽名影響減少立即因而職業一位，報名集團顯示形勢看法公里體會郵箱天氣消除嚴重導致，一位我又，高級體。你有生成跟着，就好瀏覽一座，到來每年計算機適當臺灣因為內地對此你還不對，總算發現，一句話協會關於筆者營銷高雄成果原則和諧後果動漫，科學好像優點之家熱線安排配套簽名影響減少立即因而職業一位，報名集團顯示形勢看法公里體會郵箱天氣消除嚴重導致，一位我又，高級體。你有生成跟着，就好瀏覽一座，到來每年計算機適當臺灣因為內地對此你還不對，總算發現，一句話協會關於筆者營銷高雄成果原則和諧後果動漫，科學好像優點之家熱線安排配套簽名影響減少立即因而職業一位，報名集團顯示形勢看法公里體會郵箱天氣消除嚴重導致，一位我又，高級體。
+          <div v-html="service.description"
+            class="col-auto text-xl-h6 spacing-h6 text-grey-8 text-justify items-center q-pt-md q-mb-lg"
+            style="min-height: 250px;">
           </div>
           <!-- 諮詢費用 -->
           <div class="col-auto text-h6 text-xl-h4 spacing-h6 text-warning text-right q-mb-lg">NT$ {{
-              service.price.toLocaleString()
-          }}
+            service.price.toLocaleString()
+            }}
           </div>
           <!-- 服務項目訂購 -->
           <div class="col-auto row justify-end" style="width: 100%;height: 40px;">
-              <q-btn square flat class="col-auto bg-dark text-body1 text-secondary" label="立即預約諮詢"
-                to='/appointment' />
+            <q-btn square flat class="col-auto bg-dark text-body1 text-secondary" label="立即預約諮詢" to='/appointment' />
           </div>
         </div>
       </div>
