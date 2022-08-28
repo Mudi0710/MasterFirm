@@ -53,28 +53,37 @@
         <div class="col-auto q-mt-lg-xl q-pt-lg-xl q-mb-lg-lg">
           <!-- 主標題 -->
           <div class="col-auto text-h4 text-xl-h3 spacing-h6 text-secondary">{{ slogan.length > 0 ? slogan[0]?.title :
-              ''
+          ''
           }}</div>
           <!-- 副標題 -->
           <div class="col-auto text-h6 text-xl-h5 spacing-h5 text-secondary q-my-lg q-pr-xl-lg text-right">{{
-              slogan.length > 0 ? slogan[0]?.subtitle : ''
+          slogan.length > 0 ? slogan[0]?.subtitle : ''
           }}</div>
         </div>
         <!-- 內文 -->
         <div class="col-auto text-xl-h6 spacing-h6 text-secondary text-justify items-center q-pr-xl-lg line-height">{{
-            slogan.length > 0 ? slogan[0]?.content : ''
+        slogan.length > 0 ? slogan[0]?.content : ''
         }}</div>
       </div>
       <!-- 輪播圖 -->
+      <!-- <pre class="text-secondary">{{ carousels }}</pre> -->
       <div id="indexpage-img" class="col-12 col-xl-5 q-pa-md q-pr-xl-lg">
         <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
           :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
-          @mouseleave="autoplay = true">
-          <q-carousel-slide v-for="(image, idx) in slogan.length > 0 ? slogan[0]?.image : ''" :key="image" :name="idx + 1" :img-src="image" />
+          @mouseleave="autoplay = true" class="desktop-none">
+          <q-carousel-slide
+            v-for="(indexImageMobile, idx) in carousels.length > 0 ? carousels[0]?.indexImageMobile : ''"
+            :key="indexImageMobile" :name="idx + 1" :img-src="indexImageMobile" />
           <!-- <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg" />
           <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg" />
           <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg" />
           <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" /> -->
+        </q-carousel>
+        <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
+          :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
+          @mouseleave="autoplay = true" class="mobile-none">
+          <q-carousel-slide v-for="(indexImageDesktop, idx) in carousels.length > 0 ? carousels[0]?.indexImageDesktop : ''" :key="indexImageDesktop"
+            :name="idx + 1" :img-src="indexImageDesktop" />
         </q-carousel>
       </div>
     </div>
@@ -97,6 +106,8 @@ const { isLogin, isAdmin, cart } = storeToRefs(user)
 
 // 簡介文章陣列
 const slogan = reactive([])
+// 簡介文章陣列
+const carousels = reactive([])
 
 // 抓資料庫本所簡介的資料
 const initSlogan = async () => {
@@ -112,4 +123,18 @@ const initSlogan = async () => {
   }
 }
 initSlogan()
+// 抓資料庫輪播圖的資料
+const initCarousels = async () => {
+  try {
+    const { data } = await api.get('/carousels/')
+    carousels.push(...data.result)
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: '失敗',
+      text: error.isAxiosError ? error.response.data.message : error.message
+    })
+  }
+}
+initCarousels()
 </script>
