@@ -142,20 +142,20 @@
               <p class="text-h6 text-dark">文案副標</p>
               <q-input v-model="sloganForm.subtitle" :rules='[rules.required]' type='text' outlined square dense />
               <!-- 宣傳圖片 -->
-              <p class="text-h6 text-dark">文案圖片</p>
+              <!-- <p class="text-h6 text-dark">文案圖片</p>
               <q-file v-model='sloganForm.image' multiple :rules='[rules.size]' accept='image/*' filled bottom-slots
                 counter>
-                <!-- 上傳icon -->
+                上傳icon
                 <template v-slot:prepend>
                   <q-icon name="cloud_upload" @click.stop.prevent />
                 </template>
-                <!-- 刪除icon -->
+                刪除icon
                 <template v-slot:append>
                   <q-icon name="close" @click.stop.prevent="model = null" class="cursor-pointer" />
                 </template>
                 <template v-slot:hint>
                 </template>
-              </q-file>
+              </q-file> -->
               <!-- 宣傳內容 -->
               <p class="text-h6 text-dark">文案內容</p>
               <q-editor model="qeditor" v-model="sloganForm.content" ref="editorRef" @paste="onPaste"
@@ -1090,7 +1090,7 @@ const sloganForm = reactive({
   title: '',
   subtitle: '',
   content: '',
-  image: [],
+  // image: [],
   idx: -1,
   dialog: false
 })
@@ -1558,7 +1558,7 @@ const openSloganDialog = (_id, idx) => {
     sloganForm.subtitle = ''
     sloganForm.content = ''
   }
-  sloganForm.image = []
+  // sloganForm.image = []
   sloganForm.idx = idx
   sloganForm.dialog = true
 }
