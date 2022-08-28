@@ -18,8 +18,8 @@
     <div id='mycontent' class=''>
       <div class='row justify-between'>
         <div class='col-auto text-h3 text-secondary q-my-sm q-pl-md'>會員管理</div>
-        <q-btn @click="openDialog('', -1)" square flat
-          class='col-auto q-mr-xl bg-secondary text-dark text-h6 q-my-sm createBtn'>新增會員</q-btn>
+        <!-- <q-btn @click="openDialog('', -1)" square flat
+          class='col-auto q-mr-xl bg-secondary text-dark text-h6 q-my-sm createBtn'>新增會員</q-btn> -->
       </div>
 
       <!-- <pre class="text-secondary">{{ members }}</pre> -->
@@ -56,9 +56,10 @@
             <q-td :control="control">
               <!-- <pre>{{ control }}</pre> -->
               <div class="row justify-center">
-                <q-btn class="col-auto q-mx-sm" @click='openDialog(edit.row._id, edit.rowIndex)' outline>會員詳情</q-btn>
-                <q-btn class="col-auto q-mx-sm" @click='openDialog(edit.row._id, edit.rowIndex)' outline>編輯會員</q-btn>
-                <q-btn class="col-auto q-mx-sm" @click='openDeleteDialog(edit.row._id)' outline>刪除會員</q-btn>
+                <!-- <q-btn class="col-auto q-mx-sm" @click='openDialog(control.row._id, control.rowIndex)' outline>會員詳情</q-btn> -->
+                <q-btn class="col-auto q-mx-sm" @click='openDialog(control.row._id, control.rowIndex)' outline>編輯會員
+                </q-btn>
+                <q-btn class="col-auto q-mx-sm" @click='openDeleteDialog(control.row._id)' outline>刪除會員</q-btn>
               </div>
             </q-td>
           </template>
@@ -94,25 +95,21 @@
               <q-card square bordered class="bg-primary shadow">
                 <div v-for="col in card.cols" :key="col.name" class="q-pa-sm">
                   <!-- <pre>{{ col }}</pre> -->
-                  <!-- 商品圖片 -->
-                  <!-- <img :src="avatar((card.row.gender === 1) ? 'male' : 'female', card.row.account)" class="q-mb-xl"
-                  style="object-fit: cover;"> -->
-                  <!-- <pre class="text-secondary">{{ card.row.account }}</pre> -->
+                  <!-- 會員圖片 -->
                   <q-responsive v-if="col.name == 'image'" :ratio="1 / 1">
                     <img :src="avatar((card.row.gender === 1) ? 'male' : 'female', card.row.account)" class="q-mb-xl"
-                  style="object-fit: cover;">
+                      style="object-fit: cover;">
                   </q-responsive>
-                  <!-- 商品資訊 -->
-                  <div v-else-if="col.name !== 'image' && col.name !== 'edit'" class="text-left q-mx-auto">
+                  <!-- 會員資訊 -->
+                  <div v-else-if="col.name !== 'image' && col.name !== 'control'" class="text-left q-mx-auto">
                     <div class="row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
                       <span class="text-secondary text-right">{{ col.value }}</span>
                     </div>
                   </div>
-                  <!-- 商品編輯 -->
-                  <div v-else-if="col.name === 'edit'" class="text-left q-mx-auto">
-                    <!-- <pre>{{ card.rowIndex }}</pre> -->
-
+                  <!-- 會員編輯 -->
+                  <div v-else-if="col.name === 'control'" class="text-left q-mx-auto">
+                    <!-- <pre class="text-secondary">{{ card }}</pre> -->
                     <div class="row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
                       <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
@@ -137,47 +134,53 @@
         </q-table>
       </div>
 
-      <!-- 新增商品時的彈出視窗 -->
+      <!-- 新增會員時的彈出視窗 -->
       <q-dialog v-model="form.dialog" seamless>
         <q-card id="dialog" flat square bordered persistent v-if="form.dialog"
           class="bg-info text-secondary shadow-white">
           <q-form @submit.prevent='submitForm' class="q-pa-md">
-            <!-- 商品名稱 -->
-            <p class="text-h6 text-dark">商品名稱</p>
+            <!-- 會員名稱 -->
+            <p class="text-h6 text-dark">會員名稱</p>
             <q-input v-model="form.name" :rules='[rules.required]' type='text' outlined square dense />
-            <!-- 商品描述 -->
-            <p class="text-h6 text-dark">商品描述</p>
-            <q-input v-model="form.description" :rules='[rules.required]' type='textarea' outlined square dense />
-            <div class="row q-mb-sm">
-              <!-- 庫存狀態 -->
-              <div class="column col-6">
-                <div class="col-6 text-h6 text-dark">庫存狀態</div>
-                <q-toggle class="col-6 text-dark" v-model="form.inventory" :label="form.inventory ? '有現貨' : '沒現貨'" />
-              </div>
-              <!-- 上架狀態 -->
-              <div class="column col-6">
-                <div class="col-6 text-h6 text-dark">上架狀態</div>
-                <q-toggle class="col-6 text-dark" v-model="form.sell" :label="form.sell ? '上架' : '下架'" />
+
+            <!-- 會員性別 -->
+            <div class="row col-6">
+              <div class="col-12 text-h6 text-dark">會員性別</div>
+              <div class="col-12 row content-center q-my-sm" style="height: 40px;">
+                <q-radio dense size='xs' v-model='form.gender' :val=1 label='先生' class='text-dark q-mr-xl' />
+                <q-radio dense size='xs' v-model='form.gender' :val=2 label='小姐' class='text-dark q-ml-xl' />
               </div>
             </div>
-            <!-- 商品價格 -->
-            <p class="text-h6 text-dark">商品價格</p>
-            <q-input v-model.number="form.price" min='0' :rules='[rules.required, rules.price]' outlined square dense
+
+            <!-- 會員生日 -->
+            <div class="col-6 q-mr-xs">
+              <p class="text-h6 text-dark">會員生日</p>
+              <!-- <q-input v-model="form.birthday" type='text' outlined square dense /> -->
+              <q-input filled v-model="form.birthday" dense mask="date" :rules="[rules.date]">
+                <template v-slot:append>
+                  <q-icon name="event" class="cursor-pointer">
+                    <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
+                      <q-date v-model="form.birthday" :title="form.name" subtitle="請選擇生日" class="bg-info">
+                        <div class="row items-center justify-end">
+                          <q-btn v-close-popup label="關閉" color="primary" flat />
+                        </div>
+                      </q-date>
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
+            </div>
+
+            <!-- 會員手機 -->
+            <p class="text-h6 text-dark">會員手機</p>
+            <q-input v-model="form.tel" :rules='[rules.required]' mask='####-###-###' outlined square dense
               class="text-primary" />
-            <!-- 商品圖片 -->
-            <p class="text-h6 text-dark">商品圖片</p>
-            <q-file v-model='form.image' multiple :rules='[rules.size]' accept='image/*' filled bottom-slots counter>
-              <!-- 上傳icon -->
-              <template v-slot:prepend>
-                <q-icon name="cloud_upload" @click.stop.prevent />
-              </template>
-              <!-- 刪除icon -->
-              <template v-slot:append>
-                <q-icon name="close" @click.stop.prevent="model = null" class="cursor-pointer" />
-              </template>
-              <template v-slot:hint>
-              </template>
-            </q-file>
+            <!-- 會員信箱 -->
+            <p class="text-h6 text-dark">會員信箱</p>
+            <q-input v-model="form.email" :rules='[rules.required]' outlined square dense class="text-primary" />
+            <!-- 會員住址 -->
+            <p class="text-h6 text-dark">會員住址</p>
+            <q-input v-model="form.address" outlined square dense class="text-primary" />
             <div class="row justify-around">
               <!-- 確定新增 -->
               <q-btn square flat type='submit' class="col-4 bg-secondary text-dark q-my-sm" label="送出編輯" />
@@ -189,15 +192,14 @@
         </q-card>
       </q-dialog>
 
-      <!-- 刪除商品時的彈出視窗 -->
+      <!-- 刪除會員時的彈出視窗 -->
       <q-dialog v-model="deleteDialog.dialog" seamless persistent>
         <q-card square class="row justify-center bg-info q-pa-lg">
           <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
-          <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除商品嗎？<br>刪除商品將無法復原！</div>
+          <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除會員嗎？<br>刪除會員將無法復原！</div>
           <div class="col-12 row justify-around">
             <!-- 確定刪除 -->
-            <q-btn @click="deleteProduct(del)" square flat class="col-4 bg-secondary text-dark q-my-sm"
-              label="確定刪除商品" />
+            <q-btn @click="deleteMember(del)" square flat class="col-4 bg-secondary text-dark q-my-sm" label="確定刪除會員" />
             <!-- 取消刪除 -->
             <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
               @click='deleteDialog.dialog = false' />
@@ -242,19 +244,18 @@ const members = reactive([])
 const pagination = reactive({
   items: [], // table要顯示的資料
   page: 1, // 目前第幾頁
-  rowsPerPage: 0 // 每頁幾筆，代表 All
+  rowsPerPage: 20 // 每頁幾筆，代表 All
 })
 
 // 表單預設格式
 const form = reactive({
   _id: '',
-  account: '',
   name: '',
-  description: '',
-  inventory: false,
-  sell: false,
-  price: 0,
-  image: [],
+  gender: 1,
+  birthday: '',
+  email: '',
+  tel: '',
+  address: '',
   idx: -1,
   dialog: false
 })
@@ -267,90 +268,99 @@ const rules = reactive({
   price(v) {
     return (v > -1) || '價格必須大於或等於 0'
   },
+  date(v) {
+    return v => /^-?[\d]+\/[0-1]\d\/[0-3]\d$/.test(v)
+  },
   size(v) {
     return !v || !v.length || (v[0]?.type?.includes('image') && v[0]?.size <= 1024 * 1024 * 2) || '檔案格式不符（須為圖片檔，且檔案大小 2 MB 以下）'
   }
 })
 
 // 送出表單
-// const submitForm = async () => {
-//   // 表單送出時，因為後端要收到的是 FormData 的資料型態，所以要建立一個 FormData 物件
-//   const fd = new FormData()
-//   // 要把東西放進去 FormData 要使用 .append(key, value)，例如：fd.append('name', form.name)
-//   // 可以一行一行寫，也可以一個 for 迴圈搞定
-//   for (const key in form) {
-//     if (['_id', 'idx', 'dialog'].includes(key)) continue
-//     else if (key === 'image') {
-//       for (const image of form.image) {
-//         fd.append(key, image)
-//       }
-//     } else {
-//       fd.append(key, form[key])
-//     }
-//   }
-//   try {
-//     if (form._id.length === 0) {
-//       const { data } = await apiAuth.post('/products', fd)
-//       products.push(data.result)
-//       Swal.fire({
-//         icon: 'success',
-//         title: '新增成功',
-//         text: '您已成功新增商品！'
-//       })
-//     } else {
-//       const { data } = await apiAuth.patch('/products/' + form._id, fd)
-//       products[form.idx] = data.result
-//       Swal.fire({
-//         icon: 'success',
-//         title: '修改成功',
-//         text: '您已成功修改商品！'
-//       })
-//     }
-//     form.dialog = false
-//   } catch (error) {
-//     Swal.fire({
-//       icon: 'error',
-//       title: '新增失敗',
-//       text: error.isAxiosError ? error.response.data.message : error.message
-//     })
-//   }
-// }
+const submitForm = async () => {
+  // // 表單送出時，因為後端要收到的是 FormData 的資料型態，所以要建立一個 FormData 物件
+  // const fd = new FormData()
+  // // 要把東西放進去 FormData 要使用 .append(key, value)，例如：fd.append('name', form.name)
+  // // 可以一行一行寫，也可以一個 for 迴圈搞定
+  // for (const key in form) {
+  //   if (['_id', 'idx', 'dialog'].includes(key)) continue
+  //   else if (key === 'image') {
+  //     for (const image of form.image) {
+  //       fd.append(key, image)
+  //     }
+  //   } else {
+  //     fd.append(key, form[key])
+  //   }
+  // }
+  // console.log(form)
+  try {
+    if (form._id.length === 0) {
+      const { data } = await apiAuth.post('/users', form)
+      members.push(data.result)
+      Swal.fire({
+        icon: 'success',
+        title: '新增成功',
+        text: '您已成功新增一名會員！'
+      })
+      init()
+    } else {
+      // console.log('進了')
+      const { data } = await apiAuth.patch('/users/' + form._id, form)
+      // console.log(data.result)
+      members[form.idx] = data.result
+      Swal.fire({
+        icon: 'success',
+        title: '修改成功',
+        text: '您已成功修改該名會員！'
+      })
+    }
+    form.dialog = false
+    init()
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: '新增失敗',
+      text: error.isAxiosError ? error.response.data.message : error.message
+    })
+  }
+}
 
-// 預設 刪除商品的彈窗 為 false
+// 預設 刪除會員的彈窗 為 false
 const deleteDialog = reactive({
   dialog: false
 })
 
 /*
-  定義一個變數，用來將 form 裡面的 _id 帶入 deleteProduct 的 function 裡
-  又，因為開啟 刪除商品的彈窗 的按鈕放在 #body-cell-edit="edit" 裡
+  定義一個變數，用來將 form 裡面的 _id 帶入 deleteMember 的 function 裡
+  又，因為開啟 刪除會員的彈窗 的按鈕放在 #body-cell-edit="edit" 裡
   所以才會寫 @click='openDeleteDialog(edit.row._id)'
 */
 const del = ref('')
 
 /*
-  開啟 刪除商品的彈窗，並帶入值
-  此時 del.value = edit.row._id = productId
+  開啟 刪除會員的彈窗，並帶入值
+  此時 del.value = edit.row._id = memberId
 */
-const openDeleteDialog = (productId) => {
-  del.value = productId
+const openDeleteDialog = (memberId) => {
+  del.value = memberId
   deleteDialog.dialog = true
 }
 
 /*
-  刪除商品
-  透過 deleteProduct(del) 將 最原始的 form._id 帶入 function
-  form._id = edit.row._id = del.value = productId
+  刪除會員
+  透過 deleteMember(del) 將 最原始的 form._id 帶入 function
+  form._id = edit.row._id = del.value = memberId
 */
-const deleteProduct = async (productId) => {
+const deleteMember = async (memberId) => {
   deleteDialog.dialog = false
   try {
-    await apiAuth.delete('/products/' + productId)
+    await apiAuth.delete('/users/' + memberId)
     await Swal.fire({
       icon: 'success',
       title: '刪除成功',
-      text: '您已成功刪除商品！'
+      text: '您已成功刪除該名會員！'
     })
+    init()
   } catch (error) {
     Swal.fire({
       icon: 'error',
@@ -367,17 +377,19 @@ const openDialog = (_id, idx) => {
   if (idx > -1) {
     // 有 id => 編輯
     form.name = members[idx].name
-    form.description = members[idx].description
-    form.inventory = members[idx].inventory
-    form.sell = members[idx].sell
-    form.price = members[idx].price
+    form.gender = members[idx].gender
+    form.birthday = members[idx].birthday
+    form.email = members[idx].email
+    form.tel = members[idx].tel
+    form.address = members[idx].address
   } else {
     // 沒 id => 清空
     form.name = ''
-    form.description = ''
-    form.inventory = false
-    form.sell = false
-    form.price = 0
+    form.gender = ''
+    form.birthday = ''
+    form.email = ''
+    form.tel = ''
+    form.address = ''
   }
   form.image = []
   form.idx = idx
@@ -398,6 +410,7 @@ const columns = [
 const init = async () => {
   try {
     const { data } = await apiAuth.get('/users/all')
+    members.splice(0, members.length)
     members.push(...data.result)
   } catch (error) {
     Swal.fire({
