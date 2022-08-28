@@ -65,17 +65,20 @@
 
         <!-- 左邊圖片 -->
         <div id="news-img" class="col-12 col-xl-5 q-pa-md" style="height: auto;">
-          <!-- <q-responsive :ratio="4 / 5"> -->
           <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
             :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
-            @mouseleave="autoplay = true">
-            <!-- <q-carousel-slide v-for="(image, idx) in introduction[0].image" :key="image" :name="idx + 1" :img-src="image" /> -->
-            <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg" />
-            <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg" />
-            <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg" />
-            <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" />
+            @mouseleave="autoplay = true" class="desktop-none">
+            <q-carousel-slide
+              v-for="(newsImageMobile, idx) in carousels.length > 0 ? carousels[0]?.newsImageMobile : ''"
+              :key="newsImageMobile" :name="idx + 1" :img-src="newsImageMobile" />
           </q-carousel>
-          <!-- </q-responsive> -->
+          <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
+            :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
+            @mouseleave="autoplay = true" class="mobile-none">
+            <q-carousel-slide
+              v-for="(newsImageDesktop, idx) in carousels.length > 0 ? carousels[0]?.newsImageDesktop : ''"
+              :key="newsImageDesktop" :name="idx + 1" :img-src="newsImageDesktop" />
+          </q-carousel>
         </div>
 
         <!-- <pre class="text-secondary">{{ introduction[0].image }}</pre> -->
@@ -119,12 +122,13 @@
                   </div>
                   <!-- 消息標題 -->
                   <div class="text-h6 spacing-h7 q-mt-md q-pr-lg text-wrap">{{
-                      props.row.title
-                  }}
+                    props.row.title
+                    }}
                   </div>
                   <!-- 消息連結 -->
                   <div class="text-right q-pr-lg q-mb-sm">
-                    <router-link class="spacing-h5" :to="'/new/' + props.row._id" :news="news">&lt;繼續閱讀&gt;</router-link>
+                    <router-link class="spacing-h5" :to="'/new/' + props.row._id" :news="news">&lt;繼續閱讀&gt;
+                    </router-link>
                   </div>
                   <q-separator color="accent" inset />
                 </div>
@@ -189,6 +193,8 @@ const autoplay = ref(true)
 
 // 最新消息陣列
 const newses = reactive([])
+// 輪播圖片陣列
+const carousels = reactive([])
 
 // 分頁選項
 const paginationNews = reactive({
@@ -220,5 +226,19 @@ const initNewses = async () => {
   }
 }
 initNewses()
+// 抓資料庫輪播圖的資料
+const initCarousels = async () => {
+  try {
+    const { data } = await api.get('/carousels/')
+    carousels.push(...data.result)
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: '失敗',
+      text: error.isAxiosError ? error.response.data.message : error.message
+    })
+  }
+}
+initCarousels()
 
 </script>
