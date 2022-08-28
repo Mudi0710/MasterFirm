@@ -71,7 +71,7 @@
             class="col-12 text-xl-h6 spacing-h6 line-height-h6 text-secondary text-justify q-my-xl q-pr-xl-lg"></div>
         </div>
         <!-- 左邊圖片 -->
-        <div id="introduction-img" class="myorder col-12 col-xl-5 q-pa-md" style="max-height: 700px;">
+        <div id="introduction-img" class="myorder col-12 col-xl-5 q-pa-md" style="height: auto;">
           <q-responsive :ratio="4 / 5">
             <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
               :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
