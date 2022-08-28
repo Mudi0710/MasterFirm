@@ -66,17 +66,20 @@
 
         <!-- 左邊圖片 -->
         <div id="cases-img" class="col-12 col-xl-5 q-pa-md" style="height: auto;">
-          <!-- <q-responsive :ratio="4 / 5"> -->
           <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
             :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
-            @mouseleave="autoplay = true">
-            <!-- <q-carousel-slide v-for="(image, idx) in introduction[0].image" :key="image" :name="idx + 1" :img-src="image" /> -->
-            <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg" />
-            <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg" />
-            <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg" />
-            <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg" />
+            @mouseleave="autoplay = true" class="desktop-none">
+            <q-carousel-slide
+              v-for="(casesImageMobile, idx) in carousels.length > 0 ? carousels[0]?.casesImageMobile : ''"
+              :key="casesImageMobile" :name="idx + 1" :img-src="casesImageMobile" />
           </q-carousel>
-          <!-- </q-responsive> -->
+          <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
+            :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
+            @mouseleave="autoplay = true" class="mobile-none">
+            <q-carousel-slide
+              v-for="(casesImageDesktop, idx) in carousels.length > 0 ? carousels[0]?.casesImageDesktop : ''"
+              :key="casesImageDesktop" :name="idx + 1" :img-src="casesImageDesktop" />
+          </q-carousel>
         </div>
 
         <!-- <pre class="text-secondary">{{ introduction[0].image }}</pre> -->
@@ -191,6 +194,8 @@ const autoplay = ref(true)
 
 // 最新消息陣列
 const cases = reactive([])
+// 輪播圖片陣列
+const carousels = reactive([])
 
 // 分頁選項
 const paginationCases = reactive({
@@ -222,5 +227,19 @@ const initCases = async () => {
   }
 }
 initCases()
+// 抓資料庫輪播圖的資料
+const initCarousels = async () => {
+  try {
+    const { data } = await api.get('/carousels/')
+    carousels.push(...data.result)
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: '失敗',
+      text: error.isAxiosError ? error.response.data.message : error.message
+    })
+  }
+}
+initCarousels()
 
 </script>
