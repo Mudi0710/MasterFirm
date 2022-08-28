@@ -51,7 +51,7 @@
             <q-td :img="image" align="center" ellipsis>
               <!-- <pre>{{ image.row }}</pre> -->
               <q-avatar square size="100px">
-                <img :src="image.row.image" class="q-mb-xl" style="object-fit: cover;">
+                <img :src="image.row.image[0]" class="q-mb-xl" style="object-fit: cover;">
               </q-avatar>
             </q-td>
           </template>
@@ -132,7 +132,7 @@
                   <!-- <pre>{{ col }}</pre> -->
                   <!-- 服務項目圖片 -->
                   <q-responsive v-if="col.name == 'image'" :ratio="3 / 2">
-                    <img :src="card.row[col.name]" class="col" style="width: 100%;">
+                    <img :src="card.row[col.name][0]" class="col" style="width: 100%; object-fit: cover;">
                   </q-responsive>
                   <!-- 諮詢費用 -->
                   <div v-if="col.name === 'price'" class="text-left q-mx-auto">
@@ -212,7 +212,7 @@
             <p class="text-h6 text-dark">上架狀態</p>
             <q-toggle class="col-6 text-dark" v-model="serviceForm.sell" :label="serviceForm.sell ? '上架' : '下架'" />
             <!-- Icon -->
-            <p class="text-h6 text-dark">Icon</p>
+            <p class="text-h6 text-dark">Icon<a href="http://fontawesome.com/search?m=free" target="_blank">&nbsp;這邊找</a></p>
             <q-input v-model="serviceForm.icon" :rules='[rules.required]' type='text' outlined square dense />
             <!-- 服務項目圖片 -->
             <p class="text-h6 text-dark">服務圖片</p>
@@ -316,8 +316,8 @@
         <q-card square class="row justify-center bg-info q-pa-lg">
           <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
           <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除【{{ delServices.name }}】服務項目嗎？<br>刪除【{{
-              delServices.name
-          }}】服務項目將無法復原！</div>
+            delServices.name
+            }}】服務項目將無法復原！</div>
           <div class="col-12 row justify-around">
             <!-- 確定刪除 -->
             <q-btn @click="deleteService(delServices._id)" square flat class="col-4 bg-secondary text-dark q-my-sm"
