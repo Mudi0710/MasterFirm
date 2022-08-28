@@ -141,21 +141,6 @@
               <!-- 宣傳副標 -->
               <p class="text-h6 text-dark">文案副標</p>
               <q-input v-model="sloganForm.subtitle" :rules='[rules.required]' type='text' outlined square dense />
-              <!-- 宣傳圖片 -->
-              <!-- <p class="text-h6 text-dark">文案圖片</p>
-              <q-file v-model='sloganForm.image' multiple :rules='[rules.size]' accept='image/*' filled bottom-slots
-                counter>
-                上傳icon
-                <template v-slot:prepend>
-                  <q-icon name="cloud_upload" @click.stop.prevent />
-                </template>
-                刪除icon
-                <template v-slot:append>
-                  <q-icon name="close" @click.stop.prevent="model = null" class="cursor-pointer" />
-                </template>
-                <template v-slot:hint>
-                </template>
-              </q-file> -->
               <!-- 宣傳內容 -->
               <p class="text-h6 text-dark">文案內容</p>
               <q-editor model="qeditor" v-model="sloganForm.content" ref="editorRef" @paste="onPaste"
@@ -370,7 +355,8 @@
             class="bg-info text-secondary shadow-white">
             <q-form @submit.prevent='submitConnectionForm' class="q-pa-md">
               <!-- 聯絡資訊 icon -->
-              <p class="text-h6 text-dark">聯絡資訊 Icon</p>
+              <p class="text-h6 text-dark">聯絡資訊 Icon<a href="http://fontawesome.com/search?m=free"
+                  target="_blank">&nbsp;這邊找</a></p>
               <q-input v-model="connectionForm.icon" :rules='[rules.required]' type='text' outlined square dense />
               <!-- 聯絡資訊標題 -->
               <p class="text-h6 text-dark">聯絡資訊標題</p>
