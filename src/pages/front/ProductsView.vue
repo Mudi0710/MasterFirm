@@ -65,7 +65,7 @@
         <div v-if="products.length > 0" class="row justify-start items-center">
           <!-- <pre>{{ products }}</pre> -->
           <div v-for='product in products' :key="product.id" class="col-6 col-md-4 col-xl-3 q-px-xs q-py-md">
-            <ProductCard bordered class="my-card bg-info shadow-10" style="border-radius: 0; width: 100%;"
+            <ProductCard bordered class="my-card bg-info shadow-10" style="border-radius: 0; width: 100%; height: 100%;"
               :product="product">
             </ProductCard>
           </div>
