@@ -100,25 +100,25 @@
           <div class="col-auto row content-end" style="width: 100%;">
             <!-- 商品價格 -->
             <div class="col-12 text-h6 text-xl-h4 spacing-h6 text-warning text-right q-mb-lg">NT$ {{
-                product.price.toLocaleString()
-            }}
+              product.price.toLocaleString()
+              }}
             </div>
             <!-- 商品訂購 -->
             <div class="col-12">
               <!-- 訂購表單 -->
               <q-form class="row justify-between items-center" style="width: 100%;height: 40px;"
                 @submit.prevent='submit'>
-                <div class="col-auto text-primary" style="font-size: calc(16px + 9 * ((100vw - 350px) / 850))">訂購數量
+                <div class="col-auto text-primary" style="font-size: calc(18px + 2 * ((100vw - 350px) / 850))">訂購數量
                 </div>
                 <div v-if='isLogin' class="col-auto row">
                   <q-btn outline square color="dark" icon="fa-solid fa-minus" size="sm" @click="minus()" />
-                  <q-btn square flat class="col-7 bg-primary text-secondary"
-                    style="width: auto; height: auto font-size: calc(16px + 9 * ((100vw - 350px) / 850))" type="submit"
+                  <q-btn square flat size="sm" class="col-7 bg-primary text-secondary"
+                    style="width: auto; height: auto ;font-size: calc(16px + 2 * ((100vw - 350px) / 850))" type="submit"
                     v-model="quantity">{{ quantity }}，加入購物車</q-btn>
                   <q-btn outline square color="dark" icon="fa-solid fa-plus" size="sm" @click="quantity++" />
                 </div>
-                <q-btn v-if='!isLogin' square flat class="col-7 bg-dark text-secondary" label="登入以使用購物車" to='/login'
-                  style="font-size: calc(16px + 9 * ((100vw - 350px) / 850))" />
+                <q-btn v-if='!isLogin' square flat class="col-7 bg-dark text-secondary" size="sm" label="登入以使用購物車"
+                  to='/login' style="width: auto; height: auto ;font-size: calc(16px + 2 * ((100vw - 350px) / 850))" />
               </q-form>
             </div>
           </div>
