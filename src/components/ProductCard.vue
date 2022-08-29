@@ -12,9 +12,7 @@
     </q-card-section>
     <!-- 商品描述 -->
     <q-card-section class="q-pt-none">
-      <div class="text-subtitle1 text-dark ellipsis-3-lines" style="height: 84px;">
-        {{ product.description }}
-      </div>
+      <div v-html="product.description" class="text-subtitle1 text-dark ellipsis-3-lines" style="height: 84px;"></div>
     </q-card-section>
     <!-- 商品金額 -->
     <q-card-section class="q-pt-none">
