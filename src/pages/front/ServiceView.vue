@@ -62,7 +62,7 @@
       </div>
 
       <!-- 服務項目內容區 -->
-      <div class="col-12 row justify-start content-center bg-secondary shadow-white q-mt-lg q-mb-xl q-ml-sm"
+      <div class="col-12 row justify-start content-center bg-secondary shadow-white q-mt-lg q-mb-lg q-pb-md"
         style="width: 100%;">
 
         <!-- 輪播圖 -->
@@ -77,26 +77,29 @@
         </div>
 
         <!-- 服務項目資訊 -->
-        <div id="ServiceView-content" class="col-12 q-pa-md column wrap justify-start content-start q-pr-lg-lg">
-          <!-- 諮詢項目 -->
-          <div class="col-auto text-h4 spacing-h6 text-xl-h3 text-primary q-mb-lg">{{ service.name }}</div>
-          <!-- 諮詢時間 -->
-          <div class="col-auto text-body2 spacing-h6 text-accent text-justify items-center q-mb-md">
-            <span class="bg-primary q-pa-xs">{{ service.time }}&nbsp;分鐘&nbsp;&frasl;&nbsp;人</span>
+        <div id="ServiceView-content" class="col-12 q-px-md q-py-md row wrap justify-start content-between q-pr-lg-md">
+
+          <div class="col-12 row wrap justify-start content-start q-pr-md">
+            <!-- 諮詢項目 -->
+            <div class="col-12 text-h4 spacing-h6 text-xl-h3 text-primary q-mb-lg">{{ service.name }}</div>
+            <!-- 諮詢時間 -->
+            <div class="col-12 text-body2 spacing-h6 text-accent text-justify items-center q-mb-md">
+              <span class="bg-primary q-pa-xs">{{ service.time }}&nbsp;分鐘&nbsp;&frasl;&nbsp;人</span>
+            </div>
+
+            <!-- 服務描述 -->
+            <div v-html="service.description"
+              class="col-auto text-xl-h6 spacing-h6 text-grey-8 text-justify items-center q-pt-md q-mb-lg">
+            </div>
           </div>
-          <!-- 服務描述 -->
-          <div v-html="service.description"
-            class="col-auto text-xl-h6 spacing-h6 text-grey-8 text-justify items-center q-pt-md q-mb-lg"
-            style="min-height: 250px;">
-          </div>
-          <!-- 諮詢費用 -->
-          <div class="col-auto text-h6 text-xl-h4 spacing-h6 text-warning text-right q-mb-lg">NT$ {{
-            service.price.toLocaleString()
-            }}
-          </div>
-          <!-- 服務項目訂購 -->
-          <div class="col-auto row justify-end" style="width: 100%;height: 40px;">
-            <q-btn square flat class="col-auto bg-dark text-body1 text-secondary" label="立即預約諮詢" to='/appointment' />
+
+          <div class="col-auto row justify-end" style="width: 100%;">
+            <!-- 諮詢費用 -->
+            <div class="col-auto text-h6 text-xl-h4 spacing-h6 text-warning text-right q-mb-lg">NT$ {{ service.price.toLocaleString() }} </div>
+            <!-- 服務項目訂購 -->
+            <div class="col-auto row justify-end" style="width: 100%;height: 40px;">
+              <q-btn square flat class="col-auto bg-dark text-body1 text-secondary" label="立即預約諮詢" to='/appointment' />
+            </div>
           </div>
         </div>
       </div>
