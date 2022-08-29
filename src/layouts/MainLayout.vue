@@ -13,8 +13,8 @@
         <q-list class='text-h5 text-secondary row xs-show'>
           <q-fab v-if='isLogin' flat unelevated padding="xs" icon="fa-solid fa-user" direction="down right">
             <q-fab-action v-if='isLogin' padding="sm" icon='fa-solid fa-address-card' to='/member' />
-            <q-fab-action v-if='isLogin' padding="sm" color="primary" text-color="secondary"
-              icon='fa-regular fa-calendar-days' to='/booking' />
+            <!-- <q-fab-action v-if='isLogin' padding="sm" color="primary" text-color="secondary"
+              icon='fa-regular fa-calendar-days' to='/booking' /> -->
             <q-fab-action v-if='isLogin' padding="sm" color="primary" text-color="secondary" icon='fa-solid fa-receipt'
               to='/order' />
           </q-fab>
@@ -55,12 +55,12 @@
               會員資料
             </q-tooltip>
           </q-btn>
-          <q-btn v-if='isLogin' round dense flat size="md" icon='fa-regular fa-calendar-days' to='/booking'
+          <!-- <q-btn v-if='isLogin' round dense flat size="md" icon='fa-regular fa-calendar-days' to='/booking'
             class="q-mx-xs">
             <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
               預約查詢
             </q-tooltip>
-          </q-btn>
+          </q-btn> -->
           <q-btn v-if='isLogin' round dense flat size="md" icon='fa-solid fa-receipt' to='/order' class="q-mx-xs">
             <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
               訂單查詢

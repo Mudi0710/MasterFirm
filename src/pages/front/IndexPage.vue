@@ -7,11 +7,11 @@
             會員資料
           </q-tooltip>
         </q-btn>
-        <q-btn v-if='isLogin' round dense flat icon='fa-regular fa-calendar-days' to='booking' class="q-mx-xs">
+        <!-- <q-btn v-if='isLogin' round dense flat icon='fa-regular fa-calendar-days' to='booking' class="q-mx-xs">
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
             預約查詢
           </q-tooltip>
-        </q-btn>
+        </q-btn> -->
         <q-btn v-if='isLogin' round dense flat icon='fa-solid fa-receipt' to='order' class="q-mx-xs">
           <q-tooltip transition-show='fade' transition-hide='fade' :offset='[0, 0]'>
             訂單查詢
