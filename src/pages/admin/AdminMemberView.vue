@@ -92,7 +92,7 @@
           <template v-slot:item="card">
             <!-- <pre>{{ card }}</pre> -->
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 q-pa-sm cursor-pointer ">
-              <q-card square bordered class="bg-primary shadow">
+              <q-card square bordered class="bg-primary shadow" style="height: 100%;">
                 <div v-for="col in card.cols" :key="col.name" class="q-pa-sm">
                   <!-- <pre>{{ col }}</pre> -->
                   <!-- 會員圖片 -->
@@ -100,8 +100,15 @@
                     <img :src="avatar((card.row.gender === 1) ? 'male' : 'female', card.row.account)" class="q-mb-xl"
                       style="object-fit: cover;">
                   </q-responsive>
+                  <!-- 會員信箱 -->
+                  <div v-if="col.name === 'email'" class="text-left q-mx-auto">
+                    <div class="row justify-between">
+                      <span class="col-auto text-accent">{{ col.label }}：</span>
+                      <span class="col-auto text-secondary text-right q-ml-auto">{{ col.value }}</span>
+                    </div>
+                  </div>
                   <!-- 會員資訊 -->
-                  <div v-else-if="col.name !== 'image' && col.name !== 'control'" class="text-left q-mx-auto">
+                  <div v-else-if="col.name !== 'image' && col.name !== 'email' && col.name !== 'control'" class="text-left q-mx-auto">
                     <div class="row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
                       <span class="text-secondary text-right">{{ col.value }}</span>
@@ -112,11 +119,11 @@
                     <!-- <pre class="text-secondary">{{ card }}</pre> -->
                     <div class="row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                      <q-btn class="col-auto text-secondary" style="font-size: small; padding: 0px 8px;"
                         @click='openDialog(card.row._id, card.rowIndex)' outline>編輯會員</q-btn>
                     </div>
-                    <div class="row justify-end q-mt-sm">
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                    <div class="row justify-end q-my-sm" style="height: 28.8px;">
+                      <q-btn class="col-auto text-secondary" style="font-size: small; padding: 0px 8px;"
                         @click='openDeleteDialog(card.row._id)' outline>刪除會員</q-btn>
                     </div>
 
@@ -196,10 +203,10 @@
       <q-dialog v-model="deleteDialog.dialog" seamless persistent>
         <q-card square class="row justify-center bg-info q-pa-lg">
           <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
-          <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除會員嗎？<br>刪除會員將無法復原！</div>
+          <div class="col-12 text-center text-h6 text-dark q-pb-md">您確定要刪除會員嗎？<br>刪除會員將無法復原！</div>
           <div class="col-12 row justify-around">
             <!-- 確定刪除 -->
-            <q-btn @click="deleteMember(del)" square flat class="col-4 bg-secondary text-dark q-my-sm" label="確定刪除會員" />
+            <q-btn @click="deleteMember(del)" square flat class="col-4 bg-secondary text-dark q-my-sm" label="刪除" />
             <!-- 取消刪除 -->
             <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
               @click='deleteDialog.dialog = false' />
