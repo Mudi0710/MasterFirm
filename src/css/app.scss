@@ -1,7 +1,7 @@
 // 全局設定 --------------------------------------------------
 * {
-  // font-family: 'Noto Serif TC', serif;
-  font-family: 'jf-jinxuanlatte';
+  font-family: 'Noto Serif TC', serif;
+  // font-family: 'jf-jinxuan';
   letter-spacing: 0.06em;
   line-height: 1.8em;
 }
@@ -239,7 +239,7 @@ button {
 .text-lg-h5 {
   @media (min-width: 1200px) {
     font-size: 1.5rem;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 2rem;
     letter-spacing: normal;
   }
@@ -248,7 +248,7 @@ button {
 .text-xl-h3 {
   @media (min-width: 1400px) {
     font-size: 3rem;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 3.125rem;
     letter-spacing: 0.06em;
   }
@@ -256,14 +256,14 @@ button {
 
 .text-xl-h4 {
   font-size: 2.125rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 2.5rem;
   letter-spacing: 0.00735em;
 }
 
 .text-xl-h5 {
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 2rem;
   letter-spacing: normal;
 }
@@ -363,7 +363,7 @@ button {
 .master {
   // text-h3
   font-size: 3rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 3.125rem;
   letter-spacing: 0.08em;
 }
@@ -372,7 +372,7 @@ button {
 .firm {
   // text-h4
   font-size: 2.125rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 2.5rem;
   letter-spacing: 0.008em;
 }
@@ -517,18 +517,18 @@ button {
 // AdminHomeView.vue 設定 --------------------------------------------------
 #adminHome .indexTitle {
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 2rem;
   letter-spacing: normal;
   @media (min-width: 460px) {
     font-size: 2.125rem;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 2.5rem;
     letter-spacing: 0.00735em;
   }
   @media (min-width: 768px) {
     font-size: 3rem;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 3.125rem;
     letter-spacing: normal;
   }
