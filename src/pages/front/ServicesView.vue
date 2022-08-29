@@ -64,8 +64,8 @@
       <div class="col-12 q-mt-md q-mb-xl" style="width: 100%;">
         <div v-if="services.length > 0" class="row justify-start items-center">
           <!-- <pre>{{ services }}</pre> -->
-          <div v-for='service in services' :key="service.id" class="col-6 col-md-4 col-xl-3 col-xxl-25 col-xxl-2 q-px-xs q-py-md">
-            <serviceCard bordered class="my-card bg-info shadow-10 q-mx-sm" style="border-radius: 0; width: 100%;"
+          <div v-for='service in services' :key="service.id" class="col-12 col-sm-6 col-md-4 col-xl-3 q-px-sm q-py-md q-pr-lg">
+            <serviceCard bordered class="my-card bg-info shadow-10 q-mx-sm q-mr-md" style="border-radius: 0; width: 100%;"
               :service="service">
             </serviceCard>
           </div>
