@@ -102,7 +102,9 @@
             <template v-slot:header="props">
               <q-tr :props="props" class="col-auto">
                 <div>
-                  <marquee class="text-subtitle1 spacing-h6 text-accent">歡迎來我們這一家，充滿歡樂的這一家</marquee>
+                  <marquee class="text-subtitle1 spacing-h6 text-accent">{{ marquees.length > 0 ?
+                      marquees[0]?.newsMarquee : ''
+                  }}</marquee>
                 </div>
               </q-tr>
             </template>
@@ -122,8 +124,8 @@
                   </div>
                   <!-- 消息標題 -->
                   <div class="text-h6 spacing-h7 q-mt-md q-pr-lg text-wrap">{{
-                    props.row.title
-                    }}
+                      props.row.title
+                  }}
                   </div>
                   <!-- 消息連結 -->
                   <div class="text-right q-pr-lg q-mb-sm">
@@ -195,6 +197,8 @@ const autoplay = ref(true)
 const newses = reactive([])
 // 輪播圖片陣列
 const carousels = reactive([])
+// 跑馬燈陣列
+const marquees = reactive([])
 
 // 分頁選項
 const paginationNews = reactive({
@@ -240,5 +244,19 @@ const initCarousels = async () => {
   }
 }
 initCarousels()
+// 抓資料庫跑馬燈的資料
+const initmarquees = async () => {
+  try {
+    const { data } = await api.get('/marquees/')
+    marquees.push(...data.result)
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: '失敗',
+      text: error.isAxiosError ? error.response.data.message : error.message
+    })
+  }
+}
+initmarquees()
 
 </script>
