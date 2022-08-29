@@ -66,17 +66,17 @@
       <!-- <pre class="text-secondary">{{ carousels }}</pre> -->
       <div id="indexpage-img" class="col-12 col-xl-5 q-pa-md q-pr-xl-lg">
         <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
-          :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
+          :autoplay="autoplay" arrows navigation v-model="slideMobile" @mouseenter="autoplay = false"
           @mouseleave="autoplay = true" class="desktop-none">
           <q-carousel-slide
             v-for="(indexImageMobile, idx) in carousels.length > 0 ? carousels[0]?.indexImageMobile : '' "
             :key="indexImageMobile" :name="idx + 1" :img-src="indexImageMobile" />
         </q-carousel>
         <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
-          :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
+          :autoplay="autoplay" arrows navigation v-model="slideDesktop" @mouseenter="autoplay = false"
           @mouseleave="autoplay = true" class="mobile-none">
           <q-carousel-slide
-            v-for="(indexImageDesktop, idx) in carousels.length > 0 ? carousels[0]?.indexImageDesktop : ''"
+            v-for="(indexImageDesktop, idx) in carousels.length > 0 ? carousels[0]?.indexImageDesktop : '' "
             :key="indexImageDesktop" :name="idx + 1" :img-src="indexImageDesktop" />
         </q-carousel>
       </div>
@@ -91,7 +91,8 @@ import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 import Swal from 'sweetalert2'
 
-const slide = ref(1)
+const slideMobile = ref(1)
+const slideDesktop = ref(1)
 const autoplay = ref(true)
 
 const user = useUserStore()

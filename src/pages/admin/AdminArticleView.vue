@@ -624,20 +624,20 @@
               <q-toggle class="col-6 text-dark" v-model="knowledgesForm.show"
                 :label="knowledgesForm.show ? '已發布' : '未發布'" />
               <!-- 文章圖片 -->
-              <p class="text-h6 text-dark">文章圖片</p>
+              <!-- <p class="text-h6 text-dark">文章圖片</p>
               <q-file v-model='knowledgesForm.image' multiple :rules='[rules.size]' accept='image/*' filled bottom-slots
                 counter>
-                <!-- 上傳icon -->
+                上傳icon
                 <template v-slot:prepend>
                   <q-icon name="cloud_upload" @click.stop.prevent />
                 </template>
-                <!-- 刪除icon -->
+                刪除icon
                 <template v-slot:append>
                   <q-icon name="close" @click.stop.prevent="model = null" class="cursor-pointer" />
                 </template>
                 <template v-slot:hint>
                 </template>
-              </q-file>
+              </q-file> -->
               <!-- 消息內容 -->
               <p class="text-h6 text-dark">文章內容</p>
               <q-editor model="qeditor" v-model="knowledgesForm.content" ref="editorRef" @paste="onPaste"
@@ -872,20 +872,20 @@
               <p class="text-h6 text-dark">發布狀態</p>
               <q-toggle class="col-6 text-dark" v-model="casesForm.show" :label="casesForm.show ? '已發布' : '未發布'" />
               <!-- 文章圖片 -->
-              <p class="text-h6 text-dark">文章圖片</p>
+              <!-- <p class="text-h6 text-dark">文章圖片</p>
               <q-file v-model='casesForm.image' multiple :rules='[rules.size]' accept='image/*' filled bottom-slots
                 counter>
-                <!-- 上傳icon -->
+                上傳icon
                 <template v-slot:prepend>
                   <q-icon name="cloud_upload" @click.stop.prevent />
                 </template>
-                <!-- 刪除icon -->
+                刪除icon
                 <template v-slot:append>
                   <q-icon name="close" @click.stop.prevent="model = null" class="cursor-pointer" />
                 </template>
                 <template v-slot:hint>
                 </template>
-              </q-file>
+              </q-file> -->
               <!-- 消息內容 -->
               <p class="text-h6 text-dark">文章內容</p>
               <q-editor model="qeditor" v-model="casesForm.content" ref="editorRef" @paste="onPaste"

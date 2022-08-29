@@ -66,14 +66,14 @@
         <!-- 左邊圖片 -->
         <div id="news-img" class="col-12 col-xl-5 q-pa-md" style="height: auto;">
           <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
-            :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
+            :autoplay="autoplay" arrows navigation v-model="slideMobile" @mouseenter="autoplay = false"
             @mouseleave="autoplay = true" class="desktop-none">
             <q-carousel-slide
               v-for="(newsImageMobile, idx) in carousels.length > 0 ? carousels[0]?.newsImageMobile : ''"
               :key="newsImageMobile" :name="idx + 1" :img-src="newsImageMobile" />
           </q-carousel>
           <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
-            :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
+            :autoplay="autoplay" arrows navigation v-model="slideDesktop" @mouseenter="autoplay = false"
             @mouseleave="autoplay = true" class="mobile-none">
             <q-carousel-slide
               v-for="(newsImageDesktop, idx) in carousels.length > 0 ? carousels[0]?.newsImageDesktop : ''"
@@ -103,7 +103,7 @@
               <q-tr :props="props" class="col-auto">
                 <div>
                   <marquee class="text-subtitle1 spacing-h6 text-accent">{{ marquees.length > 0 ?
-                      marquees[0]?.newsMarquee : ''
+                  marquees[0]?.newsMarquee : ''
                   }}</marquee>
                 </div>
               </q-tr>
@@ -124,7 +124,7 @@
                   </div>
                   <!-- 消息標題 -->
                   <div class="text-h6 spacing-h7 q-mt-md q-pr-lg text-wrap">{{
-                      props.row.title
+                  props.row.title
                   }}
                   </div>
                   <!-- 消息連結 -->
@@ -190,7 +190,8 @@ const { logout } = user
 const { isLogin, isAdmin, cart } = storeToRefs(user)
 
 // 輪播圖
-const slide = ref(1)
+const slideMobile = ref(1)
+const slideDesktop = ref(1)
 const autoplay = ref(true)
 
 // 最新消息陣列

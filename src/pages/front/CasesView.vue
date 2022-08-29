@@ -67,14 +67,14 @@
         <!-- 左邊圖片 -->
         <div id="cases-img" class="col-12 col-xl-5 q-pa-md" style="height: auto;">
           <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
-            :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
+            :autoplay="autoplay" arrows navigation v-model="slideMobile" @mouseenter="autoplay = false"
             @mouseleave="autoplay = true" class="desktop-none">
             <q-carousel-slide
               v-for="(casesImageMobile, idx) in carousels.length > 0 ? carousels[0]?.casesImageMobile : ''"
               :key="casesImageMobile" :name="idx + 1" :img-src="casesImageMobile" />
           </q-carousel>
           <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
-            :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
+            :autoplay="autoplay" arrows navigation v-model="slideDesktop" @mouseenter="autoplay = false"
             @mouseleave="autoplay = true" class="mobile-none">
             <q-carousel-slide
               v-for="(casesImageDesktop, idx) in carousels.length > 0 ? carousels[0]?.casesImageDesktop : ''"
@@ -104,7 +104,7 @@
               <q-tr :props="props" class="col-auto">
                 <div>
                   <marquee class="text-subtitle1 spacing-h6 text-accent">{{ marquees.length > 0 ?
-                      marquees[0]?.casesMarquee : ''
+                  marquees[0]?.casesMarquee : ''
                   }}</marquee>
                 </div>
               </q-tr>
@@ -125,8 +125,8 @@
                   </div>
                   <!-- 文章標題 -->
                   <div class="text-h6 spacing-h7 q-mt-md q-pr-lg text-wrap">{{
-                    props.row.title
-                    }}
+                  props.row.title
+                  }}
                   </div>
                   <!-- 文章連結 -->
                   <div class="text-right q-pr-lg q-mb-sm">
@@ -191,7 +191,8 @@ const { logout } = user
 const { isLogin, isAdmin, cart } = storeToRefs(user)
 
 // 輪播圖
-const slide = ref(1)
+const slideMobile = ref(1)
+const slideDesktop = ref(1)
 const autoplay = ref(true)
 
 // 最新消息陣列
