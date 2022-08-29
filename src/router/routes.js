@@ -3,8 +3,6 @@ import FrontHomeView from '@/pages/front/IndexPage.vue'
 import AdminLayout from '@/layouts/AdminLayout.vue'
 import NotFoundView from '@/pages/ErrorNotFound.vue'
 
-// import AdminHomeView from '@/pages/admin/AdminHomeView.vue'
-
 const routes = [
   {
     path: '/',
@@ -19,14 +17,6 @@ const routes = [
           login: false,
           admin: false
         }
-        // path: '',
-        // name: 'admin-home',
-        // component: AdminHomeView,
-        // meta: {
-        //   title: '法師事務所 | 管理後台',
-        //   login: false,
-        //   admin: false
-        // }
       },
       {
         path: 'register',
@@ -304,17 +294,17 @@ const routes = [
           login: true,
           admin: true
         }
-      },
-      {
-        path: 'adminTest',
-        name: 'admin-test',
-        component: () => import('@/pages/admin/AdminTestView.vue'),
-        meta: {
-          title: '法師事務所 | 測試頁',
-          login: true,
-          admin: true
-        }
       }
+      // {
+      //   path: 'adminTest',
+      //   name: 'admin-test',
+      //   component: () => import('@/pages/admin/AdminTestView.vue'),
+      //   meta: {
+      //     title: '法師事務所 | 測試頁',
+      //     login: true,
+      //     admin: true
+      //   }
+      // }
     ]
   },
 
