@@ -110,11 +110,11 @@
                     <div class="col-12 row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
 
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                      <q-btn class="col-auto text-secondary" style="padding: 0px 8px;"
                         @click='openSloganDialog(card.row._id, card.rowIndex)' outline>修改文案</q-btn>
                     </div>
-                    <div class="col-12 row justify-end q-mt-sm">
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                    <div class="col-12 row justify-end q-my-sm" style="height: 28.8px;">
+                      <q-btn class="col-auto text-secondary" style="padding: 0px 8px;"
                         @click='openDeleteSloganDialog(card.row._id, card.row.title)' outline>刪除文案</q-btn>
                     </div>
                   </div>
@@ -226,13 +226,11 @@
         <q-dialog v-model="deleteSloganDialog.dialog" seamless persistent>
           <q-card square class="row justify-center bg-info q-pa-lg">
             <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
-            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除【{{ delSlogan.title }}】文案嗎？<br>刪除【{{
-              delSlogan.title
-              }}】文案將無法復原！</div>
+            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除<br>【{{ delSlogan.title }}】嗎？<br>刪除將無法復原！</div>
             <div class="col-12 row justify-around">
               <!-- 確定刪除 -->
               <q-btn @click="deleteSlogan(delSlogan._id)" square flat class="col-4 bg-secondary text-dark q-my-sm"
-                label="確定刪除" />
+                label="刪除" />
               <!-- 取消刪除 -->
               <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
                 @click='deleteSloganDialog.dialog = false' />
@@ -307,15 +305,15 @@
           <!-- RWD 卡片 -->
           <template v-slot:item="card">
             <!-- <pre>{{ card }}</pre> -->
-            <div class="col-6 col-md-4 col-lg-3 q-pa-sm cursor-pointer ">
+            <div class="col-12 col-md-4 col-lg-3 q-pa-sm cursor-pointer ">
               <q-card square bordered class="bg-primary shadow" style="width: 100%;height: 100%;">
                 <div v-for="col in card.cols" :key="col.name" class="q-pa-sm">
                   <!-- <pre>{{ col }}</pre> -->
                   <!-- 聯絡資訊 icon -->
                   <div v-if="col.name === 'icon'" class="row justify-between">
-                    <span class="col-12 text-accent">{{ col.label }}：</span>
-                    <span class="col-12 text-right text-secondary ellipsis" style="max-width: 300px;">{{ col.value
-                      }}</span>
+                    <span class="col-auto text-accent">{{ col.label }}：</span>
+                    <span class="col-auto text-right text-secondary text-wrap q-mr-auto" style="max-width: 300px;">{{ col.value
+                    }}</span>
                   </div>
                   <!-- 聯絡資訊標題 -->
                   <div v-if="col.name === 'title'" class="row justify-between">
@@ -329,11 +327,11 @@
                     <div class="col-12 row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
 
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                      <q-btn class="col-auto text-secondary" style="padding: 0px 8px;"
                         @click='openConnectionDialog(card.row._id, card.rowIndex)' outline>修改資訊</q-btn>
                     </div>
-                    <div class="col-12 row justify-end q-mt-sm">
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                    <div class="col-12 row justify-end q-my-sm" style="height: 28.8px;">
+                      <q-btn class="col-auto text-secondary" style="padding: 0px 8px;"
                         @click='openDeleteConnectionDialog(card.row._id, card.row.title)' outline>刪除資訊</q-btn>
                     </div>
                   </div>
@@ -446,13 +444,11 @@
         <q-dialog v-model="deleteConnectionDialog.dialog" seamless persistent>
           <q-card square class="row justify-center bg-info q-pa-lg">
             <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
-            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除【{{ delConnection.title }}】聯絡資訊嗎？<br>刪除【{{
-              delConnection.title
-              }}】聯絡資訊將無法復原！</div>
+            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除<br>【{{ delConnection.title }}】嗎？<br>刪除將無法復原！</div>
             <div class="col-12 row justify-around">
               <!-- 確定刪除 -->
               <q-btn @click="deleteConnection(delConnection._id)" square flat
-                class="col-4 bg-secondary text-dark q-my-sm" label="確定刪除" />
+                class="col-4 bg-secondary text-dark q-my-sm" label="刪除" />
               <!-- 取消刪除 -->
               <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
                 @click='deleteConnectionDialog.dialog = false' />
@@ -530,8 +526,8 @@
                   <!-- 聯絡地圖 -->
                   <div v-if="col.name === 'localmap'" class="row justify-between">
                     <span class="col-12 text-accent">{{ col.label }}：</span>
-                    <span class="col-12 text-secondary ellipsis-3-lines" style="max-width: 300px;">{{ col.value
-                      }}</span>
+                    <span class="col-12 text-secondary text-wrap" style="width: 100%;">{{ col.value
+                    }}</span>
                   </div>
                   <!-- 聯絡資訊編輯 -->
                   <div v-if="col.name === 'edit'" class="row justify-start">
@@ -540,11 +536,11 @@
                     <div class="col-12 row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
 
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                      <q-btn class="col-auto text-secondary" style="padding: 0px 8px;"
                         @click='openLocalmapDialog(card.row._id, card.rowIndex)' outline>修改地圖</q-btn>
                     </div>
-                    <div class="col-12 row justify-end q-mt-sm">
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                    <div class="col-12 row justify-end q-my-sm" style="height: 28.8px;">
+                      <q-btn class="col-auto text-secondary" style="padding: 0px 8px;"
                         @click='openDeleteLocalmapDialog(card.row._id)' outline>刪除地圖</q-btn>
                     </div>
                   </div>
@@ -589,7 +585,7 @@
             <div class="col-12 row justify-around">
               <!-- 確定刪除 -->
               <q-btn @click="deleteLocalmap(delLocalmap._id)" square flat class="col-4 bg-secondary text-dark q-my-sm"
-                label="確定刪除" />
+                label="刪除" />
               <!-- 取消刪除 -->
               <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
                 @click='deleteLocalmapDialog.dialog = false' />
@@ -642,7 +638,7 @@
                   刪除圖片</q-btn>
               </div>
               <!-- 首頁輪播圖（ 手機版 - 橫 ） -->
-              <q-separator color="accent" inset />
+              <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
               <div class="col-12 row">
                 <div class="col-12 text-h6 text-accent q-mb-sm q-pl-sm">首頁輪播圖（ 手機版 - 橫 ）</div>
                 <div v-for="(indexImageMobile, idx) in props.row.indexImageMobile" :key="indexImageMobile"
@@ -650,7 +646,7 @@
                   <img :src="props.row.indexImageMobile[idx]" class="q-mx-md"
                     style="width: 200px;height: 150px; object-fit: cover;" :ratio="4 / 3">
                 </div>
-                <q-separator color="accent" inset />
+                <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
               </div>
               <!-- 首頁輪播圖（ 手機版 - 橫 ） -->
               <div class="col-12 row">
@@ -662,7 +658,7 @@
                 </div>
               </div>
               <!-- 最新消息輪播圖（ 手機版 - 橫 ） -->
-              <q-separator color="accent" inset />
+              <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
               <div class="col-12 row">
                 <div class="col-12 text-h6 text-accent q-mb-sm q-pl-sm">最新消息輪播圖（ 手機版 - 橫 ）</div>
                 <div v-for="(newsImageMobile, idx) in props.row.newsImageMobile" :key="newsImageMobile"
@@ -672,7 +668,7 @@
                 </div>
               </div>
               <!-- 最新消息輪播圖（ 手機版 - 橫 ） -->
-              <q-separator color="accent" inset />
+              <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
               <div class="col-12 row">
                 <div class="col-12 text-h6 text-accent q-mb-sm q-pl-sm">最新消息輪播圖（ 電腦版 - 直 ）</div>
                 <div v-for="(newsImageDesktop, idx) in props.row.newsImageDesktop" :key="newsImageDesktop"
@@ -682,7 +678,7 @@
                 </div>
               </div>
               <!-- 靈學知識輪播圖（ 手機版 - 橫 ） -->
-              <q-separator color="accent" inset />
+              <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
               <div class="col-12 row">
                 <div class="col-12 text-h6 text-accent q-mb-sm q-pl-sm">靈學知識輪播圖（ 手機版 - 橫 ）</div>
                 <div v-for="(knowledgesImageMobile, idx) in props.row.knowledgesImageMobile"
@@ -692,7 +688,7 @@
                 </div>
               </div>
               <!-- 靈學知識輪播圖（ 手機版 - 橫 ） -->
-              <q-separator color="accent" inset />
+              <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
               <div class="col-12 row">
                 <div class="col-12 text-h6 text-accent q-mb-sm q-pl-sm">靈學知識輪播圖（ 電腦版 - 直 ）</div>
                 <div v-for="(knowledgesImageDesktop, idx) in props.row.knowledgesImageDesktop"
@@ -702,7 +698,7 @@
                 </div>
               </div>
               <!-- 案例分享輪播圖（ 手機版 - 橫 ） -->
-              <q-separator color="accent" inset />
+              <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
               <div class="col-12 row">
                 <div class="col-12 text-h6 text-accent q-mb-sm q-pl-sm">案例分享輪播圖（ 手機版 - 橫 ）</div>
                 <div v-for="(casesImageMobile, idx) in props.row.casesImageMobile" :key="casesImageMobile"
@@ -712,7 +708,7 @@
                 </div>
               </div>
               <!-- 案例分享輪播圖（ 手機版 - 橫 ） -->
-              <q-separator color="accent" inset />
+              <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
               <div class="col-12 row">
                 <div class="col-12 text-h6 text-accent q-mb-sm q-pl-sm">案例分享輪播圖（ 電腦版 - 直 ）</div>
                 <div v-for="(casesImageDesktop, idx) in props.row.casesImageDesktop" :key="casesImageDesktop"
@@ -759,13 +755,14 @@
                     <!-- <pre>{{ card.rowIndex }}</pre> -->
                     <div class="col-12 row justify-between">
                       <span class="text-h6 text-accent q-pl-sm">{{ col.label }}：</span>
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                      <q-btn class="col-auto text-secondary" style="padding: 0px 8px;"
                         @click='openCarouselsDialog(card.row._id, card.rowIndex)' outline>修改圖片</q-btn>
                     </div>
-                    <div class="col-12 row justify-end q-mt-sm">
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                    <div class="col-12 row justify-end q-my-sm" style="height: 28.8px;">
+                      <q-btn class="col-auto text-secondary" style="padding: 0px 8px;"
                         @click='openDeleteCarouselsDialog(card.row._id)' outline>刪除圖片</q-btn>
                     </div>
+                    <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
                   </div>
 
                   <!-- 首頁輪播圖（ 手機版 - 橫 ） -->
@@ -776,6 +773,7 @@
                         <img :src="col.value[idx]" class="col-12 q-mx-md"
                           style="width: 200px;height: 150px; object-fit: cover;" :ratio="4 / 3">
                       </div>
+                      <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
                     </div>
                   </div>
                   <!-- 首頁輪播圖（ 電腦版 - 橫 ） -->
@@ -786,6 +784,7 @@
                         <img :src="col.value[idx]" class="col-12 q-mx-md"
                           style="width: 150px;height: 200px; object-fit: cover;" :ratio="3 / 4">
                       </div>
+                      <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
                     </div>
                   </div>
                   <!-- 最新消息輪播圖（ 手機版 - 橫 ） -->
@@ -796,6 +795,7 @@
                         <img :src="col.value[idx]" class="col-12 q-mx-md"
                           style="width: 200px;height: 150px; object-fit: cover;" :ratio="4 / 3">
                       </div>
+                      <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
                     </div>
                   </div>
                   <!-- 最新消息輪播圖（ 電腦版 - 橫 ） -->
@@ -806,6 +806,7 @@
                         <img :src="col.value[idx]" class="col-12 q-mx-md"
                           style="width: 150px;height: 200px; object-fit: cover;" :ratio="3 / 4">
                       </div>
+                      <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
                     </div>
                   </div>
                   <!-- 靈學知識輪播圖（ 手機版 - 橫 ） -->
@@ -816,6 +817,7 @@
                         <img :src="col.value[idx]" class="col-12 q-mx-md"
                           style="width: 200px;height: 150px; object-fit: cover;" :ratio="4 / 3">
                       </div>
+                      <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
                     </div>
                   </div>
                   <!-- 靈學知識輪播圖（ 電腦版 - 橫 ） -->
@@ -826,6 +828,7 @@
                         <img :src="col.value[idx]" class="col-12 q-mx-md"
                           style="width: 150px;height: 200px; object-fit: cover;" :ratio="3 / 4">
                       </div>
+                      <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
                     </div>
                   </div>
                   <!-- 案例分享輪播圖（ 手機版 - 橫 ） -->
@@ -836,6 +839,7 @@
                         <img :src="col.value[idx]" class="col-12 q-mx-md"
                           style="width: 200px;height: 150px; object-fit: cover;" :ratio="4 / 3">
                       </div>
+                      <q-separator inset class="q-my-sm q-mx-auto" style="width:98%;" />
                     </div>
                   </div>
                   <!-- 案例分享輪播圖（ 電腦版 - 橫 ） -->
@@ -1006,7 +1010,7 @@
             <div class="col-12 row justify-around">
               <!-- 確定刪除 -->
               <q-btn @click="deleteCarousels(delCarousels._id)" square flat class="col-4 bg-secondary text-dark q-my-sm"
-                label="確定刪除" />
+                label="刪除" />
               <!-- 取消刪除 -->
               <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
                 @click='deleteCarouselsDialog.dialog = false' />
