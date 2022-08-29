@@ -125,7 +125,7 @@
             <div class="col-12 row justify-between q-my-md">
               <q-btn square class="col-5 bg-secondary text-dark text-h6" style="width:auto;" to="/products">繼續購物</q-btn>
               <!-- @click='user.checkout' 的 checkout 是從 /stores/user.js 來的 -->
-              <q-btn square class="col-5 bg-secondary text-dark text-h6" style="width:270px;" @click='user.checkout'
+              <q-btn square class="col-5 bg-secondary text-dark text-h6" style="min-width:51.44px; max-width: 270px;" @click='user.checkout'
                 :disabled='!canCheckout'>結帳
               </q-btn>
             </div>
