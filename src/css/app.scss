@@ -224,6 +224,7 @@ button {
 
 // font-size: calc([minf]px + ([maxf] - [minf]) * ( (100vw - [minw]px) / ([maxw] - [minw]) ));
 // font-size: calc(0.8rem + 1.2 * ((100vw - 20rem) / 30));
+// font-size: calc(16px + 6 * ((100vw - 350px) / 850));
 // 文字 RWD
 .text-sm-h6 {
   @media (min-width: 577px) {
