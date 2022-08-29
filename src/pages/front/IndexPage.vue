@@ -69,7 +69,7 @@
           :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
           @mouseleave="autoplay = true" class="desktop-none">
           <q-carousel-slide
-            v-for="(indexImageMobile, idx) in carousels.length > 0 ? carousels[0]?.indexImageMobile : ''"
+            v-for="(indexImageMobile, idx) in carousels.length > 0 ? carousels[0]?.indexImageMobile : '' "
             :key="indexImageMobile" :name="idx + 1" :img-src="indexImageMobile" />
         </q-carousel>
         <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
