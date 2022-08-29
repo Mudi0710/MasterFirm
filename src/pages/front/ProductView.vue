@@ -62,7 +62,7 @@
       </div>
 
       <!-- 商品內容區 -->
-      <div class="col-12 row justify-start content-center bg-secondary shadow-white q-mt-lg q-mb-xl q-ml-sm q-pb-md"
+      <div class="col-12 row justify-start content-center bg-secondary shadow-white q-mt-lg q-mb-xl q-pb-md"
         style="width: 100%;height: max-content;">
 
         <!-- 輪播圖 -->
@@ -77,44 +77,52 @@
         </div>
 
         <!-- 商品資訊 -->
-        <div id="ProductView-content" class="col-12 q-px-md q-pt-md row wrap justify-start content-start q-pr-lg-md">
-          <!-- 商品名稱 -->
-          <div class="col-12 text-h4 spacing-h6 text-xl-h3 text-primary q-mb-lg">{{ product.name }}</div>
-          <!-- 商品狀態 -->
-          <div class="col-12 text-body2 spacing-h6 text-accent text-justify items-center q-mb-md">
-            <span class="bg-primary q-pa-xs">{{ product.inventory ? '有現貨' : '訂購後製作' }}</span>
-          </div>
-          <div class=" col-12 column justify-between">
-            <!-- 商品描述 -->
-            <div class="col-auto row">
-              <div v-html="product.description"
-                class="col-12 text-xl-h6 spacing-h6 text-grey-8 text-justify items-center q-pt-md q-mb-lg"
-                style="min-height: 250px;">
-              </div>
+        <div id="ProductView-content" class="col-12 q-px-md q-py-md row wrap justify-start content-between q-pr-lg-md ">
+
+          <div class="col-12 row wrap justify-start content-start">
+
+            <!-- 商品名稱 -->
+            <div class="col-12 text-h4 spacing-h6 text-xl-h3 text-primary q-mb-lg">{{ product.name }}</div>
+            <!-- 商品狀態 -->
+            <div class="col-12 text-body2 spacing-h6 text-accent text-justify items-center q-mb-md">
+              <span class="bg-primary q-pa-xs">{{ product.inventory ? '有現貨' : '訂購後製作' }}</span>
             </div>
-            <div class="col-auto row content-end" style="width: 100%;">
-              <!-- 商品價格 -->
-              <div class="col-12 text-h6 text-xl-h4 spacing-h6 text-warning text-right q-mb-lg">NT$ {{
-              product.price.toLocaleString() }}
-              </div>
-              <!-- 商品訂購 -->
-              <div class="col-12">
-                <!-- 訂購表單 -->
-                <q-form class="row justify-between items-center" style="width: 100%;height: 40px;"
-                  @submit.prevent='submit'>
-                  <div class="col-auto text-h4 text-primary">訂購數量</div>
-                  <div v-if='isLogin' class="col-auto row">
-                    <q-btn outline square color="dark" icon="fa-solid fa-minus" @click="minus()" />
-                    <q-btn square flat class="col-7 bg-primary text-body1 text-secondary"
-                      style="width: auto; height: auto" type="submit" v-model="quantity">{{ quantity }}，加入購物車</q-btn>
-                    <q-btn outline square color="dark" icon="fa-solid fa-plus" @click="quantity++" />
-                  </div>
-                  <q-btn v-if='!isLogin' square flat class="col-7 bg-dark text-body1 text-secondary" label="登入以使用購物車"
-                    to='/login' />
-                </q-form>
+            <div class=" col-12 column justify-between">
+              <!-- 商品描述 -->
+              <div class="col-auto row">
+                <div v-html="product.description"
+                  class="col-12 text-xl-h6 spacing-h6 text-grey-8 text-justify items-center q-pt-md q-mb-lg">
+                </div>
               </div>
             </div>
           </div>
+
+          <div class="col-auto row content-end" style="width: 100%;">
+            <!-- 商品價格 -->
+            <div class="col-12 text-h6 text-xl-h4 spacing-h6 text-warning text-right q-mb-lg">NT$ {{
+                product.price.toLocaleString()
+            }}
+            </div>
+            <!-- 商品訂購 -->
+            <div class="col-12">
+              <!-- 訂購表單 -->
+              <q-form class="row justify-between items-center" style="width: 100%;height: 40px;"
+                @submit.prevent='submit'>
+                <div class="col-auto text-primary" style="font-size: calc(16px + 9 * ((100vw - 350px) / 850))">訂購數量
+                </div>
+                <div v-if='isLogin' class="col-auto row">
+                  <q-btn outline square color="dark" icon="fa-solid fa-minus" size="sm" @click="minus()" />
+                  <q-btn square flat class="col-7 bg-primary text-secondary"
+                    style="width: auto; height: auto font-size: calc(16px + 9 * ((100vw - 350px) / 850))" type="submit"
+                    v-model="quantity">{{ quantity }}，加入購物車</q-btn>
+                  <q-btn outline square color="dark" icon="fa-solid fa-plus" size="sm" @click="quantity++" />
+                </div>
+                <q-btn v-if='!isLogin' square flat class="col-7 bg-dark text-secondary" label="登入以使用購物車" to='/login'
+                  style="font-size: calc(16px + 9 * ((100vw - 350px) / 850))" />
+              </q-form>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
