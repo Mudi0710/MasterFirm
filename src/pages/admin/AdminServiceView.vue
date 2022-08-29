@@ -24,8 +24,6 @@
 
       <!-- 服務管理區 -->
       <div class="q-pa-md">
-        <div class="bg-accent text-h5 text-dark q-mt-xl q-mb-sm" style="height:1px;"></div>
-        <div class="text-h5 text-accent q-my-sm" style="height:40px; line-height: 1.6em;">服務項目</div>
         <q-table :grid="$q.screen.lt.xl" :columns="columnsServices" :rows="services" row-key="name" square bordered
           wrap-cells binary-state-sort dense :filter="filter" :loading="loading" :pagination="paginationServices"
           rows-per-page-label="每頁顯示筆數" no-data-label="目前沒有新增任何服務項目" no-results-label="Oops...找不到該筆服務項目"
@@ -164,11 +162,11 @@
 
                     <div class="row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                      <q-btn class="col-auto text-secondary" style="font-size: small; padding: 0px 8px;"
                         @click='openServiceDialog(card.row._id, card.rowIndex)' outline>修改服務項目</q-btn>
                     </div>
-                    <div class="row justify-end q-mt-sm">
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                    <div class="row justify-end q-my-sm" style="height: 28.8px; ">
+                      <q-btn class="col-auto text-secondary" style="font-size: small; padding: 0px 8px;"
                         @click='openDeleteServiceDialog(card.row._id, card.row.name)' outline>刪除服務項目</q-btn>
                     </div>
 
@@ -203,7 +201,7 @@
               </div>
               <!-- 諮詢時間 -->
               <div class="col-6 ">
-                <p class="text-h6 text-dark">諮詢時間（分鐘）</p>
+                <p class="text-h6 text-dark">諮詢時間<span style="font-size: xx-small;">(分鐘)</span></p>
                 <q-input class="text-primary q-mr-sm" v-model.number="serviceForm.time" min='0'
                   :rules='[rules.required, rules.time]' outlined square dense />
               </div>
@@ -315,13 +313,11 @@
       <q-dialog v-model="deleteServiceDialog.dialog" seamless persistent>
         <q-card square class="row justify-center bg-info q-pa-lg">
           <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
-          <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除【{{ delServices.name }}】服務項目嗎？<br>刪除【{{
-            delServices.name
-            }}】服務項目將無法復原！</div>
+          <div class="col-12 text-center text-h6 text-dark q-pb-md">您確定要刪除<br>【{{ delServices.name }}】嗎？<br>刪除將無法復原！</div>
           <div class="col-12 row justify-around">
             <!-- 確定刪除 -->
             <q-btn @click="deleteService(delServices._id)" square flat class="col-4 bg-secondary text-dark q-my-sm"
-              label="確定刪除服務項目" />
+              label="刪除" />
             <!-- 取消刪除 -->
             <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
               @click='deleteServiceDialog.dialog = false' />
@@ -369,6 +365,29 @@ const serviceForm = reactive({
   idx: -1,
   dialog: false
 })
+
+// 編輯器
+const editorRef = ref(null)
+const onPaste = (evt) => {
+  // Let inputs do their thing, so we don't break pasting of links.
+  if (evt.target.nodeName === 'INPUT') return
+  let text, onPasteStripFormattingIEPaste
+  evt.preventDefault()
+  evt.stopPropagation()
+  if (evt.originalEvent && evt.originalEvent.clipboardData.getData) {
+    text = evt.originalEvent.clipboardData.getData('text/plain')
+    editorRef.value.runCmd('insertText', text)
+  } else if (evt.clipboardData && evt.clipboardData.getData) {
+    text = evt.clipboardData.getData('text/plain')
+    editorRef.value.runCmd('insertText', text)
+  } else if (window.clipboardData && window.clipboardData.getData) {
+    if (!onPasteStripFormattingIEPaste) {
+      onPasteStripFormattingIEPaste = true
+      editorRef.value.runCmd('ms-pasteTextOnly', text)
+    }
+    onPasteStripFormattingIEPaste = false
+  }
+}
 
 // 驗證規則
 const rules = reactive({
