@@ -100,7 +100,7 @@
                   <!-- 簡介標題、內容 -->
                   <div v-if="col.name !== 'edit'" class="row justify-between">
                     <span class="text-accent">{{ col.label }}：</span>
-                    <span class="text-secondary ellipsis" style="max-width: 300px;">{{ col.value }}</span>
+                    <span class="text-secondary ellipsis-3-lines" style="max-width: 300px;">{{ col.value }}</span>
                   </div>
                   <!-- 簡介編輯 -->
                   <div v-if="col.name === 'edit'" class="row justify-start">
@@ -109,11 +109,11 @@
                     <div class="col-12 row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
 
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                      <q-btn class="col-auto text-secondary" style="padding: 0px 8px;"
                         @click='openIntroductionDialog(card.row._id, card.rowIndex)' outline>修改簡介</q-btn>
                     </div>
-                    <div class="col-12 row justify-end q-mt-sm">
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                    <div class="col-12 row justify-end q-my-sm" style="height: 28.8px;">
+                      <q-btn class="col-auto text-secondary" style="padding: 0px 8px;"
                         @click='openDeleteIntroductionDialog(card.row._id, card.row.title)' outline>刪除簡介</q-btn>
                     </div>
                   </div>
@@ -237,13 +237,11 @@
         <q-dialog v-model="deleteIntroductionDialog.dialog" seamless persistent>
           <q-card square class="row justify-center bg-info q-pa-lg">
             <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
-            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除【{{ delIntroduction.title }}】文章嗎？<br>刪除【{{
-                delIntroduction.title
-            }}】文章將無法復原！</div>
+            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除<br>【{{ delIntroduction.title }}】嗎？<br>刪除將無法復原！</div>
             <div class="col-12 row justify-around">
               <!-- 確定刪除 -->
               <q-btn @click="deleteIntroduction(delIntroduction._id)" square flat
-                class="col-4 bg-secondary text-dark q-my-sm" label="確定刪除" />
+                class="col-4 bg-secondary text-dark q-my-sm" label="刪除" />
               <!-- 取消刪除 -->
               <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
                 @click='deleteIntroductionDialog.dialog = false' />
@@ -333,19 +331,21 @@
           <template v-slot:item="card">
             <!-- <pre>{{ card }}</pre> -->
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 q-pa-sm cursor-pointer ">
-              <q-card square bordered class="bg-primary shadow" style="width: 100%;">
+              <q-card square bordered class="bg-primary shadow" style="width: 100%;height: 100%;">
                 <div v-for="col in card.cols" :key="col.name" class="q-pa-sm">
                   <!-- <pre>{{ col }}</pre> -->
-                  <!-- 消息標題、上架狀態 -->
-                  <div v-if="col.name !== 'date' && col.name !== 'edit'" class="row justify-between">
-                    <span class="text-accent">{{ col.label }}：</span>
-                    <span class="text-secondary ellipsis" style="max-width: 300px;">{{ col.value }}</span>
-                  </div>
                   <!-- 發布日期 -->
                   <div v-if="col.name === 'date'" class="row justify-between">
-                    <span class="text-accent">{{ col.label }}：</span>
-                    <span class="text-secondary ellipsis" style="max-width: 300px;">{{ new
+                    <span class="col-auto text-accent">{{ col.label }}：</span>
+                    <span class="col-auto text-secondary text-right text-wrap q-ml-auto">{{ new
                         Date(col.value).toLocaleString()
+                    }}</span>
+                  </div>
+                  <!-- 消息標題、上架狀態 -->
+                  <div v-if="col.name !== 'date' && col.name !== 'edit'" class="row justify-between">
+                    <span class="col-auto text-accent">{{ col.label }}：</span>
+                    <span class="col-auto text-secondary text-right text-wrap q-ml-auto">{{
+                        col.value
                     }}</span>
                   </div>
                   <!-- 消息編輯 -->
@@ -355,11 +355,11 @@
                     <div class="col-12 row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
 
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                      <q-btn class="col-auto text-secondary" style="padding: 0px 8px;"
                         @click='openNewsesDialog(card.row._id, card.rowIndex)' outline>修改消息</q-btn>
                     </div>
-                    <div class="col-12 row justify-end q-mt-sm">
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                    <div class="col-12 row justify-end q-my-sm" style="height: 28.8px;">
+                      <q-btn class="col-auto text-secondary" style="padding: 0px 8px;"
                         @click='openDeleteNewsDialog(card.row._id, card.row.title)' outline>刪除消息</q-btn>
                     </div>
                   </div>
@@ -472,12 +472,11 @@
         <q-dialog v-model="deleteNewsDialog.dialog" seamless persistent>
           <q-card square class="row justify-center bg-info q-pa-lg">
             <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
-            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除【{{ del.title }}】文章嗎？<br>刪除【{{ del.title
-            }}】文章將無法復原！</div>
+            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除<br>【{{ delnews.title }}】嗎？<br>刪除將無法復原！</div>
             <div class="col-12 row justify-around">
               <!-- 確定刪除 -->
-              <q-btn @click="deleteNews(del._id)" square flat class="col-4 bg-secondary text-dark q-my-sm"
-                label="確定刪除" />
+              <q-btn @click="deleteNews(delnews._id)" square flat class="col-4 bg-secondary text-dark q-my-sm"
+                label="刪除" />
               <!-- 取消刪除 -->
               <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
                 @click='deleteNewsDialog.dialog = false' />
@@ -568,19 +567,21 @@
           <template v-slot:item="card">
             <!-- <pre>{{ card }}</pre> -->
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 q-pa-sm cursor-pointer ">
-              <q-card square bordered class="bg-primary shadow" style="width: 100%;">
+              <q-card square bordered class="bg-primary shadow" style="width: 100%;height: 100%;">
                 <div v-for="col in card.cols" :key="col.name" class="q-pa-sm">
                   <!-- <pre>{{ col }}</pre> -->
-                  <!-- 消息標題、上架狀態 -->
-                  <div v-if="col.name !== 'date' && col.name !== 'edit'" class="row justify-between">
-                    <span class="text-accent">{{ col.label }}：</span>
-                    <span class="text-secondary ellipsis" style="max-width: 300px;">{{ col.value }}</span>
-                  </div>
                   <!-- 發布日期 -->
                   <div v-if="col.name === 'date'" class="row justify-between">
-                    <span class="text-accent">{{ col.label }}：</span>
-                    <span class="text-secondary ellipsis" style="max-width: 300px;">{{ new
+                    <span class="col-auto text-accent">{{ col.label }}：</span>
+                    <span class="col-auto text-secondary text-right text-wrap q-ml-auto">{{ new
                         Date(col.value).toLocaleString()
+                    }}</span>
+                  </div>
+                  <!-- 消息標題、上架狀態 -->
+                  <div v-if="col.name !== 'date' && col.name !== 'edit'" class="row justify-between">
+                    <span class="col-auto text-accent">{{ col.label }}：</span>
+                    <span class="col-auto text-secondary text-right text-wrap q-ml-auto">{{
+                        col.value
                     }}</span>
                   </div>
                   <!-- 消息編輯 -->
@@ -590,11 +591,11 @@
                     <div class="col-12 row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
 
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                      <q-btn class="col-auto text-secondary" style="padding: 0px 8px;"
                         @click='openKnowledgesDialog(card.row._id, card.rowIndex)' outline>修改文章</q-btn>
                     </div>
-                    <div class="col-12 row justify-end q-mt-sm">
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                    <div class="col-12 row justify-end q-my-sm" style="height: 28.8px;">
+                      <q-btn class="col-auto text-secondary" style="padding: 0px 8px;"
                         @click='openDeleteKnowledgesDialog(card.row._id, card.row.title)' outline>刪除文章</q-btn>
                     </div>
                   </div>
@@ -723,13 +724,11 @@
         <q-dialog v-model="deleteKnowledgesDialog.dialog" seamless persistent>
           <q-card square class="row justify-center bg-info q-pa-lg">
             <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
-            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除【{{ delknowledges.title }}】文章嗎？<br>刪除【{{
-                delknowledges.title
-            }}】文章將無法復原！</div>
+            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除<br>【{{ delknowledges.title }}】嗎？<br>刪除將無法復原！</div>
             <div class="col-12 row justify-around">
               <!-- 確定刪除 -->
               <q-btn @click="deleteKnowledges(delknowledges._id)" square flat
-                class="col-4 bg-secondary text-dark q-my-sm" label="確定刪除" />
+                class="col-4 bg-secondary text-dark q-my-sm" label="刪除" />
               <!-- 取消刪除 -->
               <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
                 @click='deleteKnowledgesDialog.dialog = false' />
@@ -819,20 +818,20 @@
           <template v-slot:item="card">
             <!-- <pre>{{ card }}</pre> -->
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 q-pa-sm cursor-pointer ">
-              <q-card square bordered class="bg-primary shadow" style="width: 100%;">
+              <q-card square bordered class="bg-primary shadow" style="width: 100%;height: 100%;">
                 <div v-for="col in card.cols" :key="col.name" class="q-pa-sm">
                   <!-- <pre>{{ col }}</pre> -->
-                  <!-- 消息標題、上架狀態 -->
-                  <div v-if="col.name !== 'date' && col.name !== 'edit'" class="row justify-between">
-                    <span class="text-accent">{{ col.label }}：</span>
-                    <span class="text-secondary ellipsis" style="max-width: 300px;">{{ col.value }}</span>
-                  </div>
                   <!-- 發布日期 -->
                   <div v-if="col.name === 'date'" class="row justify-between">
-                    <span class="text-accent">{{ col.label }}：</span>
-                    <span class="text-secondary ellipsis" style="max-width: 300px;">{{ new
+                    <span class="col-auto text-accent">{{ col.label }}：</span>
+                    <span class="col-auto text-secondary text-right text-wrap q-ml-auto">{{ new
                         Date(col.value).toLocaleString()
                     }}</span>
+                  </div>
+                  <!-- 消息標題、上架狀態 -->
+                  <div v-if="col.name !== 'date' && col.name !== 'edit'" class="row justify-between">
+                    <span class="col-auto text-accent">{{ col.label }}：</span>
+                    <span class="col-auto text-secondary text-right text-wrap q-ml-auto">{{ col.value }}</span>
                   </div>
                   <!-- 消息編輯 -->
                   <div v-if="col.name === 'edit'" class="row justify-start">
@@ -841,11 +840,11 @@
                     <div class="col-12 row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
 
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                      <q-btn class="col-auto text-secondary" style=" padding: 0px 8px;"
                         @click='opencasesDialog(card.row._id, card.rowIndex)' outline>修改文章</q-btn>
                     </div>
-                    <div class="col-12 row justify-end q-mt-sm">
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                    <div class="col-12 row justify-end q-my-sm" style="height: 28.8px;">
+                      <q-btn class="col-auto text-secondary" style=" padding: 0px 8px;"
                         @click='openDeleteCasesDialog(card.row._id, card.row.title)' outline>刪除文章</q-btn>
                     </div>
                   </div>
@@ -973,13 +972,11 @@
         <q-dialog v-model="deleteCasesDialog.dialog" seamless persistent>
           <q-card square class="row justify-center bg-info q-pa-lg">
             <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
-            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除【{{ delCases.title }}】文章嗎？<br>刪除【{{
-                delCases.title
-            }}】文章將無法復原！</div>
+            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除<br>【{{ delCases.title }}】嗎？<br>刪除將無法復原！</div>
             <div class="col-12 row justify-around">
               <!-- 確定刪除 -->
               <q-btn @click="deleteCases(delCases._id)" square flat class="col-4 bg-secondary text-dark q-my-sm"
-                label="確定刪除" />
+                label="刪除" />
               <!-- 取消刪除 -->
               <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
                 @click='deleteCasesDialog.dialog = false' />
