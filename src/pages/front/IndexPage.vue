@@ -52,18 +52,15 @@
       <div class="col-12 col-xl-7 q-pa-md column justify-between">
         <div class="col-auto q-mt-lg-xl q-pt-lg-xl q-mb-lg-lg">
           <!-- 主標題 -->
-          <div class="col-auto text-h4 text-xl-h3 spacing-h6 text-secondary">{{ slogan.length > 0 ? slogan[0]?.title :
-          ''
-          }}</div>
+          <div v-html="slogan.length > 0 ? slogan[0]?.title : ''"
+            class="col-auto text-h4 text-xl-h3 spacing-h6 text-secondary"></div>
           <!-- 副標題 -->
-          <div class="col-auto text-h6 text-xl-h5 spacing-h5 text-secondary q-mt-xl q-pr-xl-lg text-right">{{
-          slogan.length > 0 ? slogan[0]?.subtitle : ''
-          }}</div>
+          <div v-html="slogan.length > 0 ? slogan[0]?.subtitle : ''"
+            class="col-auto text-h6 text-xl-h5 spacing-h5 text-secondary q-mt-xl q-pr-xl-lg text-right"></div>
         </div>
         <!-- 內文 -->
-        <div class="col-auto text-xl-h6 spacing-h6 text-secondary text-justify items-center q-pr-xl-lg line-height">{{
-        slogan.length > 0 ? slogan[0]?.content : ''
-        }}</div>
+        <div v-html="slogan.length > 0 ? slogan[0]?.content : ''"
+          class="col-auto text-xl-h6 spacing-h6 text-secondary text-justify items-center q-pr-xl-lg line-height"></div>
       </div>
       <!-- 輪播圖 -->
       <!-- <pre class="text-secondary">{{ carousels }}</pre> -->
@@ -78,8 +75,9 @@
         <q-carousel animated infinite swipeable transition-prev="slide-right" transition-next="slide-left"
           :autoplay="autoplay" arrows navigation v-model="slide" @mouseenter="autoplay = false"
           @mouseleave="autoplay = true" class="mobile-none">
-          <q-carousel-slide v-for="(indexImageDesktop, idx) in carousels.length > 0 ? carousels[0]?.indexImageDesktop : ''" :key="indexImageDesktop"
-            :name="idx + 1" :img-src="indexImageDesktop" />
+          <q-carousel-slide
+            v-for="(indexImageDesktop, idx) in carousels.length > 0 ? carousels[0]?.indexImageDesktop : ''"
+            :key="indexImageDesktop" :name="idx + 1" :img-src="indexImageDesktop" />
         </q-carousel>
       </div>
     </div>
