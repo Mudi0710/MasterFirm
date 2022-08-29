@@ -15,7 +15,7 @@
         </q-btn>
       </q-list>
     </div>
-    <div id='mycontent' class=''>
+    <div id='mycontent'>
       <div class='row justify-between'>
         <div class='col-auto text-h3 text-secondary q-my-sm q-pl-md'>預約管理</div>
         <!-- <q-btn @click="openDialog('', -1)" square flat
@@ -94,14 +94,14 @@
           <!-- RWD 卡片 -->
           <template v-slot:item="card">
             <!-- <pre>{{ card }}</pre> -->
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 q-pa-sm cursor-pointer ">
-              <q-card square bordered class="bg-primary shadow" style="width: 100%;">
+            <div class="col-12 q-pa-sm cursor-pointer ">
+              <q-card square bordered class="bg-primary shadow">
                 <div v-for="col in card.cols" :key="col.name" class="q-pa-sm">
                   <!-- <pre>{{ col }}</pre> -->
                   <!-- 簡介標題、內容 -->
                   <div v-if="col.name !== 'edit'" class="row justify-between">
                     <span class="text-accent">{{ col.label }}：</span>
-                    <span class="text-secondary ellipsis" style="max-width: 300px;">{{ col.value }}</span>
+                    <span class="text-secondary ellipsis-3-lines">{{ col.value }}</span>
                   </div>
                   <!-- 簡介編輯 -->
                   <div v-if="col.name === 'edit'" class="row justify-start">
@@ -110,11 +110,11 @@
                     <div class="col-12 row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
 
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                      <q-btn class="col-auto text-secondary" style="font-size: small; padding: 0px 8px;"
                         @click='openNoticeDialog(card.row._id, card.rowIndex)' outline>修改須知</q-btn>
                     </div>
-                    <div class="col-12 row justify-end q-mt-sm">
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                    <div class="col-12 row justify-end q-my-sm" style="height: 28.8px; ">
+                      <q-btn class="col-auto text-secondary" style="font-size: small; padding: 0px 8px;"
                         @click='openDeleteNoticeDialog(card.row._id, card.row.title)' outline>刪除須知</q-btn>
                     </div>
                   </div>
@@ -238,13 +238,11 @@
         <q-dialog v-model="deleteNoticeDialog.dialog" seamless persistent>
           <q-card square class="row justify-center bg-info q-pa-lg">
             <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
-            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除【{{ delNotice.title }}】文章嗎？<br>刪除【{{
-                delNotice.title
-            }}】文章將無法復原！</div>
+            <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除<br>【{{ delNotice.title }}】嗎？<br>刪除將無法復原！</div>
             <div class="col-12 row justify-around">
               <!-- 確定刪除 -->
               <q-btn @click="deleteNotice(delNotice._id)" square flat
-                class="col-4 bg-secondary text-dark q-my-sm" label="確定刪除" />
+                class="col-4 bg-secondary text-dark q-my-sm" label="刪除" />
               <!-- 取消刪除 -->
               <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
                 @click='deleteNoticeDialog.dialog = false' />
