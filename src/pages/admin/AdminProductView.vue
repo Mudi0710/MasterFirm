@@ -15,7 +15,7 @@
         </q-btn>
       </q-list>
     </div>
-    <div id='mycontent' class=''>
+    <div id='mycontent'>
       <div class='row justify-between'>
         <div class='col-auto text-h3 text-secondary q-my-sm q-pl-md'>商品管理</div>
         <q-btn @click="openDialog('', -1)" square flat
@@ -60,8 +60,10 @@
             <q-td :edit="edit">
               <!-- <pre>{{ edit }}</pre> -->
               <div class="row justify-center">
-                <q-btn class="col-auto q-mx-sm q-my-xs" @click='openDialog(edit.row._id, edit.rowIndex)' outline>修改商品</q-btn>
-                <q-btn class="col-auto q-mx-sm q-my-xs" @click='openDeleteDialog(edit.row._id, edit.row.name)' outline>刪除商品
+                <q-btn class="col-auto q-mx-sm q-my-xs" @click='openDialog(edit.row._id, edit.rowIndex)' outline>修改商品
+                </q-btn>
+                <q-btn class="col-auto q-mx-sm q-my-xs" @click='openDeleteDialog(edit.row._id, edit.row.name)' outline>
+                  刪除商品
                 </q-btn>
               </div>
             </q-td>
@@ -103,7 +105,15 @@
                     <img :src="card.row[col.name][0]" class="col" style="width: 100%; object-fit: cover;">
                   </q-responsive>
                   <!-- 商品資訊 -->
-                  <div v-else-if="col.name !== 'image' && col.name !== 'edit'" class="text-left q-mx-auto">
+                  <div v-if="col.name === 'price'" class="text-left q-mx-auto">
+                    <div class="row justify-between">
+                      <span class="text-accent">{{ col.label }}：</span>
+                      <span class="text-secondary text-right">NT$ {{ col.value.toLocaleString() }}</span>
+                    </div>
+                  </div>
+                  <!-- 商品金額 -->
+                  <div v-else-if="col.name !== 'image' && col.name !== 'price' && col.name !== 'edit'"
+                    class="text-left q-mx-auto">
                     <div class="row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
                       <span class="text-secondary text-right">{{ col.value }}</span>
@@ -115,11 +125,11 @@
 
                     <div class="row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                      <q-btn class="col-auto text-secondary" style="font-size: small; padding: 0px 8px;"
                         @click='openDialog(card.row._id, card.rowIndex)' outline>修改商品</q-btn>
                     </div>
-                    <div class="row justify-end q-mt-sm">
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                    <div class="row justify-end q-mt-sm" style="height: 28.8px;">
+                      <q-btn class="col-auto text-secondary" style="font-size: small; padding: 0px 8px;"
                         @click='openDeleteDialog(card.row._id, card.row.name)' outline>刪除商品</q-btn>
                     </div>
 
@@ -147,7 +157,74 @@
             <q-input v-model="form.name" :rules='[rules.required]' type='text' outlined square dense />
             <!-- 商品描述 -->
             <p class="text-h6 text-dark">商品描述</p>
-            <q-input v-model="form.description" :rules='[rules.required]' type='textarea' outlined square dense />
+            <q-editor model="qeditor" v-model="form.description" ref="editorRef" @paste="onPaste"
+              :rules='[rules.required]' outlined square content-class="bg-dark" toolbar-bg="secondary"
+              toolbar-text-color="dark" :dense="$q.screen.lt.lg" :toolbar="[
+                ['bold', 'italic', 'strike', 'underline', 'subscript', 'superscript'],
+                ['left', 'center', 'right', 'justify'],
+                ['token', 'hr', 'link', 'custom_btn'],
+                ['print', 'fullscreen'],
+                [
+                  {
+                    icon: $q.iconSet.editor.formatting,
+                    fixedIcon: false,
+                    list: 'no-icons',
+                    options: [
+                      'p',
+                      'h1',
+                      'h2',
+                      'h3',
+                      'h4',
+                      'h5',
+                      'h6',
+                      'code'
+                    ]
+                  },
+                  {
+                    icon: $q.iconSet.editor.fontSize,
+                    fixedIcon: false,
+                    list: 'no-icons',
+                    options: [
+                      'size-1',
+                      'size-2',
+                      'size-3',
+                      'size-4',
+                      'size-5',
+                      'size-6',
+                      'size-7'
+                    ]
+                  },
+                  {
+                    icon: $q.iconSet.editor.font,
+                    fixedIcon: true,
+                    list: 'no-icons',
+                    options: [
+                      'default_font',
+                      'arial',
+                      'arial_black',
+                      'comic_sans',
+                      'courier_new',
+                      'impact',
+                      'lucida_grande',
+                      'times_new_roman',
+                      'verdana'
+                    ]
+                  },
+                  'removeFormat'
+                ],
+                ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
+                ['undo', 'redo'],
+                ['viewsource']
+              ]" :fonts="{
+  arial: 'Arial',
+  arial_black: 'Arial Black',
+  comic_sans: 'Comic Sans MS',
+  courier_new: 'Courier New',
+  impact: 'Impact',
+  lucida_grande: 'Lucida Grande',
+  times_new_roman: 'Times New Roman',
+  verdana: 'Verdana'
+}" />
             <div class="row q-mb-sm">
               <!-- 庫存狀態 -->
               <div class="column col-6">
@@ -193,12 +270,11 @@
       <q-dialog v-model="deleteDialog.dialog" seamless persistent>
         <q-card square class="row justify-center bg-info q-pa-lg">
           <div class="col-12 text-center text-h3 text-red q-pb-md">警告</div>
-          <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除【{{ del.name }}】商品嗎？<br>刪除【{{ del.name
-            }}】商品將無法復原！</div>
+          <div class="col-12 text-center text-h6 text-dark q-pb-md">你確定要刪除<br>【{{ del.name }}】嗎？<br>刪除將無法復原！</div>
           <div class="col-12 row justify-around">
             <!-- 確定刪除 -->
             <q-btn @click="deleteProduct(del._id)" square flat class="col-4 bg-secondary text-dark q-my-sm"
-              label="確定刪除商品" />
+              label="刪除" />
             <!-- 取消刪除 -->
             <q-btn square flat outline class="col-4 bg-dark text-secondary q-my-sm" label="取消"
               @click='deleteDialog.dialog = false' />
@@ -245,6 +321,29 @@ const form = reactive({
   idx: -1,
   dialog: false
 })
+
+// 編輯器
+const editorRef = ref(null)
+const onPaste = (evt) => {
+  // Let inputs do their thing, so we don't break pasting of links.
+  if (evt.target.nodeName === 'INPUT') return
+  let text, onPasteStripFormattingIEPaste
+  evt.preventDefault()
+  evt.stopPropagation()
+  if (evt.originalEvent && evt.originalEvent.clipboardData.getData) {
+    text = evt.originalEvent.clipboardData.getData('text/plain')
+    editorRef.value.runCmd('insertText', text)
+  } else if (evt.clipboardData && evt.clipboardData.getData) {
+    text = evt.clipboardData.getData('text/plain')
+    editorRef.value.runCmd('insertText', text)
+  } else if (window.clipboardData && window.clipboardData.getData) {
+    if (!onPasteStripFormattingIEPaste) {
+      onPasteStripFormattingIEPaste = true
+      editorRef.value.runCmd('ms-pasteTextOnly', text)
+    }
+    onPasteStripFormattingIEPaste = false
+  }
+}
 
 // 驗證規則
 const rules = reactive({
