@@ -1,5 +1,5 @@
 <template>
-  <q-card bordered class="my-card bg-info shadow-10" style="border-radius: 0;" :product="product">
+  <q-card bordered class="my-card bg-info shadow-10" style="border-radius: 0;height: 100%;" :product="product">
     <!-- 商品圖片 -->
     <!-- <router-link :to="'/product/' + product._id"> -->
     <q-responsive :ratio="3 / 2">
@@ -12,7 +12,7 @@
     </q-card-section>
     <!-- 商品描述 -->
     <q-card-section class="q-pt-none">
-      <div class="text-subtitle1 text-dark ellipsis-3-lines">
+      <div class="text-subtitle1 text-dark ellipsis-3-lines" style="height: 84px;">
         {{ product.description }}
       </div>
     </q-card-section>
