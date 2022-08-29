@@ -84,8 +84,8 @@
                   <!-- 訂單日期 -->
                   <div v-if="col.name === 'date'" class="text-left q-mx-auto">
                     <div class="row justify-between items-center">
-                      <span class="text-accent">{{ col.label }}：</span>
-                      <span class="text-secondary text-body2 text-right ellipsis-3-lines">{{ new
+                      <span class="col-auto text-accent">{{ col.label }}：</span>
+                      <span class="col-auto text-secondary text-right text-wrap q-ml-auto">{{ new
                         Date(col.value).toLocaleString()
                         }}</span>
                     </div>
@@ -93,15 +93,15 @@
                   <!-- 訂單id -->
                   <div v-if="col.name === 'id'" class="text-left q-mx-auto">
                     <div class="row justify-between">
-                      <span class="text-accent">{{ col.label }}：</span>
-                      <span class="text-secondary text-body2 text-right text-wrap">{{ col.value }}</span>
+                      <span class="col-auto text-accent">{{ col.label }}：</span>
+                      <span class="col-auto text-secondary text-body2 text-right text-wrap q-ml-auto">{{ col.value }}</span>
                     </div>
                   </div>
-                  <!-- 訂單id -->
+                  <!-- 訂購會員 -->
                   <div v-if="col.name === 'account'" class="text-left q-mx-auto">
                     <div class="row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
-                      <span class="text-secondary text-body2 text-right text-wrap">{{ col.value }}</span>
+                      <span class="text-secondary text-right text-wrap">{{ col.value }}</span>
                     </div>
                   </div>
                   <!-- 訂單金額 -->
@@ -117,7 +117,7 @@
                     <div class="row justify-between">
                       <span class="text-accent">{{ col.label }}：</span>
                       <!-- <pre>{{ card }}</pre> -->
-                      <q-btn class="col-auto text-secondary" style="font-size: xx-small; padding: 0px 8px;"
+                      <q-btn class="col-auto text-secondary" style="font-size: small; padding: 0px 8px;"
                         @click='openDetailDialog(card)' outline>訂單詳情</q-btn>
                     </div>
                   </div>
