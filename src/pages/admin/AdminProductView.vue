@@ -97,7 +97,7 @@
           <template v-slot:item="card">
             <!-- <pre>{{ card }}</pre> -->
             <div class="col-12 col-sm-6 col-md-4 col-lg-3 q-pa-sm cursor-pointer ">
-              <q-card square bordered class="bg-primary shadow">
+              <q-card square bordered class="bg-primary shadow" style="height: 100%;">
                 <div v-for="col in card.cols" :key="col.name" class="q-pa-sm">
                   <!-- <pre>{{ col }}</pre> -->
                   <!-- 商品圖片 -->
@@ -306,7 +306,7 @@ const products = reactive([])
 const pagination = reactive({
   items: [], // table要顯示的資料
   page: 1, // 目前第幾頁
-  rowsPerPage: 5 // 每頁幾筆，0 代表 All
+  rowsPerPage: 10 // 每頁幾筆，0 代表 All
 })
 
 // 表單預設格式
