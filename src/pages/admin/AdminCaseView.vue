@@ -209,20 +209,20 @@
   verdana: 'Verdana'
 }" />
               <!-- 須知圖片 -->
-              <p class="text-h6 text-dark">須知圖片</p>
+              <!-- <p class="text-h6 text-dark">須知圖片</p>
               <q-file v-model='noticeForm.image' multiple :rules='[rules.size]' accept='image/*' filled
                 bottom-slots counter>
-                <!-- 上傳icon -->
+                上傳icon
                 <template v-slot:prepend>
                   <q-icon name="cloud_upload" @click.stop.prevent />
                 </template>
-                <!-- 刪除icon -->
+                刪除icon
                 <template v-slot:append>
                   <q-icon name="close" @click.stop.prevent="model = null" class="cursor-pointer" />
                 </template>
                 <template v-slot:hint>
                 </template>
-              </q-file>
+              </q-file> -->
               <div class="row justify-around">
                 <!-- 確定新增 -->
                 <q-btn square flat type='submit' class="col-4 bg-secondary text-dark q-my-sm" label="送出編輯" />
